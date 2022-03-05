@@ -1,17 +1,37 @@
+// import firebase from './firebase';
+// require('firebase/auth');
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAOP8Na04cyGMFu2ssdqF32WSLuGJH6EbQ",
+//   authDomain: "pet-go-9200b.firebaseapp.com",
+//   projectId: "pet-go-9200b",
+//   storageBucket: "pet-go-9200b.appspot.com",
+//   messagingSenderId: "6183594456",
+//   appId: "1:6183594456:web:5ef003414996aee579aaad"
+// };
+
+
+// // Initialize Firebase
+// export const firebaseApp = firebase.initializeApp(firebaseConfig);
+// export const database = firebase.getDatabase(firebaseApp);
+// const db = firebaseApp.firestore();
+// const auth = firebaseApp.auth();
+// export { auth };
+// export default db;
+
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBNx_Ehjn52LhaADXacU2wf-7pu3lRdBr0",
-  authDomain: "todo-6e822.firebaseapp.com",
-  projectId: "todo-6e822",
-  storageBucket: "todo-6e822.appspot.com",
-  messagingSenderId: "346832021646",
-  appId: "1:346832021646:web:372d44d2cf61fb74b5c1df",
-  // for the db
-  databaseURL: 'https://pet-go-9200b-default-rtdb.europe-west1.firebasedatabase.app/'
+  apiKey: "AIzaSyAOP8Na04cyGMFu2ssdqF32WSLuGJH6EbQ",
+  authDomain: "pet-go-9200b.firebaseapp.com",
+  projectId: "pet-go-9200b",
+  storageBucket: "pet-go-9200b.appspot.com",
+  messagingSenderId: "6183594456",
+  appId: "1:6183594456:web:5ef003414996aee579aaad"
 };
+
 
 export const firebaseApp = initializeApp(firebaseConfig);
 export const database = getDatabase(firebaseApp);
