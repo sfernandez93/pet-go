@@ -32,7 +32,7 @@ const TodoContextProvider = ({ children }) => {
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
 
-  const clearInptuts = () => {
+  const clearInputs = () => {
     setEmail("");
     setPassword("");
   };
@@ -100,11 +100,18 @@ const TodoContextProvider = ({ children }) => {
 
   const handleSignUp = async (emailRef, passwordRef) => {
     clearErrors();
+    console.log("HEHE");
     const auth = getAuth();
     let result = null;
+    console.log(emailRef);
+    console.log(passwordRef);
+    debugger;
     try {
       result = await createUserWithEmailAndPassword(auth, emailRef, passwordRef);
+      debugger;
     } catch (err) {
+      debugger;
+      console.log(err);
       switch (err.code) {
         case "auth/email-already-in-use":
           setEmailError("Ya dispone de una cuenta con este correo");
@@ -113,13 +120,13 @@ const TodoContextProvider = ({ children }) => {
           setEmailError("El email no es válido");
           break;
         case "auth/weak-password":
-          setEmailError("La constraseña no es válida");
-          setPasswordError(err.message);
+          setPasswordError("La constraseña no es válida");
           break;
         default:
           break;
       }
     }
+    debugger;
     const dataToStore = {
       token: result.user.accessToken,
       photo: result.user.photoURL,
@@ -136,7 +143,7 @@ const TodoContextProvider = ({ children }) => {
   // const authListener = () => {
   //   firebase.auth().onAuthStateChanged((user) => {
   //     if (user){
-  //       clearInptuts();
+  //       clearInputs();
   //       setUser(user);
   //     } else {
   //       setUser("");
@@ -204,6 +211,8 @@ const TodoContextProvider = ({ children }) => {
     const auth = getAuth();
     await signOut(auth);
     setUser('');
+    clearErrors();
+    clearInputs();
   };
 
   return (

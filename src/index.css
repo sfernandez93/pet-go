@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -6,7 +9,7 @@
 }
 
 :root {
-  --font: 'DM Sans', sans-serif;
+  --font: "DM Sans", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,8 +17,14 @@
 }
 
 body {
-  background-image: linear-gradient( 102.7deg, rgba(253,218,255,1) 8.2%, rgba(223,173,252,1) 19.6%, rgba(173,205,252,1) 36.8%, rgba(173,252,244,1) 73.2%, rgba(202,248,208,1) 90.9% );
-  background-attachment: fixed;
+  /* background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%); */
+  /* background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%); */
+  /* background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); */
+  background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+  /* background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); */
+      /* background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%); */
+  /* background-image: linear-gradient(-225deg, #B6CEE8 0%, #F578DC 100%); */
+      background-attachment: fixed;
   flex-direction: column;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +37,7 @@ body {
   border-radius: 16px;
   font-size: 15px;
   color: #455963;
-  box-shadow: 0 20px 80px rgba(0,0,0,.3);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
 }
 
 .task-list {
@@ -85,7 +94,7 @@ body {
 }
 
 .task-item.is-completed > .task-name {
-  text-decoration: line-through wavy rgba(0,0,0,.3);
+  text-decoration: line-through wavy rgba(0, 0, 0, 0.3);
 }
 
 .task-item.is-completed {
@@ -157,7 +166,9 @@ body {
   box-shadow: 0 -1px 0 #bdcdd6 inset;
 }
 
-.task-button { display: none; }
+.task-button {
+  display: none;
+}
 
 .task-delete {
   border: 0;
@@ -187,7 +198,7 @@ body {
 }
 
 .googleButton {
-  background: #4285F4;
+  background: #4285f4;
   border-radius: 1px;
   display: inline-block;
   padding: 1px;
@@ -199,7 +210,8 @@ body {
   cursor: pointer;
 }
 .googleButton span.icon {
-  background: url('https://flixable.com/images/google.svg') white center center no-repeat;
+  background: url("https://flixable.com/images/google.svg") white center center
+    no-repeat;
   display: block;
   float: left;
   height: 18px;
@@ -208,7 +220,7 @@ body {
 }
 .googleButton span.text {
   color: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: bold;
   line-height: 32px;
