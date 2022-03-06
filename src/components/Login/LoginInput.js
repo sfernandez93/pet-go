@@ -1,7 +1,7 @@
-const LoginInput = ({ ref, type, inputValue, inputFunction, placeholder }) => {
+const LoginInput = ({ inputRef, type, inputValue, inputFunction, placeholder }) => {
   return (
     <input
-      ref={ref}
+      ref={inputRef}
       type={type}
       autoFocus
       required
