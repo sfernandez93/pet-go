@@ -136,6 +136,8 @@ const LoginContextProvider = ({ children }) => {
         signOutAccount,
         isLoggedIn,
         userData,
+        email,
+        password,
         setEmail,
         hasAccount,
         setHasAccount,

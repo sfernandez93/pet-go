@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import Home from "./components/Home";
-import SignIn from "./components/SignIn";
+import SignIn from "./views/SignIn";
 import { LoginContext } from "./context/LoginContext";
 
 function App() {
