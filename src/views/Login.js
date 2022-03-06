@@ -1,12 +1,12 @@
 import React, { useRef, useContext } from "react";
 
 import { LoginContext } from "../context/LoginContext";
-import SignInUpButton from "../components/SignInUpButton";
-import LoginInput from "../components/LoginInput";
-import LoginError from "../components/LoginError";
-import SignInGoogleButton from "../components/SignInGoogleButton";
-import LoginSpacedBar from "../components/LoginSpacedBar";
-import LoginChangeAccount from "../components/LoginChangeAccount";
+import SignInUpButton from "../components/Login/SignInUpButton";
+import LoginInput from "../components/Login/LoginInput";
+import LoginError from "../components/Login/LoginError";
+import SignInGoogleButton from "../components/Login/SignInGoogleButton";
+import LoginSpacedBar from "../components/Login/LoginSpacedBar";
+import LoginChangeAccount from "../components/Login/LoginChangeAccount";
 
 const SignIn = (setUser) => {
   const { emailError, passwordError, email, setEmail, password, setPassword } =
