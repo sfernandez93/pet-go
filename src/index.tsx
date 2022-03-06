@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import './firebase';
-import './index.css';
-import App from './App';
-import TodoContextProvider from './context/TodoContext';
+import "./firebase";
+import "./index.css";
+import App from "./App";
+import LoginContextProvider from "./context/LoginContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <TodoContextProvider>
+    <LoginContextProvider>
       <App />
-    </TodoContextProvider>
+    </LoginContextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

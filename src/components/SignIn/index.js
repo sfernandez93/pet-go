@@ -1,9 +1,7 @@
-import React, { useRef, useEffect, useContext, useState } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { getAuth } from "firebase/auth";
-import "./SignIn.css";
-import { setLocalStorage } from "../localStorage";
-import { TodoContext } from "../context/TodoContext";
-import LoginButton from "./LoginButton";
+import "./style.css";
+import { LoginContext } from "../../context/LoginContext";
 
 const SignIn = (setUser) => {
   const {
@@ -12,15 +10,13 @@ const SignIn = (setUser) => {
     handleSignUp,
     handleLogin,
     hasAccount,
-    loginWithEmailAndPassword,
-    signUpWithEmailAndPassword,
     emailError,
     passwordError,
     email,
     setEmail,
     password,
     setPassword,
-  } = useContext(TodoContext);
+  } = useContext(LoginContext);
   const emailRef = useRef();
   const passwordRef = useRef();
   const auth = getAuth();
