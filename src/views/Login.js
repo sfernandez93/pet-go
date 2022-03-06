@@ -19,7 +19,7 @@ const SignIn = (setUser) => {
       <div className="w-80 py-8 flex items-center flex-col mb-3">
         <div className="mt-8 w-64 flex flex-col">
           <LoginInput
-            ref={emailRef}
+            inputRef={emailRef}
             type={"email"}
             inputValue={email}
             inputFunction={setEmail}
@@ -27,7 +27,7 @@ const SignIn = (setUser) => {
           ></LoginInput>
           <LoginError error={emailError}></LoginError>
           <LoginInput
-            ref={passwordRef}
+            inputRef={passwordRef}
             type={"password"}
             inputValue={password}
             inputFunction={setPassword}
