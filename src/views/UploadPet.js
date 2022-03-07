@@ -1,4 +1,4 @@
-import UploadPhoto from "../components/Upload/UploadPhoto";
+import UploadInput from "../components/Upload/UploadInput";
 
 const UploadPet = () => {
   return (
@@ -6,85 +6,36 @@ const UploadPet = () => {
     <form className="absolute top-0 left-0 w-full">
       <div className="px-4 py-6 bg-white sm:p-6">
         <div className="grid grid-cols-6 gap-6">
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              for="first-name"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Nombre
-            </label>
-            <input
-              type="text"
-              name="first-name"
-              id="first-name"
-              autocomplete="given-name"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
-
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              for="race"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Raza
-            </label>
-            <input
-              type="text"
-              name="race"
-              id="race"
-              autocomplete="family-name"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
-
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              for="age"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Edad
-            </label>
-            <input
-              type="text"
-              name="age"
-              id="age"
-              autocomplete="family-name"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
-
-          <div className="col-span-6 sm:col-span-4">
-            <label
-              for="email-address"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Email
-            </label>
-            <input
-              type="text"
-              name="email-address"
-              id="email-address"
-              autocomplete="email"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
-
-          <div className="col-span-6 sm:col-span-4">
-            <label
-              for="phone"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Teléfono/Móvil
-            </label>
-            <input
-              type="text"
-              name="phone"
-              id="phone"
-              autocomplete="email"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
+          <UploadInput
+            inputTitle="Nombre"
+            inputName="first-name"
+            inputType="text"
+            inputAutocomplete="given-name"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Raza"
+            inputName="race"
+            inputType="text"
+            inputAutocomplete="family-name"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Edad"
+            inputName="age"
+            inputType="text"
+            inputAutocomplete="age"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Email"
+            inputName="email-address"
+            inputType="email"
+            inputAutocomplete="email"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Teléfono/Móvil"
+            inputName="phone"
+            inputType="text"
+            inputAutocomplete="phone"
+          ></UploadInput>
 
           <div className="col-span-6 sm:col-span-3">
             <label
@@ -172,69 +123,31 @@ const UploadPet = () => {
             </div>
           </div>
 
-          <div className="col-span-6">
-            <label
-              for="street-address"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Dirección
-            </label>
-            <input
-              type="text"
-              name="street-address"
-              id="street-address"
-              autocomplete="street-address"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
+          <UploadInput
+            inputTitle="Dirección"
+            inputName="street-address"
+            inputType="text"
+            inputAutocomplete="street-address"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Ciudad"
+            inputName="city"
+            inputType="text"
+            inputAutocomplete="address-level2"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Provincia"
+            inputName="region"
+            inputType="text"
+            inputAutocomplete="address-level1"
+          ></UploadInput>
+          <UploadInput
+            inputTitle="Código Postal"
+            inputName="postal-code"
+            inputType="text"
+            inputAutocomplete="postal-code"
+          ></UploadInput>
 
-          <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-            <label
-              for="city"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Ciudad
-            </label>
-            <input
-              type="text"
-              name="city"
-              id="city"
-              autocomplete="address-level2"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
-
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-            <label
-              for="region"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Provincia
-            </label>
-            <input
-              type="text"
-              name="region"
-              id="region"
-              autocomplete="address-level1"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
-
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-            <label
-              for="postal-code"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Código Postal
-            </label>
-            <input
-              type="text"
-              name="postal-code"
-              id="postal-code"
-              autocomplete="postal-code"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            ></input>
-          </div>
           <div class="flex items-start col-span-6 sm:col-span-3 lg:col-span-2 ">
             <div class="flex items-center h-5">
               <input
@@ -249,7 +162,8 @@ const UploadPet = () => {
                 Modo ayúdame
               </label>
               <p class="text-gray-500">
-                Indica si tu mascota tiene algún tipo de discapacidad (indícalo en la descripción).
+                Indica si tu mascota tiene algún tipo de discapacidad (detállalo
+                en la descripción).
               </p>
             </div>
           </div>
