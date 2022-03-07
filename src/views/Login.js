@@ -1,4 +1,5 @@
-import React, { useRef, useContext } from "react";
+import 
+{ useRef, useContext } from "react";
 
 import { LoginContext } from "../context/LoginContext";
 import SignInUpButton from "../components/Login/SignInUpButton";
@@ -8,7 +9,7 @@ import SignInGoogleButton from "../components/Login/SignInGoogleButton";
 import LoginSpacedBar from "../components/Login/LoginSpacedBar";
 import LoginChangeAccount from "../components/Login/LoginChangeAccount";
 
-const SignIn = (setUser) => {
+const SignIn = () => {
   const { emailError, passwordError, email, setEmail, password, setPassword } =
     useContext(LoginContext);
   const emailRef = useRef();
