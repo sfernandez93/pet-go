@@ -1,10 +1,6 @@
 import {
   createContext,
-  useState,
-  useEffect,
-  useCallback,
-  useReducer,
-  useRef,
+  useState
 } from "react";
 import { isExpired } from "react-jwt";
 import { getDatabase, ref, update } from "firebase/database";
@@ -23,7 +19,6 @@ export const LoginContext = createContext({});
 
 const LoginContextProvider = ({ children }) => {
   const [userData, setUserData] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -134,7 +129,6 @@ const LoginContextProvider = ({ children }) => {
         handleLogin,
         handleSignUp,
         signOutAccount,
-        isLoggedIn,
         userData,
         email,
         password,

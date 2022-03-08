@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import 'firebase/storage';
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 
 const firebaseConfig = {
@@ -12,6 +12,7 @@ const firebaseConfig = {
   storageBucket: "pet-go-9200b.appspot.com",
   messagingSenderId: "6183594456",
   appId: "1:6183594456:web:5ef003414996aee579aaad",
+  // databaseURL: 'https://pet-go-9200b-default-rtdb.europe-west1.firebasedatabase.app'
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
