@@ -26,30 +26,27 @@ const UploadContextProvider = ({ children }) => {
 
   const storage = getStorage();
   const [imagesToUpload, setImagesToUpload] = useState({});
+  const [storeImageUrl, setStoreImageUrl] = useState([]);
 
   const handleChangeImage = (e) => {
     setImagesToUpload(e.target.files);
   };
 
   const handleFirebaseUpload = (e) => {
-    console.log(imagesToUpload);
     Object.keys(imagesToUpload).forEach((key) => {
       uploadImageFirebase(imagesToUpload[key]);
     });
   };
 
   const uploadImageFirebase = (image) => {
+    const urlArray = [];
     const metadata = {
       contentType: "image/jpeg",
     };
-    console.log(image.name);
-    console.log(storage);
-
     const storageRef = ref(storage, `imagesToUpload/${image.name}`);
-    console.log(storageRef);
     const uploadTask = uploadBytesResumable(storageRef, image, metadata);
-    console.log(uploadTask);
 
+    console.log("HEHEHE");
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -72,8 +69,9 @@ const UploadContextProvider = ({ children }) => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
+          urlArray.push(downloadURL);
         });
+        setStoreImageUrl(urlArray);
         setImagesToUpload({});
       }
     );
@@ -83,8 +81,13 @@ const UploadContextProvider = ({ children }) => {
     const db = getDatabase();
     const unique_id = uuid();
 
-    handleFirebaseUpload();
+    console.log(storeImageUrl);
+
+    await handleFirebaseUpload();
+    console.log(storeImageUrl);
+
     await writePetData(db, unique_id);
+    console.log(storeImageUrl);
     await writePetImagesData(db, unique_id);
   };
 
@@ -104,10 +107,13 @@ const UploadContextProvider = ({ children }) => {
     });
   };
 
-  const writePetImagesData = async (db, unique_id) => {
-    // set(dbref(db, "images/" + unique_id), {
-    //   url:
-    // });
+  const writePetImagesData = (db, unique_id) => {
+    console.log(storeImageUrl);
+    storeImageUrl.forEach(i => {
+      set(dbref(db, "petImages/" + unique_id), {
+        url: i,
+      });
+    });
   };
 
   return (
