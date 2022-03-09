@@ -1,12 +1,11 @@
-import { createContext, useState, useRef } from "react";
-import { set, ref as dbref } from "firebase/database";
+import { createContext, useState, useRef, useEffect } from "react";
 import {
   ref,
   getStorage,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref as dbref, push, set  } from "firebase/database";
 import { v4 as uuid } from "uuid";
 
 export const UploadContext = createContext({});
@@ -26,27 +25,51 @@ const UploadContextProvider = ({ children }) => {
 
   const storage = getStorage();
   const [imagesToUpload, setImagesToUpload] = useState({});
-  const [storeImageUrl, setStoreImageUrl] = useState([]);
+  const [storeImageUrl, setStoreImageUrl] = useState("");
+  const [uid, setUid] = useState("");
+
+  useEffect(() => {
+    if (storeImageUrl) writePetImageDatabase(storeImageUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storeImageUrl]);
+
+  useEffect(() => {
+    if (uid) uploadImagesFirebase();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uid]);
+
+  const clearInputs = () => {
+    firstNameRef.current.value = ''
+    raceRef.current.value =  ''
+    ageRef.current.value =  ''
+    emailRef.current.value =  ''
+    phoneRef.current.value =  ''
+    detailsRef.current.value =  ''
+    streetAdressRef.current.value =  ''
+    cityRef.current.value =  ''
+    regionRef.current.value =  ''
+    postalCodeRef.current.value =  ''
+    isDisabledRef.current.checked = false
+    setImagesToUpload({})
+  }
 
   const handleChangeImage = (e) => {
     setImagesToUpload(e.target.files);
   };
 
-  const handleFirebaseUpload = (e) => {
+  const uploadImagesFirebase = () => {
     Object.keys(imagesToUpload).forEach((key) => {
       uploadImageFirebase(imagesToUpload[key]);
     });
   };
 
   const uploadImageFirebase = (image) => {
-    const urlArray = [];
     const metadata = {
       contentType: "image/jpeg",
     };
-    const storageRef = ref(storage, `imagesToUpload/${image.name}`);
+    const storageRef = ref(storage, `imagesToUpload/${uid}`);
     const uploadTask = uploadBytesResumable(storageRef, image, metadata);
 
-    console.log("HEHEHE");
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -69,29 +92,31 @@ const UploadContextProvider = ({ children }) => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          urlArray.push(downloadURL);
+          console.log("File available at", downloadURL);
+          setStoreImageUrl(downloadURL);
         });
-        setStoreImageUrl(urlArray);
-        setImagesToUpload({});
       }
     );
   };
 
   const writeData = async () => {
     const db = getDatabase();
-    const unique_id = uuid();
-
-    console.log(storeImageUrl);
-
-    await handleFirebaseUpload();
-    console.log(storeImageUrl);
-
-    await writePetData(db, unique_id);
-    console.log(storeImageUrl);
-    await writePetImagesData(db, unique_id);
+    const id = uuid();
+    await writePetDatabase(db, id);
+    setUid(id);
   };
 
-  const writePetData = async (db, unique_id) => {
+  const writePetImageDatabase =  (url) => {
+    const db = getDatabase();
+    const postListRef = dbref(db, "petImages/" + uid);
+    const newPostRef = push(postListRef);
+    set(newPostRef, {
+      url: url,
+    });
+    clearInputs();
+  };
+
+  const writePetDatabase = async (db, unique_id) => {
     set(dbref(db, "pets/" + unique_id), {
       name: firstNameRef.current.value,
       race: raceRef.current.value,
@@ -107,22 +132,12 @@ const UploadContextProvider = ({ children }) => {
     });
   };
 
-  const writePetImagesData = (db, unique_id) => {
-    console.log(storeImageUrl);
-    storeImageUrl.forEach(i => {
-      set(dbref(db, "petImages/" + unique_id), {
-        url: i,
-      });
-    });
-  };
-
   return (
     <UploadContext.Provider
       value={{
         imagesToUpload,
         setImagesToUpload,
         handleChangeImage,
-        handleFirebaseUpload,
         firstNameRef,
         raceRef,
         ageRef,
