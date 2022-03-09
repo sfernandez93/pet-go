@@ -5,7 +5,8 @@ module.exports = {
       colors: {
         "blue-violet": "#b885e4",
         "dark-violet": "#8d41c9",
-        "clear-blue": "#e0eefc;"
+        "clear-blue": "#e0eefc;",
+        "clear-gray": "#e5e7eb;"
       },
     },
   },

@@ -17,7 +17,7 @@ const SignIn = () => {
 
   return (
     <div>
-      <div className="w-80 py-8 flex items-center flex-col mb-3">
+      <div className="gradient-background w-80 py-8 flex items-center flex-col mb-3">
         <div className="mt-8 w-64 flex flex-col">
           <LoginInput
             inputRef={emailRef}
