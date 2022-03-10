@@ -40,13 +40,16 @@ const SearchContextProvider = ({ children }) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
-            console.log(petObj);
             setPetData({
               uid: key,
               name: petObj.name,
               age: petObj.age,
+              race: petObj.race,
               city: petObj.city,
+              phone:petObj.phone,
+              email:petObj.email,
               isDisabled: petObj.isDisabled,
+              details: petObj.details
             });
           });
         } else {
@@ -72,10 +75,14 @@ const SearchContextProvider = ({ children }) => {
             {
               uid: petData.uid,
               name: petData.name,
+              race:petData.race,
               age: petData.age,
               city: petData.city,
+              phone:petData.phone,
+              email:petData.email,
               isDisabled: petData.isDisabled,
               profileImage: imageUrl,
+              details: petData.details
             },
           ]);
         } else {
