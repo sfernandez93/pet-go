@@ -1,5 +1,21 @@
-import { createContext, useState, useEffect } from "react";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { createContext, useState, useEffect, useContext } from "react";
+import {
+  getDatabase,
+  ref as dbref,
+  child,
+  get,
+  push,
+  set,
+} from "firebase/database";
+import { UploadContext } from "../context/UploadContext";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 export const SearchContext = createContext({});
 
@@ -18,7 +34,7 @@ const SearchContextProvider = ({ children }) => {
   }, [petsAllData]);
 
   const getDataFromPetsDatabase = async () => {
-    const dbRef = ref(getDatabase());
+    const dbRef = dbref(getDatabase());
     get(child(dbRef, `pets`))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -43,7 +59,7 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const getProfileImageByUid = () => {
-    const dbRef = ref(getDatabase());
+    const dbRef = dbref(getDatabase());
     return get(child(dbRef, `petImages/${petData.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -78,6 +94,19 @@ const SearchContextProvider = ({ children }) => {
       : setIndexImages(0);
   };
 
+  const savePetAsFavorite = () => {
+    const db = getDatabase();
+    const auth = getAuth();
+    // const postListRef = dbref(db, "users/" + auth.currentUser.uid);
+    const postListRef = dbref(db, "users/" + 123456);
+    const newPostRef = push(postListRef);
+    set(newPostRef, {
+      pet: petsAllData[indexImages].uid,
+    }).then(() => {
+      incrementIndexImage();
+    });
+  };
+
   return (
     <SearchContext.Provider
       value={{
@@ -85,6 +114,7 @@ const SearchContextProvider = ({ children }) => {
         incrementIndexImage,
         indexImages,
         petsAllData,
+        savePetAsFavorite,
       }}
     >
       {children}
