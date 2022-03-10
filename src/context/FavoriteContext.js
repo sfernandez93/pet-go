@@ -1,0 +1,68 @@
+import { createContext, useState, useEffect, useContext } from "react";
+import {
+  getDatabase,
+  ref as dbref,
+  child,
+  get,
+  push,
+  set,
+} from "firebase/database";
+import { UploadContext } from "../context/UploadContext";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+
+export const FavoriteContext = createContext({});
+
+const FavoriteContextProvider = ({ children }) => {
+  const dbRef = dbref(getDatabase());
+  const [urlImages, setUrlImages] = useState([]);
+
+  const getDataFavoritesFromDatabase = async () => {
+    get(child(dbRef, "users/" + 123456 + "/favoritePets"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          Object.keys(snapshot.val()).forEach((key) => {
+            const petUid = snapshot.val()[key].pet;
+            findPetUrlPhotoByUid(petUid);
+            console.log(petUid);
+          });
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const findPetUrlPhotoByUid = async (uid) => {
+    get(child(dbRef, "petImages/" + uid))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          Object.keys(snapshot.val()).forEach((key) => {
+            const petUrl = snapshot.val()[key].url;
+            setUrlImages((prevState) => [...prevState, petUrl]);
+          });
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  return (
+    <FavoriteContext.Provider value={{ getDataFavoritesFromDatabase, urlImages }}>
+      {children}
+    </FavoriteContext.Provider>
+  );
+};
+
+export default FavoriteContextProvider;

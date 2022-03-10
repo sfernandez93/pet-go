@@ -7,16 +7,19 @@ import App from "./App";
 import LoginContextProvider from "./context/LoginContext";
 import UploadContextProvider from "./context/UploadContext";
 import SearchContextProvider from "./context/SearchContext";
+import FavoriteContextProvider from "./context/FavoriteContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SearchContextProvider>
-      <UploadContextProvider>
-        <LoginContextProvider>
-          <App />
-        </LoginContextProvider>
-      </UploadContextProvider>
-    </SearchContextProvider>
+    <FavoriteContextProvider>
+      <SearchContextProvider>
+        <UploadContextProvider>
+          <LoginContextProvider>
+            <App />
+          </LoginContextProvider>
+        </UploadContextProvider>
+      </SearchContextProvider>
+    </FavoriteContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -98,7 +98,7 @@ const SearchContextProvider = ({ children }) => {
     const db = getDatabase();
     const auth = getAuth();
     // const postListRef = dbref(db, "users/" + auth.currentUser.uid);
-    const postListRef = dbref(db, "users/" + 123456);
+    const postListRef = dbref(db, "users/" + 123456 + "/favoritePets");
     const newPostRef = push(postListRef);
     set(newPostRef, {
       pet: petsAllData[indexImages].uid,
