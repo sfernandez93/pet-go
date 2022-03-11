@@ -1,10 +1,12 @@
 import { UploadContext } from "../../context/UploadContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const UploadSubmitButton = () => {
   const { writeData } = useContext(UploadContext);
 
   return (
+    <Link to={'/search'}>
     <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
       <button
         onClick={writeData}
@@ -14,6 +16,7 @@ const UploadSubmitButton = () => {
         Guardar
       </button>
     </div>
+    </Link>
   );
 };
 export default UploadSubmitButton;

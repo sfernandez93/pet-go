@@ -34,7 +34,7 @@ const DetailsPets = () => {
         >
           <div className="mt-3 md:mt-4 lg:mt-0 flex flex-col lg:flex-row items-strech justify-center lg:space-x-8">
             <DetailsPhoto
-              photo={petsAllData.length > 0 ? petsAllData[0].profileImage : ""}
+              photo={petsAllData.length > 0 ? petsAllData[0].imagesUrl[Object.keys(petsAllData[0].imagesUrl)[0]] : ""}
             ></DetailsPhoto>
             <div className="lg:w-1/2 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
               <DetailsName

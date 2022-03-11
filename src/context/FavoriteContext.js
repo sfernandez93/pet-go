@@ -30,7 +30,6 @@ const FavoriteContextProvider = ({ children }) => {
           Object.keys(snapshot.val()).forEach((key) => {
             const petUid = snapshot.val()[key].pet;
             findPetUrlPhotoByUid(petUid);
-            console.log(petUid);
           });
         } else {
           console.log("No data available");
@@ -42,13 +41,12 @@ const FavoriteContextProvider = ({ children }) => {
   };
 
   const findPetUrlPhotoByUid = async (uid) => {
-    get(child(dbRef, "petImages/" + uid))
+    get(child(dbRef, "pets/" + uid))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          Object.keys(snapshot.val()).forEach((key) => {
-            const petUrl = snapshot.val()[key].url;
-            setUrlImages((prevState) => [...prevState, petUrl]);
-          });
+          const petObj = snapshot.val().imagesUrl;
+          const petUrl = petObj[Object.keys(petObj)[0]];
+          setUrlImages((prevState) => [...prevState, petUrl]);
         } else {
           console.log("No data available");
         }
@@ -59,7 +57,9 @@ const FavoriteContextProvider = ({ children }) => {
   };
 
   return (
-    <FavoriteContext.Provider value={{ getDataFavoritesFromDatabase, urlImages }}>
+    <FavoriteContext.Provider
+      value={{ getDataFavoritesFromDatabase, urlImages }}
+    >
       {children}
     </FavoriteContext.Provider>
   );

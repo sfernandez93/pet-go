@@ -58,16 +58,19 @@ const UploadContextProvider = ({ children }) => {
   };
 
   const uploadImagesFirebase = () => {
+    let i = 1;
     Object.keys(imagesToUpload).forEach((key) => {
-      uploadImageFirebase(imagesToUpload[key]);
+      uploadImageFirebase(imagesToUpload[key], i++);
     });
   };
 
-  const uploadImageFirebase = (image) => {
+  const uploadImageFirebase = (image, index) => {
+    console.log(image)
+
     const metadata = {
       contentType: "image/jpeg",
     };
-    const storageRef = ref(storage, `imagesToUpload/${uid}`);
+    const storageRef = ref(storage, `imagesToUpload/${uid}_${index}`);
     const uploadTask = uploadBytesResumable(storageRef, image, metadata);
 
     uploadTask.on(
@@ -108,11 +111,11 @@ const UploadContextProvider = ({ children }) => {
 
   const writePetImageDatabase =  (url) => {
     const db = getDatabase();
-    const postListRef = dbref(db, "petImages/" + uid);
+    const postListRef = dbref(db, "pets/" + uid + "/imagesUrl");
     const newPostRef = push(postListRef);
-    set(newPostRef, {
-      url: url,
-    });
+    
+    set(newPostRef, url);
+
     clearInputs();
   };
 

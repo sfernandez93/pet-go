@@ -3,6 +3,7 @@ import { SearchContext } from "../context/SearchContext";
 import { FaHeart, FaSadTear } from "react-icons/fa";
 import SearchPhoto from "../components/Search/SearchPhoto";
 import SearchButton from "../components/Search/SearchButton";
+import { NavLink } from "react-router-dom";
 
 const Searchpet = () => {
   const { getDataFromPetsDatabase, incrementIndexImage, savePetAsFavorite } =
@@ -15,7 +16,10 @@ const Searchpet = () => {
 
   return (
     <div>
-      <SearchPhoto></SearchPhoto>
+      <NavLink to="/detail">
+        <SearchPhoto></SearchPhoto>
+      </NavLink>
+
       <div className="p-4 flex justify-center">
         <SearchButton
           onClickFunction={incrementIndexImage}

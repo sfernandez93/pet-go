@@ -21,13 +21,7 @@ export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
   const [petsAllData, setPetsAllData] = useState([]);
-  const [petData, setPetData] = useState({});
   const [indexImages, setIndexImages] = useState(0);
-
-  useEffect(() => {
-    getProfileImageByUid();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [petData]);
 
   useEffect(() => {
     console.log(petsAllData);
@@ -40,17 +34,22 @@ const SearchContextProvider = ({ children }) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
-            setPetData({
-              uid: key,
-              name: petObj.name,
-              age: petObj.age,
-              race: petObj.race,
-              city: petObj.city,
-              phone:petObj.phone,
-              email:petObj.email,
-              isDisabled: petObj.isDisabled,
-              details: petObj.details
-            });
+            setPetsAllData((prevState) => [
+              ...prevState,
+              {
+                uid: key,
+                name: petObj.name,
+                age: petObj.age,
+                race: petObj.race,
+                city: petObj.city,
+                phone:petObj.phone,
+                email:petObj.email,
+                isDisabled: petObj.isDisabled,
+                details: petObj.details,
+                imagesUrl: petObj.imagesUrl,
+              },
+            ]);
+
           });
         } else {
           console.log("No data available");
@@ -61,38 +60,6 @@ const SearchContextProvider = ({ children }) => {
       });
   };
 
-  const getProfileImageByUid = () => {
-    const dbRef = dbref(getDatabase());
-    return get(child(dbRef, `petImages/${petData.uid}`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          const imageObj = snapshot.val();
-          const firstKey = Object.keys(imageObj)[0];
-          const imageUrl = imageObj[firstKey].url;
-
-          setPetsAllData((prevState) => [
-            ...prevState,
-            {
-              uid: petData.uid,
-              name: petData.name,
-              race:petData.race,
-              age: petData.age,
-              city: petData.city,
-              phone:petData.phone,
-              email:petData.email,
-              isDisabled: petData.isDisabled,
-              profileImage: imageUrl,
-              details: petData.details
-            },
-          ]);
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   const incrementIndexImage = () => {
     console.log(petsAllData);

@@ -6,10 +6,10 @@ const SearchSubtitlePhoto = () => {
 
   return (
     <div className="pl-4 text-sm text-gray-500">
-      <a href="#">
+      <div>
         <span className="absolute inset-0"></span>
         {petsAllData.length > 0 ? petsAllData[indexImages].city : ""}
-      </a>
+      </div>
     </div>
   );
 };
