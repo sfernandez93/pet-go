@@ -16,9 +16,13 @@ const SignIn = () => {
   const passwordRef = useRef();
 
   return (
-    <div>
-      <div className="gradient-background w-80 py-8 flex items-center flex-col mb-3">
+    <div className="flex flex-col items-center">
+      <div className="w-80 py-8 flex items-center flex-col mb-3">
         <div className="mt-8 w-64 flex flex-col">
+        <img
+        src={require('../images/output-logo-remove.png')}
+        alt="logo"
+      ></img>
           <LoginInput
             inputRef={emailRef}
             type={"email"}

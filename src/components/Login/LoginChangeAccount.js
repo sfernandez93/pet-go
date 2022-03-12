@@ -12,7 +12,7 @@ const LoginChangeAccount = () => {
             {" "}
             Don't have an account?{" "}
             <span
-              className="text-dark-violet text-sm font-semibold"
+              className="text-blue-900 text-sm font-semibold"
               onClick={() => setHasAccount(!hasAccount)}
             >
               {" "}
@@ -25,7 +25,7 @@ const LoginChangeAccount = () => {
           <p>
             Have an account?{" "}
             <span
-              className="text-dark-violet text-sm font-semibold"
+              className="text-blue-900 text-sm font-semibold"
               onClick={() => setHasAccount(!hasAccount)}
             >
               Sign in

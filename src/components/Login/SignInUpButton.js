@@ -14,7 +14,7 @@ const SignInUpButton = () => {
 
   return (
     <button
-      className="text-sm text-center bg-blue-violet text-white py-1 rounded font-medium"
+      className="text-sm text-center bg-marine-green text-white py-1 rounded font-medium"
       onClick={
         hasAccount
           ? handleLoginWithEmailAndPassword
