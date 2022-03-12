@@ -16,7 +16,7 @@ const SignIn = () => {
   const passwordRef = useRef();
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="gradient-background h-full flex flex-col items-center">
       <div className="w-80 py-8 flex items-center flex-col mb-3">
         <div className="mt-8 w-64 flex flex-col">
         <img
