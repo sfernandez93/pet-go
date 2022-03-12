@@ -4,6 +4,7 @@ import { FaHeart, FaSadTear } from "react-icons/fa";
 import SearchPhoto from "../components/Search/SearchPhoto";
 import SearchButton from "../components/Search/SearchButton";
 import { NavLink } from "react-router-dom";
+import NavBar from "../components/Comun/NavBar";
 
 const Searchpet = () => {
   const {
@@ -21,7 +22,13 @@ const Searchpet = () => {
 
   return (
     <div>
-      <NavLink to={`/detail/${petsAllData && petsAllData.length > 0 ? petsAllData[indexImages].uid : ""}`}>
+      <NavLink
+        to={`/detail/${
+          petsAllData && petsAllData.length > 0
+            ? petsAllData[indexImages].uid
+            : ""
+        }`}
+      >
         <SearchPhoto></SearchPhoto>
       </NavLink>
 
@@ -35,6 +42,7 @@ const Searchpet = () => {
           iconComponent={<FaHeart size={50} style={{ fill: "white" }} />}
         ></SearchButton>
       </div>
+      <NavBar></NavBar>
     </div>
   );
 };

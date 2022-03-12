@@ -13,14 +13,8 @@ function App() {
   const { isLoggedIn } = useContext(LoginContext);
 
   if (!isLoggedIn) return <SignIn />;
-
   return (
     <Routes>
-      {/* {user ? (
-        <Route path="/upload" element={<UploadPet />} />
-      ) : (
-        <Route path="/" element={<SignIn />} />
-      )} */}
       <Route path="/" element={<Home />} />
       <Route path="/upload" element={<UploadPet />} />
       <Route path="/search" element={<SearchPet />} />
