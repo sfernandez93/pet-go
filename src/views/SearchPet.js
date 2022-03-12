@@ -6,8 +6,13 @@ import SearchButton from "../components/Search/SearchButton";
 import { NavLink } from "react-router-dom";
 
 const Searchpet = () => {
-  const { getDataFromPetsDatabase, incrementIndexImage, savePetAsFavorite } =
-    useContext(SearchContext);
+  const {
+    getDataFromPetsDatabase,
+    incrementIndexImage,
+    savePetAsFavorite,
+    petsAllData,
+    indexImages,
+  } = useContext(SearchContext);
 
   useEffect(() => {
     getDataFromPetsDatabase();
@@ -16,7 +21,7 @@ const Searchpet = () => {
 
   return (
     <div>
-      <NavLink to="/detail">
+      <NavLink to={`/detail/${petsAllData && petsAllData.length > 0 ? petsAllData[indexImages].uid : ""}`}>
         <SearchPhoto></SearchPhoto>
       </NavLink>
 

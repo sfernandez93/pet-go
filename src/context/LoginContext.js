@@ -1,9 +1,10 @@
 import {
   createContext,
-  useState
+  useState,
+  useEffect
 } from "react";
 import { isExpired } from "react-jwt";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, ref, update, child, get } from "firebase/database";
 import {
   getAuth,
   signInWithPopup,
@@ -18,13 +19,38 @@ import { getLocalStorage, setLocalStorage } from "../localStorage";
 export const LoginContext = createContext({});
 
 const LoginContextProvider = ({ children }) => {
-  const [userData, setUserData] = useState({});
-  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [hasAccount, setHasAccount] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedData = getLocalStorage('userData');
+    const hasExpired = isExpired(storedData?.token);
+    if (!hasExpired && storedData) {
+      setUserData(storedData);
+      setIsLoggedIn(true);
+    }
+  }, [])
+
+  useEffect(() => {
+    const getFromDatabase = async () => {
+      const storedData = getLocalStorage('userData');
+      const DB_PATH = `users/${storedData?.userId}`;
+      const dbRef = ref(getDatabase());
+      const dbSnapshot = await get(child(dbRef, DB_PATH))
+      if (dbSnapshot.exists()) {
+        // dispatch({ type: TODO_ACTIONS.SET_TASKS, tasksList: dbSnapshot.val()});
+      };
+    };
+    if (isLoggedIn) {
+      getFromDatabase();
+    }
+  }, [isLoggedIn])
+
 
   const clearInputs = () => {
     setEmail("");
@@ -104,7 +130,7 @@ const LoginContextProvider = ({ children }) => {
   const signOutAccount = async () => {
     const auth = getAuth();
     await signOut(auth);
-    setUser("");
+    setIsLoggedIn(false);
     clearErrors();
     clearInputs();
   };
@@ -119,7 +145,7 @@ const LoginContextProvider = ({ children }) => {
     };
     setUserData(dataToStore);
     setLocalStorage("userData", dataToStore);
-    setUser(result.user.email);
+    setIsLoggedIn(true);
   };
 
   return (
@@ -138,8 +164,7 @@ const LoginContextProvider = ({ children }) => {
         setPassword,
         emailError,
         passwordError,
-        user,
-        setUser,
+        isLoggedIn,
       }}
     >
       {children}
