@@ -26,11 +26,11 @@ const SearchImage = () => {
       //   ></img>
       // </div>
       <div
-      class="overflow-hidden relative justify-end  cursor-pointer capitalize flex flex-col rounded-md bg-red-500 w-76 h-106 z-50 object-cover text-white">
-      <img src="https://t2.uc.ltmcdn.com/es/posts/8/3/6/como_saber_si_un_border_collie_es_puro_44638_600_square.jpg" alt="desktop" />
-      <div class="w-full bg-transparent-black absolute p-5 flex flex-col">
+      className="w-11/12 h-4/5 overflow-hidden relative justify-end  cursor-pointer capitalize flex flex-col rounded-md bg-red-500 z-50 object-cover text-white">
+      <img className="w-full h-full object-cover" src="https://t2.uc.ltmcdn.com/es/posts/8/3/6/como_saber_si_un_border_collie_es_puro_44638_600_square.jpg" alt="desktop" />
+      <div className="w-full bg-transparent-black absolute p-5 flex flex-col">
         <span className= "text-3xl font-normal">Ron <span className="text-lg text-gray-400">3</span></span>
-        <span class="capitalize" >Madrid</span>
+        <span className="capitalize" >Madrid</span>
       </div>
     </div>
   );

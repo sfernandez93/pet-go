@@ -24,7 +24,7 @@ const Searchpet = () => {
   return (
     <div className="h-full w-full flex items-center justify-center flex-col">
       <LogoIconBar></LogoIconBar>
-      <NavLink
+      <NavLink className="h-full flex items-center justify-center"
         to={`/detail/${
           petsAllData && petsAllData.length > 0
             ? petsAllData[indexImages].uid
@@ -33,7 +33,7 @@ const Searchpet = () => {
       >
         <SearchPhoto></SearchPhoto>
       </NavLink>
-      <div class="flex items-center w-full justify-evenly p-6">
+      {/* <div class="flex items-center w-full justify-evenly p-6">
         <div
           className="w-12 h-12 border-solid border-2 rounded-full flex items-center justify-center"
           to={"/search"}
@@ -59,7 +59,9 @@ const Searchpet = () => {
             <FaHeart size={30} style={{ fill: "pink" }} />
           </div>
         </div>
-      </div>
+      </div> */}
+
+
       {/* <div className="p-4 flex justify-center">
         <SearchButton
           onClickFunction={incrementIndexImage}
