@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { UploadContext } from "../../context/UploadContext";
+import LoginError from "../../components/Login/LoginError";
 
 const UploadPhoto = () => {
-  const { imagesToUpload, handleChangeImage, handleFirebaseUpload } =
+  const { imagesToUpload, handleChangeImage, numberFilesError } =
     useContext(UploadContext);
 
   return (
@@ -10,7 +11,7 @@ const UploadPhoto = () => {
       <label className="block text-sm font-medium text-gray-500"> Fotos </label>
       <div
         className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md ${
-          imagesToUpload.length > 0 ? "bg-clear-blue" : "bg-gray-50"
+          imagesToUpload.length > 0 ? "bg-blue-50" : "bg-gray-50"
         } `}
       >
         <div className="space-y-1 text-center">
@@ -36,9 +37,10 @@ const UploadPhoto = () => {
               <span>
                 {imagesToUpload.length > 0
                   ? `${imagesToUpload.length} foto(s) seleccionadas`
-                  : "Selecciona una foto"}
+                  : "Selecciona una o varias fotos"}
               </span>
               <input
+                required
                 id="file-upload"
                 name="file-upload"
                 type="file"
@@ -50,6 +52,9 @@ const UploadPhoto = () => {
           </div>
           <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
         </div>
+      </div>
+      <div className="flex items-center justify-center">
+        <LoginError error={numberFilesError}></LoginError>
       </div>
     </div>
   );

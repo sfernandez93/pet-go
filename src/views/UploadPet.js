@@ -4,8 +4,10 @@ import UploadCheckbox from "../components/Upload/UploadCheckbox";
 import UploadSubmitButton from "../components/Upload/UploadSubmitButton";
 import UploadPhoto from "../components/Upload/UploadPhoto";
 import UploadProfilePhoto from "../components/Upload/UploadProfilePhoto";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UploadContext } from "../context/UploadContext";
+import NavBar from "../components/Comun/NavBar";
+import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const UploadPet = () => {
   const {
@@ -19,18 +21,25 @@ const UploadPet = () => {
     cityRef,
     regionRef,
     postalCodeRef,
-    isDisabledRef
+    isDisabledRef,
+    clearInputs,
   } = useContext(UploadContext);
 
+  useEffect(() => {
+    clearInputs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="absolute top-0 left-0 w-full">
-      <div className="px-4 py-6 bg-white sm:p-6">
+    <form className="absolute top-0 left-0 w-full">
+      <LogoIconBar></LogoIconBar>
+      <div className="mt-16 px-4 py-6 bg-white sm:p-6">
         <div className="grid grid-cols-6 gap-6">
           <UploadInput
             inputTitle="Nombre"
             inputName="first-name"
             inputType="text"
-            inputAutocomplete="given-name"
+            inputAutocomplLogoIconBarete="given-name"
             inputRef={firstNameRef}
           ></UploadInput>
           <UploadInput
@@ -105,12 +114,13 @@ const UploadPet = () => {
             inputName="comments"
             inputDescription="Indica si tu mascota tiene algún tipo de discapacidad (detállalo
                 en la descripción)."
-                inputRef={isDisabledRef}
+            inputRef={isDisabledRef}
           ></UploadCheckbox>
         </div>
       </div>
       <UploadSubmitButton></UploadSubmitButton>
-    </div>
+      <NavBar></NavBar>
+    </form>
   );
 };
 export default UploadPet;

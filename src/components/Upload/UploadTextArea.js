@@ -9,6 +9,8 @@ const UploadTextArea = ({ title, inputName, inputPlaceholder, inputRef }) => {
       </label>
       <div className="mt-1">
         <textarea
+          required
+          maxLength="100"
           id={inputName}
           name={inputName}
           rows="3"

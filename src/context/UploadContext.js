@@ -5,12 +5,14 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { getDatabase, ref as dbref, push, set  } from "firebase/database";
+import { getDatabase, ref as dbref, push, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 export const UploadContext = createContext({});
 
 const UploadContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const firstNameRef = useRef();
   const raceRef = useRef();
   const ageRef = useRef();
@@ -27,8 +29,10 @@ const UploadContextProvider = ({ children }) => {
   const [imagesToUpload, setImagesToUpload] = useState({});
   const [storeImageUrl, setStoreImageUrl] = useState("");
   const [uid, setUid] = useState("");
+  const [numberFilesError, setNumberFilesError] = useState("");
 
   useEffect(() => {
+    console.log(storeImageUrl);
     if (storeImageUrl) writePetImageDatabase(storeImageUrl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeImageUrl]);
@@ -39,22 +43,27 @@ const UploadContextProvider = ({ children }) => {
   }, [uid]);
 
   const clearInputs = () => {
-    firstNameRef.current.value = ''
-    raceRef.current.value =  ''
-    ageRef.current.value =  ''
-    emailRef.current.value =  ''
-    phoneRef.current.value =  ''
-    detailsRef.current.value =  ''
-    streetAdressRef.current.value =  ''
-    cityRef.current.value =  ''
-    regionRef.current.value =  ''
-    postalCodeRef.current.value =  ''
-    isDisabledRef.current.checked = false
-    setImagesToUpload({})
-  }
+    firstNameRef.current.value = "";
+    raceRef.current.value = "";
+    ageRef.current.value = "";
+    emailRef.current.value = "";
+    phoneRef.current.value = "";
+    detailsRef.current.value = "";
+    streetAdressRef.current.value = "";
+    cityRef.current.value = "";
+    regionRef.current.value = "";
+    postalCodeRef.current.value = "";
+    isDisabledRef.current.checked = false;
+    setImagesToUpload({});
+  };
 
   const handleChangeImage = (e) => {
-    setImagesToUpload(e.target.files);
+    if (e.target.files.length < 2) {
+      setNumberFilesError("");
+      setImagesToUpload(e.target.files);
+    } else {
+      setNumberFilesError("Puedes subir un máximo de 6 fotos");
+    }
   };
 
   const uploadImagesFirebase = () => {
@@ -65,8 +74,6 @@ const UploadContextProvider = ({ children }) => {
   };
 
   const uploadImageFirebase = (image, index) => {
-    console.log(image)
-
     const metadata = {
       contentType: "image/jpeg",
     };
@@ -79,6 +86,7 @@ const UploadContextProvider = ({ children }) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
+
         switch (snapshot.state) {
           case "paused":
             console.log("Upload is paused");
@@ -102,24 +110,28 @@ const UploadContextProvider = ({ children }) => {
     );
   };
 
-  const writeData = async () => {
+  const writeData = async (e) => {
+    e.preventDefault();
     const db = getDatabase();
     const id = uuid();
     await writePetDatabase(db, id);
     setUid(id);
   };
 
-  const writePetImageDatabase =  (url) => {
+  const writePetImageDatabase = (url) => {
     const db = getDatabase();
     const postListRef = dbref(db, "pets/" + uid + "/imagesUrl");
     const newPostRef = push(postListRef);
-    
+
     set(newPostRef, url);
 
-    clearInputs();
+    // clearInputs();
+
+    navigate("/search", { replace: true });
   };
 
   const writePetDatabase = async (db, unique_id) => {
+    console.log("HIHIHIH");
     set(dbref(db, "pets/" + unique_id), {
       name: firstNameRef.current.value,
       race: raceRef.current.value,
@@ -153,6 +165,8 @@ const UploadContextProvider = ({ children }) => {
         postalCodeRef,
         isDisabledRef,
         writeData,
+        clearInputs,
+        numberFilesError,
       }}
     >
       {children}

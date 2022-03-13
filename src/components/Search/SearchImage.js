@@ -58,7 +58,7 @@ const SearchImage = () => {
               : ""}
           </span>
         </span>
-        <div class="flex p-5 items-center w-full justify-evenly">
+        <div className="flex p-5 items-center w-full justify-evenly">
           <SearchButton
             onClickFunction={incrementIndexImage}
             iconComponent={<FaUndo size={20} style={{ fill: "deepskyblue" }} />}
