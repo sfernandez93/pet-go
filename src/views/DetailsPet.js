@@ -5,6 +5,8 @@ import DetailsDescription from "../components/Details/DetailsDescription";
 import DetailsName from "../components/Details/DetailsName";
 import DetailsItem from "../components/Details/DetailsItem";
 import DetailsContactButton from "../components/Details/DetailsContactButton";
+import NavBar from "../components/Comun/NavBar";
+import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const DetailsPets = () => {
   const { indexImages, petsAllData, getDataFromPetsDatabase } =
@@ -21,8 +23,9 @@ const DetailsPets = () => {
   }, [petsAllData]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="2xl:container 2xl:mx-auto md:py-12 lg:px-20 md:px-6 py-9 px-4">
+    // <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div >
+              <LogoIconBar></LogoIconBar>
         <div id="viewerButton" className="hidden w-full flex justify-center">
           <button className="bg-white text-indigo-600 shadow-md rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 py-5 px-10 font-semibold">
             Open Quick View
@@ -34,7 +37,13 @@ const DetailsPets = () => {
         >
           <div className="mt-3 md:mt-4 lg:mt-0 flex flex-col lg:flex-row items-strech justify-center lg:space-x-8">
             <DetailsPhoto
-              photo={petsAllData.length > 0 ? petsAllData[0].imagesUrl[Object.keys(petsAllData[0].imagesUrl)[0]] : ""}
+              photo={
+                petsAllData.length > 0
+                  ? petsAllData[0].imagesUrl[
+                      Object.keys(petsAllData[0].imagesUrl)[0]
+                    ]
+                  : ""
+              }
             ></DetailsPhoto>
             <div className="lg:w-1/2 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
               <DetailsName
@@ -62,16 +71,25 @@ const DetailsPets = () => {
               </div>
               <div className="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8 mt-8 md:mt-16">
                 <DetailsContactButton
-                  buttomName={"Llámanos"} modoContacto={petsAllData.length > 0 ? `tel:${petsAllData[0].phone}` : ''}
+                  buttomName={"Llámanos"}
+                  modoContacto={
+                    petsAllData.length > 0 ? `tel:${petsAllData[0].phone}` : ""
+                  }
                 ></DetailsContactButton>
                 <DetailsContactButton
-                  buttomName={"Envía un correo"} modoContacto={petsAllData.length > 0 ? `mailto:${petsAllData[0].email}` : ''}
+                  buttomName={"Envía un correo"}
+                  modoContacto={
+                    petsAllData.length > 0
+                      ? `mailto:${petsAllData[0].email}`
+                      : ""
+                  }
                 ></DetailsContactButton>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
+      <NavBar></NavBar>
     </div>
 
     // <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4">
