@@ -52,7 +52,7 @@ const UploadPet = () => {
           <UploadInput
             inputTitle="Edad"
             inputName="age"
-            inputType="text"
+            inputType="number"
             inputAutocomplete="age"
             inputRef={ageRef}
           ></UploadInput>

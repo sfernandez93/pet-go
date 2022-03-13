@@ -3,6 +3,8 @@ import { SearchContext } from "../context/SearchContext";
 import { useContext, useEffect } from "react";
 import FavoriteItem from "../components/Favorite/FavoriteItem";
 import { NavLink } from "react-router-dom";
+import NavBar from "../components/Comun/NavBar";
+import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const FavoritePets = () => {
   const { getDataFavoritesFromDatabase, urlImages } =
@@ -18,9 +20,10 @@ const FavoritePets = () => {
   }, []);
 
   return (
-    <div className="bg-white">
-      <div className="max-w-2xl mx-auto py-16 px-8 max-w-7xl px-4">
-        <div className="grid grid-cols-1 gap-y-10 gap-x-6 grid-cols-3 gap-x-4">
+    <div>
+      <LogoIconBar></LogoIconBar>
+      <div className="mt-16 mb-16 max-w-2xl mx-auto pt-8 pb-16 max-w-7xl px-4">
+      <div class="grid grid-cols-3 xl:grid-cols-4 gap-3">
           {[...urlImages].map((url, i) => (
             <NavLink
               key={i}
@@ -35,6 +38,7 @@ const FavoritePets = () => {
           ))}
         </div>
       </div>
+      <NavBar></NavBar>
     </div>
   );
 };
