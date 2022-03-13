@@ -68,6 +68,12 @@ const SearchContextProvider = ({ children }) => {
       : setIndexImages(0);
   };
 
+  const decrementIndexImage = () => {
+    indexImages > 0
+      ? setIndexImages((prevState) => prevState - 1)
+      : setIndexImages(petsAllData.length - 1);
+  };
+
   const savePetAsFavorite = () => {
     const db = getDatabase();
     const auth = getAuth();
@@ -86,6 +92,7 @@ const SearchContextProvider = ({ children }) => {
       value={{
         getDataFromPetsDatabase,
         incrementIndexImage,
+        decrementIndexImage,
         indexImages,
         petsAllData,
         savePetAsFavorite,
