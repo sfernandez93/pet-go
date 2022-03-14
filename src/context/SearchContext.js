@@ -23,6 +23,12 @@ const SearchContextProvider = ({ children }) => {
   const [dataPets, setDataPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
 
+  useEffect(() => {
+    getDataFromPetsDatabase();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
   const getDataFromPetsDatabase = () => {
     const dbRef = dbref(getDatabase());
     get(child(dbRef, `pets`))

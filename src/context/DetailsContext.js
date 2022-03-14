@@ -6,12 +6,7 @@ export const DetailsContext = createContext({});
 const DetailsContextProvider = ({ children }) => {
   const [detailPet, setDetailPet] = useState(null);
   const [indexImagePet, setIndexImagePet] = useState(0);
-  const { dataPets, getDataFromPetsDatabase } = useContext(SearchContext);
-
-  useEffect(() => {
-    getDataFromPetsDatabase();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { dataPets } = useContext(SearchContext);
 
   const findByUid = (uid) => {
     Object.keys(dataPets).forEach((key) => {
@@ -19,9 +14,6 @@ const DetailsContextProvider = ({ children }) => {
       if (uid === petUid) return setDetailPet(dataPets[key]);
     });
   };
-
-
-  
 
   const incrementIndexImage = () => {
     indexImagePet < Object.keys(detailPet.imagesUrl).length - 1
@@ -43,7 +35,7 @@ const DetailsContextProvider = ({ children }) => {
         indexImagePet,
         findByUid,
         detailPet,
-        setIndexImagePet
+        setIndexImagePet,
       }}
     >
       {children}

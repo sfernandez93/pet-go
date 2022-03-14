@@ -3,7 +3,6 @@ import { DetailsContext } from "../context/DetailsContext";
 import { useContext, useEffect, useState } from "react";
 import DetailsPhoto from "../components/Details/DetailsPhoto";
 import DetailsDescription from "../components/Details/DetailsDescription";
-import DetailsName from "../components/Details/DetailsName";
 import DetailsItem from "../components/Details/DetailsItem";
 import DetailsContactButton from "../components/Details/DetailsContactButton";
 import NavBar from "../components/Comun/NavBar";
@@ -12,14 +11,13 @@ import { useParams } from "react-router-dom";
 
 const DetailsPets = () => {
   const { uidPet } = useParams();
-  const { dataPets, getDataFromPetsDatabase } = useContext(SearchContext);
+  const { dataPets } = useContext(SearchContext);
 
   const { detailPet, indexImagePet, setIndexImagePet, findByUid } =
     useContext(DetailsContext);
 
   useEffect(() => {
     setIndexImagePet(0);
-    if (dataPets.length < 1) getDataFromPetsDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

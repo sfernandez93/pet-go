@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useEffect } from "react";
+import { createContext, useState, useRef, useEffect, useContext } from "react";
 import {
   ref,
   getStorage,
@@ -8,10 +8,13 @@ import {
 import { getDatabase, ref as dbref, push, set } from "firebase/database";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "./SearchContext";
 
 export const UploadContext = createContext({});
 
 const UploadContextProvider = ({ children }) => {
+  const { getDataFromPetsDatabase } = useContext(SearchContext);
+
   const navigate = useNavigate();
   const firstNameRef = useRef();
   const raceRef = useRef();
@@ -32,7 +35,6 @@ const UploadContextProvider = ({ children }) => {
   const [numberFilesError, setNumberFilesError] = useState("");
 
   useEffect(() => {
-    console.log(storeImageUrl);
     if (storeImageUrl) writePetImageDatabase(storeImageUrl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [storeImageUrl]);
@@ -126,11 +128,11 @@ const UploadContextProvider = ({ children }) => {
     set(newPostRef, url);
 
     // clearInputs();
-
+    getDataFromPetsDatabase();
     navigate("/search", { replace: true });
   };
 
-  const writePetDatabase = async (db, unique_id) => {
+  const writePetDatabase = (db, unique_id) => {
     set(dbref(db, "pets/" + unique_id), {
       name: firstNameRef.current.value,
       race: raceRef.current.value,
