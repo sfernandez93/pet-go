@@ -12,10 +12,14 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   const { isLoggedIn } = useContext(LoginContext);
 
-  if (!isLoggedIn) return <SignIn />;
+  if (!isLoggedIn)
+    return (
+      <Routes>
+        <Route path="/login" element={<SignIn />} />
+      </Routes>
+    );
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
       <Route path="/upload" element={<UploadPet />} />
       <Route path="/search" element={<SearchPet />} />
       <Route path="/favorites" element={<FavoritePets />} />
