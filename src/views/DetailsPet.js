@@ -12,11 +12,13 @@ import { useParams } from "react-router-dom";
 
 const DetailsPets = () => {
   const { uidPet } = useParams();
-  const { indexImages, petsAllData, getDataFromPetsDatabase } =
+  const {petsAllData, getDataFromPetsDatabase } =
     useContext(SearchContext);
 
-  const { detailPet, indexImagePet, findByUid } = useContext(DetailsContext);
+  const { detailPet, indexImagePet, setIndexImagePet, findByUid } = useContext(DetailsContext);
+
     useEffect(() => {
+      setIndexImagePet(0);
     if (petsAllData.length < 1) getDataFromPetsDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

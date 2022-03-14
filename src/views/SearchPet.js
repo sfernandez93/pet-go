@@ -5,10 +5,10 @@ import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const Searchpet = () => {
-  const { getDataFromPetsDatabase } = useContext(SearchContext);
+  const { getDataFromPetsDatabase, petsAllData } = useContext(SearchContext);
 
   useEffect(() => {
-    getDataFromPetsDatabase();
+    if (petsAllData.length < 1) getDataFromPetsDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

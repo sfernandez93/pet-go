@@ -41,6 +41,7 @@ const DetailsContextProvider = ({ children }) => {
         indexImagePet,
         findByUid,
         detailPet,
+        setIndexImagePet
       }}
     >
       {children}
