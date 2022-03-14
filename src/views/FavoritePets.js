@@ -19,17 +19,21 @@ const FavoritePets = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    console.log(petsAllData)
+  }, [petsAllData]);
+
   return (
     <div>
       <LogoIconBar></LogoIconBar>
       <div className="mt-16 mb-16 max-w-2xl mx-auto pt-8 pb-16 max-w-7xl px-4">
-      <div class="grid grid-cols-3 xl:grid-cols-4 gap-3">
+      <div className="grid grid-cols-3 xl:grid-cols-4 gap-3">
           {[...urlImages].map((url, i) => (
             <NavLink
               key={i}
               to={`/detail/${
                 petsAllData && petsAllData.length > 0
-                  ? petsAllData[indexImages].uid
+                  ? petsAllData[i].uid
                   : ""
               }`}
             >

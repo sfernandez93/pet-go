@@ -14,17 +14,17 @@ import { BrowserRouter } from "react-router-dom";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <DetailsContextProvider>
         <FavoriteContextProvider>
           <SearchContextProvider>
+          <DetailsContextProvider>
             <UploadContextProvider>
               <LoginContextProvider>
                 <App />
               </LoginContextProvider>
             </UploadContextProvider>
+            </DetailsContextProvider>
           </SearchContextProvider>
         </FavoriteContextProvider>
-      </DetailsContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

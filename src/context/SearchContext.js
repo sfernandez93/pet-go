@@ -23,10 +23,6 @@ const SearchContextProvider = ({ children }) => {
   const [petsAllData, setPetsAllData] = useState([]);
   const [indexImages, setIndexImages] = useState(0);
 
-  useEffect(() => {
-    console.log(petsAllData);
-  }, [petsAllData]);
-
   const getDataFromPetsDatabase = async () => {
     const dbRef = dbref(getDatabase());
     get(child(dbRef, `pets`))
@@ -62,7 +58,6 @@ const SearchContextProvider = ({ children }) => {
 
 
   const incrementIndexImage = () => {
-    console.log(petsAllData);
     indexImages < petsAllData.length - 1
       ? setIndexImages((prevState) => prevState + 1)
       : setIndexImages(0);
