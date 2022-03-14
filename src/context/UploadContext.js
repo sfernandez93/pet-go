@@ -16,6 +16,8 @@ const UploadContextProvider = ({ children }) => {
   const { getDataFromPetsDatabase } = useContext(SearchContext);
 
   const navigate = useNavigate();
+  const storage = getStorage();
+
   const firstNameRef = useRef();
   const raceRef = useRef();
   const ageRef = useRef();
@@ -28,7 +30,6 @@ const UploadContextProvider = ({ children }) => {
   const postalCodeRef = useRef();
   const isDisabledRef = useRef();
 
-  const storage = getStorage();
   const [imagesToUpload, setImagesToUpload] = useState({});
   const [storeImageUrl, setStoreImageUrl] = useState("");
   const [uid, setUid] = useState("");
@@ -112,24 +113,12 @@ const UploadContextProvider = ({ children }) => {
     );
   };
 
-  const writeData = async (e) => {
+  const writeData = (e) => {
     e.preventDefault();
     const db = getDatabase();
     const id = uuid();
-    await writePetDatabase(db, id);
+    writePetDatabase(db, id);
     setUid(id);
-  };
-
-  const writePetImageDatabase = (url) => {
-    const db = getDatabase();
-    const postListRef = dbref(db, "pets/" + uid + "/imagesUrl");
-    const newPostRef = push(postListRef);
-
-    set(newPostRef, url);
-
-    // clearInputs();
-    getDataFromPetsDatabase();
-    navigate("/search", { replace: true });
   };
 
   const writePetDatabase = (db, unique_id) => {
@@ -146,6 +135,15 @@ const UploadContextProvider = ({ children }) => {
       postalCode: postalCodeRef.current.value,
       isDisabled: isDisabledRef.current.checked,
     });
+  };
+
+  const writePetImageDatabase = (url) => {
+    const db = getDatabase();
+    const postListRef = dbref(db, "pets/" + uid + "/imagesUrl");
+    const newPostRef = push(postListRef);
+    set(newPostRef, url);
+    getDataFromPetsDatabase();
+    navigate("/search", { replace: true });
   };
 
   return (

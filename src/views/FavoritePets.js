@@ -1,24 +1,11 @@
 import { FavoriteContext } from "../context/FavoriteContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import FavoriteItem from "../components/Favorite/FavoriteItem";
 import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const FavoritePets = () => {
-  const { getDataFavoritesFromDatabase, favoritePets, reloadFavorites } =
-    useContext(FavoriteContext);
-
-
-  useEffect(() => {
-    getDataFavoritesFromDatabase();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    console.log(reloadFavorites)
-    if (reloadFavorites) getDataFavoritesFromDatabase();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadFavorites]);
+  const { favoritePets } = useContext(FavoriteContext);
 
   return (
     <div>
@@ -29,7 +16,9 @@ const FavoritePets = () => {
             <div
               key={i}
               to={`/detail/${
-                favoritePets && favoritePets.length > 0 ? favoritePets[i].uid : ""
+                favoritePets && favoritePets.length > 0
+                  ? favoritePets[i].uid
+                  : ""
               }`}
             >
               <FavoriteItem

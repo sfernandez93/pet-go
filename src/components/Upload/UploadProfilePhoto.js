@@ -1,10 +1,4 @@
-import { useContext } from "react";
-import { UploadContext } from "../../context/UploadContext";
-
 const UploadProfilePhoto = () => {
-  const { imagesToUpload, handleChangeImage, handleFirebaseUpload } =
-    useContext(UploadContext);
-
   return (
     <div className="col-span-6 sm:col-span-3">
     <label className="block text-sm font-medium text-gray-500">

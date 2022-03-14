@@ -1,24 +1,34 @@
-import { createContext, useState } from "react";
-import { getDatabase, ref as dbref, push, remove, get, child } from "firebase/database";
+import { createContext, useState, useEffect } from "react";
 import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+  getDatabase,
+  ref as dbref,
+  remove,
+  get,
+  child,
+} from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 export const FavoriteContext = createContext({});
 
 const FavoriteContextProvider = ({ children }) => {
   const dbRef = dbref(getDatabase());
-  const [favoritePets, setFavoritePets] = useState([]);
-  const [reloadFavorites, setReloadFavorites] = useState(false);
   const auth = getAuth();
 
+  const [favoritePets, setFavoritePets] = useState([]);
+  const [reloadFavorites, setReloadFavorites] = useState(false);
+
+  useEffect(() => {
+    getDataFavoritesFromDatabase();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (reloadFavorites) getDataFavoritesFromDatabase();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reloadFavorites]);
+
   const getDataFavoritesFromDatabase = async () => {
-    setReloadFavorites(false)
+    setReloadFavorites(false);
     setFavoritePets([]);
 
     get(child(dbRef, "users/" + auth.currentUser.uid + "/favoritePets"))
@@ -55,17 +65,21 @@ const FavoriteContextProvider = ({ children }) => {
 
   const deleteByUid = (uid) => {
     const db = getDatabase();
-
     const dbRef = dbref(db);
+
     get(child(dbRef, "users/" + auth.currentUser.uid + "/favoritePets/"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
-            if (uid === petObj.pet)  {
-              remove(dbref(db, "users/" + auth.currentUser.uid + "/favoritePets/" + key))
-              setReloadFavorites(true)
-              console.log(reloadFavorites)
+            if (uid === petObj.pet) {
+              remove(
+                dbref(
+                  db,
+                  "users/" + auth.currentUser.uid + "/favoritePets/" + key
+                )
+              );
+              setReloadFavorites(true);
             }
           });
         } else {
@@ -75,16 +89,16 @@ const FavoriteContextProvider = ({ children }) => {
       .catch((error) => {
         console.error(error);
       });
-
-    // const postListRef = dbref(db, "users/" + auth.currentUser.uid + "/favoritePets/" + uid + "/imagesUrl");
-    // const newPostRef = push(postListRef);
-    // remove(db, dbref(db, "users/" + auth.currentUser.uid + "/favoritePets/" + uid + "/imagesUrl"));
   };
-
 
   return (
     <FavoriteContext.Provider
-      value={{ getDataFavoritesFromDatabase, favoritePets, reloadFavorites, deleteByUid }}
+      value={{
+        getDataFavoritesFromDatabase,
+        favoritePets,
+        reloadFavorites,
+        deleteByUid,
+      }}
     >
       {children}
     </FavoriteContext.Provider>
