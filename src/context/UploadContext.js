@@ -58,7 +58,7 @@ const UploadContextProvider = ({ children }) => {
   };
 
   const handleChangeImage = (e) => {
-    if (e.target.files.length < 2) {
+    if (e.target.files.length < 6) {
       setNumberFilesError("");
       setImagesToUpload(e.target.files);
     } else {

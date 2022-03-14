@@ -19,25 +19,12 @@ const DetailsPets = () => {
     useEffect(() => {
     if (petsAllData.length < 1) getDataFromPetsDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(detailPet ? detailPet: "")
-
   }, []);
 
   useEffect(() => {
     findByUid(uidPet);
-  }, [petsAllData]);
-
-  useEffect(() => {
-    console.log(detailPet ? detailPet: "")
-      // detailPet
-      //         ? console.log(detailPet.imagesUrl[
-      //             Object.keys(detailPet.imagesUrl)[indexImagePet]
-      //           ])
-      //         : console.log("")
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [detailPet]);
-
+  }, [petsAllData]);
 
   return (
     <div className="h-screen flex items-center justify-center">

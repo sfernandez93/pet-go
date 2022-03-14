@@ -12,12 +12,12 @@ const SearchImage = () => {
   } = useContext(SearchContext);
 
   return (
-    <div class="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div class="flex flex-col justify-between h-4/5 w-11/12 bg-white rounded-lg shadow-lg">
-        <div class="flex items-center mt-2 space-x-4">
-          <div class="flex items-center pl-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="flex flex-col justify-between h-4/5 w-11/12 bg-white rounded-lg shadow-lg">
+        <div className="flex items-center mt-2 space-x-4">
+          <div className="flex items-center pl-4">
             <FaMapMarkerAlt size={20} style={{ fill: "gray" }} />
-            <p class="p-4 pl-2 text-sm font-normal text-gray-300 mr-14 hover:underline">
+            <p className="p-4 pl-2 text-sm font-normal text-gray-300 mr-14 hover:underline">
               {petsAllData && petsAllData.length > 0
                 ? petsAllData[indexImages].city
                 : ""}{" "}
@@ -26,18 +26,17 @@ const SearchImage = () => {
           </div>
         </div>
         <img
-          class="w-full h-4/5 object-cover"
-          src="https://images.squarespace-cdn.com/content/v1/5d32b4cc78a42600019361c7/1563607085560-ESTYI12MMFIGQ2ZBYHMH/Pepper-Westie-West-Highland-White-Terrier-10.jpg"
-          //       src={
-          //         petsAllData && petsAllData.length > 0
-          //           ? petsAllData[indexImages].imagesUrl[
-          //               Object.keys(petsAllData[indexImages].imagesUrl)[0]
-          //             ]
-          //           : ""
-          //       }
+          className="w-full h-4/5 object-cover"
+                src={
+                  petsAllData && petsAllData.length > 0
+                    ? petsAllData[indexImages].imagesUrl[
+                        Object.keys(petsAllData[indexImages].imagesUrl)[0]
+                      ]
+                    : ""
+                }
           alt=""
         />
-        <div class="flex justify-between px-10 py-6">
+        <div className="flex justify-between px-10 py-6">
           <button onClick={decrementIndexImage}>
             <FaReply size={20} style={{ fill: "grey" }} />
           </button>

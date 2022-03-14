@@ -1,21 +1,5 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import {
-  getDatabase,
-  ref as dbref,
-  child,
-  get,
-  push,
-  set,
-} from "firebase/database";
-import { UploadContext } from "../context/UploadContext";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import { createContext, useState } from "react";
+import { getDatabase, ref as dbref, child, get } from "firebase/database";
 
 export const FavoriteContext = createContext({});
 

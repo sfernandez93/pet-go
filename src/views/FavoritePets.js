@@ -10,7 +10,7 @@ const FavoritePets = () => {
   const { getDataFavoritesFromDatabase, urlImages } =
     useContext(FavoriteContext);
 
-  const { petsAllData, indexImages, getDataFromPetsDatabase } =
+  const { petsAllData, getDataFromPetsDatabase } =
     useContext(SearchContext);
 
   useEffect(() => {
@@ -19,16 +19,12 @@ const FavoritePets = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    console.log(petsAllData)
-  }, [petsAllData]);
-
   return (
     <div>
       <LogoIconBar></LogoIconBar>
       <div className="mt-16 mb-16 max-w-2xl mx-auto pt-8 pb-16 max-w-7xl px-4">
       <div className="grid grid-cols-3 xl:grid-cols-4 gap-3">
-          {[...urlImages].map((url, i) => (
+          {[...petsAllData].map((url, i) => (
             <NavLink
               key={i}
               to={`/detail/${
@@ -37,7 +33,8 @@ const FavoritePets = () => {
                   : ""
               }`}
             >
-              <FavoriteItem key={i} urlImage={url} />
+              <FavoriteItem key={i} urlImage={petsAllData && petsAllData.length > 0
+                  ? petsAllData[i].imagesUrl[Object.keys(petsAllData[i].imagesUrl)[0]]: ""} />
             </NavLink>
           ))}
         </div>
