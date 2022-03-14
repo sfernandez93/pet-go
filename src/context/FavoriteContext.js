@@ -1,5 +1,13 @@
 import { createContext, useState } from "react";
 import { getDatabase, ref as dbref, push, remove, get, child } from "firebase/database";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 export const FavoriteContext = createContext({});
 
@@ -7,11 +15,13 @@ const FavoriteContextProvider = ({ children }) => {
   const dbRef = dbref(getDatabase());
   const [favoritePets, setFavoritePets] = useState([]);
   const [reloadFavorites, setReloadFavorites] = useState(false);
+  const auth = getAuth();
 
   const getDataFavoritesFromDatabase = async () => {
     setReloadFavorites(false)
     setFavoritePets([]);
-    get(child(dbRef, "users/" + 123456 + "/favoritePets"))
+
+    get(child(dbRef, "users/" + auth.currentUser.uid + "/favoritePets"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
@@ -47,14 +57,13 @@ const FavoriteContextProvider = ({ children }) => {
     const db = getDatabase();
 
     const dbRef = dbref(db);
-    get(child(dbRef, "users/" + 123456 + "/favoritePets/"))
+    get(child(dbRef, "users/" + auth.currentUser.uid + "/favoritePets/"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
             if (uid === petObj.pet)  {
-              // remove(db, dbref(db, "users/" + 123456 + "/favoritePets/" + key));
-              remove(dbref(db, "users/" + 123456 + "/favoritePets/" + key))
+              remove(dbref(db, "users/" + auth.currentUser.uid + "/favoritePets/" + key))
               setReloadFavorites(true)
               console.log(reloadFavorites)
             }
@@ -67,9 +76,9 @@ const FavoriteContextProvider = ({ children }) => {
         console.error(error);
       });
 
-    // const postListRef = dbref(db, "users/" + 123456 + "/favoritePets/" + uid + "/imagesUrl");
+    // const postListRef = dbref(db, "users/" + auth.currentUser.uid + "/favoritePets/" + uid + "/imagesUrl");
     // const newPostRef = push(postListRef);
-    // remove(db, dbref(db, "users/" + 123456 + "/favoritePets/" + uid + "/imagesUrl"));
+    // remove(db, dbref(db, "users/" + auth.currentUser.uid + "/favoritePets/" + uid + "/imagesUrl"));
   };
 
 

@@ -72,8 +72,7 @@ const SearchContextProvider = ({ children }) => {
   const savePetAsFavorite = () => {
     const db = getDatabase();
     const auth = getAuth();
-    // const postListRef = dbref(db, "users/" + auth.currentUser.uid);
-    const postListRef = dbref(db, "users/" + 123456 + "/favoritePets");
+    const postListRef = dbref(db, "users/" + auth.currentUser.uid + "/favoritePets");
     const newPostRef = push(postListRef);
     set(newPostRef, {
       pet: petsAllData[indexImages].uid,
