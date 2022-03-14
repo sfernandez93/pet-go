@@ -12,21 +12,21 @@ import { useParams } from "react-router-dom";
 
 const DetailsPets = () => {
   const { uidPet } = useParams();
-  const { petsAllData, getDataFromPetsDatabase } = useContext(SearchContext);
+  const { dataPets, getDataFromPetsDatabase } = useContext(SearchContext);
 
   const { detailPet, indexImagePet, setIndexImagePet, findByUid } =
     useContext(DetailsContext);
 
   useEffect(() => {
     setIndexImagePet(0);
-    if (petsAllData.length < 1) getDataFromPetsDatabase();
+    if (dataPets.length < 1) getDataFromPetsDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     findByUid(uidPet);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [petsAllData]);
+  }, [dataPets]);
 
   return (
     <div>

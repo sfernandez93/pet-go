@@ -2,7 +2,6 @@ import { useContext } from "react";
 
 import SignIn from "./views/Login";
 import { LoginContext } from "./context/LoginContext";
-import Home from "./views/Home";
 import UploadPet from "./views/UploadPet";
 import SearchPet from "./views/SearchPet";
 import FavoritePets from "./views/FavoritePets";

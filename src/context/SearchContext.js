@@ -20,17 +20,17 @@ import {
 export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
-  const [petsAllData, setPetsAllData] = useState([]);
-  const [indexImages, setIndexImages] = useState(0);
+  const [dataPets, setDataPets] = useState([]);
+  const [photoIndex, setPhotoIndex] = useState(0);
 
-  const getDataFromPetsDatabase = async () => {
+  const getDataFromPetsDatabase = () => {
     const dbRef = dbref(getDatabase());
     get(child(dbRef, `pets`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
-            setPetsAllData((prevState) => [
+            setDataPets((prevState) => [
               ...prevState,
               {
                 uid: key,
@@ -58,15 +58,15 @@ const SearchContextProvider = ({ children }) => {
 
 
   const incrementIndexImage = () => {
-    indexImages < petsAllData.length - 1
-      ? setIndexImages((prevState) => prevState + 1)
-      : setIndexImages(0);
+    photoIndex < dataPets.length - 1
+      ? setPhotoIndex((prevState) => prevState + 1)
+      : setPhotoIndex(0);
   };
 
   const decrementIndexImage = () => {
-    indexImages > 0
-      ? setIndexImages((prevState) => prevState - 1)
-      : setIndexImages(petsAllData.length - 1);
+    photoIndex > 0
+      ? setPhotoIndex((prevState) => prevState - 1)
+      : setPhotoIndex(dataPets.length - 1);
   };
 
   const savePetAsFavorite = () => {
@@ -75,7 +75,7 @@ const SearchContextProvider = ({ children }) => {
     const postListRef = dbref(db, "users/" + auth.currentUser.uid + "/favoritePets");
     const newPostRef = push(postListRef);
     set(newPostRef, {
-      pet: petsAllData[indexImages].uid,
+      pet: dataPets[photoIndex].uid,
     }).then(() => {
       incrementIndexImage();
     });
@@ -87,8 +87,8 @@ const SearchContextProvider = ({ children }) => {
         getDataFromPetsDatabase,
         incrementIndexImage,
         decrementIndexImage,
-        indexImages,
-        petsAllData,
+        photoIndex,
+        dataPets,
         savePetAsFavorite,
       }}
     >

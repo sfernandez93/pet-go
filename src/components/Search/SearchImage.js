@@ -7,8 +7,8 @@ const SearchImage = () => {
     incrementIndexImage,
     decrementIndexImage,
     savePetAsFavorite,
-    petsAllData,
-    indexImages,
+    dataPets,
+    photoIndex,
   } = useContext(SearchContext);
 
   return (
@@ -18,8 +18,8 @@ const SearchImage = () => {
           <div className="flex items-center pl-4">
             <FaMapMarkerAlt size={20} style={{ fill: "gray" }} />
             <p className="p-4 pl-2 text-sm font-normal text-gray-300 mr-14 hover:underline">
-              {petsAllData && petsAllData.length > 0
-                ? petsAllData[indexImages].city
+              {dataPets && dataPets.length > 0
+                ? dataPets[photoIndex].city
                 : ""}{" "}
               (publicado hace 2 horas)
             </p>
@@ -28,9 +28,9 @@ const SearchImage = () => {
         <img
           className="w-full h-4/5 object-cover"
                 src={
-                  petsAllData && petsAllData.length > 0
-                    ? petsAllData[indexImages].imagesUrl[
-                        Object.keys(petsAllData[indexImages].imagesUrl)[0]
+                  dataPets && dataPets.length > 0
+                    ? dataPets[photoIndex].imagesUrl[
+                        Object.keys(dataPets[photoIndex].imagesUrl)[0]
                       ]
                     : ""
                 }

@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { isExpired } from "react-jwt";
-import { getDatabase, ref, update, child, get } from "firebase/database";
 import {
   getAuth,
   signInWithPopup,
@@ -17,6 +16,7 @@ export const LoginContext = createContext({});
 
 const LoginContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -35,22 +35,8 @@ const LoginContextProvider = ({ children }) => {
     } else {
       navigate("/login", { replace: true });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const getFromDatabase = async () => {
-      const storedData = getLocalStorage("userData");
-      const DB_PATH = `users/${storedData?.userId}`;
-      const dbRef = ref(getDatabase());
-      const dbSnapshot = await get(child(dbRef, DB_PATH));
-      if (dbSnapshot.exists()) {
-        // dispatch({ type: TODO_ACTIONS.SET_TASKS, tasksList: dbSnapshot.val()});
-      }
-    };
-    if (isLoggedIn) {
-      getFromDatabase();
-    }
-  }, [isLoggedIn]);
 
   const clearInputs = () => {
     setEmail("");
@@ -62,17 +48,19 @@ const LoginContextProvider = ({ children }) => {
     setPasswordError("");
   };
 
+  const updateDataAndRedirect = (result, route) => {
+    updateDataToStore(result);
+    navigate(route, { replace: true });
+  };
+
   const handleLoginWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
     const result = await signInWithPopup(auth, provider);
-    updateDataToStore(result);
-    navigate("/search", { replace: true });
+    updateDataAndRedirect(result, "/search");
   };
 
   const handleLogin = async (emailRef, passwordRef) => {
     clearErrors();
-    const auth = getAuth();
     let result = null;
     try {
       result = await signInWithEmailAndPassword(auth, emailRef, passwordRef);
@@ -90,13 +78,11 @@ const LoginContextProvider = ({ children }) => {
           break;
       }
     }
-    updateDataToStore(result);
-    navigate("/search", { replace: true });
+    updateDataAndRedirect(result, "/search");
   };
 
   const handleSignUp = async (emailRef, passwordRef) => {
     clearErrors();
-    const auth = getAuth();
     let result = null;
     try {
       result = await createUserWithEmailAndPassword(
@@ -119,12 +105,10 @@ const LoginContextProvider = ({ children }) => {
           break;
       }
     }
-    updateDataToStore(result);
-    navigate("/search", { replace: true });
+    updateDataAndRedirect(result, "/search");
   };
 
   const signOutAccount = async () => {
-    const auth = getAuth();
     await signOut(auth);
     setIsLoggedIn(false);
     localStorage.removeItem("userData");

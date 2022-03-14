@@ -3,17 +3,17 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 const SearchTitlePhoto = () => {
-  const { indexImages, petsAllData } = useContext(SearchContext);
+  const { photoIndex, dataPets } = useContext(SearchContext);
 
   return (
     <NavLink
-      to={petsAllData.length > 0 ? `detail/${petsAllData[indexImages].id}` : ""}
+      to={dataPets.length > 0 ? `detail/${dataPets[photoIndex].id}` : ""}
     >
       {" "}
       Detail
       <p className="text-2xl font-semibold text-gray-900 p-4">
-        {petsAllData.length > 0
-          ? `${petsAllData[indexImages].name}, ${petsAllData[indexImages].age}`
+        {dataPets.length > 0
+          ? `${dataPets[photoIndex].name}, ${dataPets[photoIndex].age}`
           : ""}
       </p>
     </NavLink>

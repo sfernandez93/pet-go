@@ -2,13 +2,13 @@ import { SearchContext } from "../../context/SearchContext";
 import { useContext } from "react";
 
 const SearchSubtitlePhoto = () => {
-  const { indexImages, petsAllData } = useContext(SearchContext);
+  const { photoIndex, dataPets } = useContext(SearchContext);
 
   return (
     <div className="pl-4 text-sm text-gray-500">
       <div>
         <span className="absolute inset-0"></span>
-        {petsAllData.length > 0 ? petsAllData[indexImages].city : ""}
+        {dataPets.length > 0 ? dataPets[photoIndex].city : ""}
       </div>
     </div>
   );
