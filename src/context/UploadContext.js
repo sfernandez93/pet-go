@@ -131,7 +131,6 @@ const UploadContextProvider = ({ children }) => {
   };
 
   const writePetDatabase = async (db, unique_id) => {
-    console.log("HIHIHIH");
     set(dbref(db, "pets/" + unique_id), {
       name: firstNameRef.current.value,
       race: raceRef.current.value,

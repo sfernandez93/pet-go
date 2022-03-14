@@ -7,7 +7,7 @@ const DetailsPhoto = ({ photo }) => {
     useContext(DetailsContext);
 
   return (
-    <div className="relative">
+    <div className="relative mt-40">
       <img src={photo} className="rounded-t-lg object-center object-cover w-full h-72" />
       <button
         onClick={decrementIndexImage}
