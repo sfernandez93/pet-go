@@ -12,8 +12,6 @@ export const FavoriteContext = createContext({});
 
 const FavoriteContextProvider = ({ children }) => {
   const dbRef = dbref(getDatabase());
-  const auth = getAuth();
-
   const [favoritePets, setFavoritePets] = useState([]);
   const [reloadFavorites, setReloadFavorites] = useState(false);
 
@@ -28,6 +26,7 @@ const FavoriteContextProvider = ({ children }) => {
   }, [reloadFavorites]);
 
   const getDataFavoritesFromDatabase = async () => {
+    const auth = getAuth();
     setReloadFavorites(false);
     setFavoritePets([]);
 
@@ -64,6 +63,7 @@ const FavoriteContextProvider = ({ children }) => {
   };
 
   const deleteByUid = (uid) => {
+    const auth = getAuth();
     const db = getDatabase();
     const dbRef = dbref(db);
 

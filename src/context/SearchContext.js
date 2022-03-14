@@ -7,27 +7,20 @@ import {
   push,
   set,
 } from "firebase/database";
-import { UploadContext } from "../context/UploadContext";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
+import { FavoriteContext } from "../context/FavoriteContext";
+import { getAuth } from "firebase/auth";
 
 export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
   const [dataPets, setDataPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const { getDataFavoritesFromDatabase } = useContext(FavoriteContext);
 
   useEffect(() => {
     getDataFromPetsDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   const getDataFromPetsDatabase = () => {
     const dbRef = dbref(getDatabase());
@@ -44,14 +37,13 @@ const SearchContextProvider = ({ children }) => {
                 age: petObj.age,
                 race: petObj.race,
                 city: petObj.city,
-                phone:petObj.phone,
-                email:petObj.email,
+                phone: petObj.phone,
+                email: petObj.email,
                 isDisabled: petObj.isDisabled,
                 details: petObj.details,
                 imagesUrl: petObj.imagesUrl,
               },
             ]);
-
           });
         } else {
           console.log("No data available");
@@ -61,7 +53,6 @@ const SearchContextProvider = ({ children }) => {
         console.error(error);
       });
   };
-
 
   const incrementIndexImage = () => {
     photoIndex < dataPets.length - 1
@@ -78,12 +69,16 @@ const SearchContextProvider = ({ children }) => {
   const savePetAsFavorite = () => {
     const db = getDatabase();
     const auth = getAuth();
-    const postListRef = dbref(db, "users/" + auth.currentUser.uid + "/favoritePets");
+    const postListRef = dbref(
+      db,
+      "users/" + auth.currentUser.uid + "/favoritePets"
+    );
     const newPostRef = push(postListRef);
     set(newPostRef, {
       pet: dataPets[photoIndex].uid,
     }).then(() => {
       incrementIndexImage();
+      getDataFavoritesFromDatabase();
     });
   };
 
