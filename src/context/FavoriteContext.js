@@ -1,35 +1,20 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState } from "react";
 import {
   getDatabase,
   ref as dbref,
   remove,
   get,
   child,
-  update,
 } from "firebase/database";
 import { getLocalStorage } from "../localStorage";
-import { LoginContext } from "./LoginContext";
 
 export const FavoriteContext = createContext({});
 
 const FavoriteContextProvider = ({ children }) => {
   const dbRef = dbref(getDatabase());
   const [favoritePets, setFavoritePets] = useState([]);
-  const [reloadPetsData, setReloadPetsData] = useState(false);
-  const { isLoggedIn } = useContext(LoginContext);
-
-  useEffect(() => {
-    if (isLoggedIn) getDataFavoritesFromDatabase();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    if (reloadPetsData) getDataFavoritesFromDatabase();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadPetsData]);
 
   const getDataFavoritesFromDatabase = async () => {
-    setReloadPetsData(false);
     setFavoritePets([]);
     const storedData = getLocalStorage("userData");
 
@@ -79,8 +64,8 @@ const FavoriteContextProvider = ({ children }) => {
               remove(
                 dbref(db, "users/" + storedData.userId + "/favoritePets/" + key)
               );
-              
-              setReloadPetsData(true);
+
+              getDataFavoritesFromDatabase();
             }
           });
         } else {
@@ -97,7 +82,6 @@ const FavoriteContextProvider = ({ children }) => {
       value={{
         getDataFavoritesFromDatabase,
         favoritePets,
-        reloadPetsData,
         deleteByUid,
       }}
     >

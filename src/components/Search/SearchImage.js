@@ -1,6 +1,6 @@
 import { SearchContext } from "../../context/SearchContext";
-import { useContext, useEffect } from "react";
-import { FaHeart, FaRegAddressCard, FaRegListAlt, FaMapMarkerAlt, FaForward } from "react-icons/fa";
+import { useContext } from "react";
+import { FaHeart, FaRegListAlt, FaMapMarkerAlt, FaForward } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const SearchImage = () => {

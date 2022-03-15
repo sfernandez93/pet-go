@@ -5,11 +5,11 @@ import { useContext, useEffect } from "react";
 import { SearchContext } from "../context/SearchContext";
 
 const Searchpet = () => {
-  const { getFavoritesUid } = useContext(SearchContext);
+  const { getData } = useContext(SearchContext);
 
   useEffect(() => {
-    console.log("HEY")
-    getFavoritesUid();
+    getData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

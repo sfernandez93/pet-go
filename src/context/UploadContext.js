@@ -13,7 +13,7 @@ import { SearchContext } from "./SearchContext";
 export const UploadContext = createContext({});
 
 const UploadContextProvider = ({ children }) => {
-  const { getDataFromPetsDatabase } = useContext(SearchContext);
+  const { getDataNotInFavorites } = useContext(SearchContext);
 
   const navigate = useNavigate();
   const storage = getStorage();
@@ -143,7 +143,7 @@ const UploadContextProvider = ({ children }) => {
     const postListRef = dbref(db, "pets/" + uid + "/imagesUrl");
     const newPostRef = push(postListRef);
     set(newPostRef, url);
-    getDataFromPetsDatabase();
+    getDataNotInFavorites();
     navigate("/search", { replace: true });
   };
 

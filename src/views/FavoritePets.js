@@ -6,11 +6,12 @@ import LogoIconBar from "../components/Comun/LogoIconBar";
 import { SearchContext } from "../context/SearchContext";
 
 const FavoritePets = () => {
-  const { getDataFavoritesFromDatabase, favoritePets } = useContext(FavoriteContext);
+  const { getDataFavoritesFromDatabase, favoritePets } =
+    useContext(FavoriteContext);
 
-    useEffect(() => {
-      getDataFavoritesFromDatabase();
-    console.log( "HOLA")
+  useEffect(() => {
+    getDataFavoritesFromDatabase();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -6,71 +6,53 @@ import {
   get,
   push,
   set,
-  update,
 } from "firebase/database";
-import { FavoriteContext } from "../context/FavoriteContext";
 import { getLocalStorage } from "../localStorage";
-import { LoginContext } from "./LoginContext";
 
 export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
   const [dataPets, setDataPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [favoritesUid, setFavoritesUid] = useState([]);
 
-  const { getDataFavoritesFromDatabase } = useContext(FavoriteContext);
-  const { isLoggedIn } = useContext(LoginContext);
-  const { reloadPetsData } = useContext(FavoriteContext);
-
-  useEffect(() => {
-    if (isLoggedIn) getFavoritesUid();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    getDataFromPetsDatabase();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [favoritesUid]);
-
-  useEffect(() => {
-    // if (reloadPetsData) getFavoritesUid();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadPetsData]);
+  const getData = async () => {
+    const favorites = await getFavoritesUid();
+    getDataNotInFavorites(favorites);
+  };
 
   const getFavoritesUid = async () => {
     const storedData = getLocalStorage("userData");
     const db = getDatabase();
     const dbRef = dbref(db);
-    const arr = [];
+    const favorites = [];
 
     try {
-      const snapshot = await get(child(dbRef, "users/" + storedData.userId + "/favoritePets/"))
+      const snapshot = await get(
+        child(dbRef, "users/" + storedData.userId + "/favoritePets/")
+      );
       if (snapshot.exists()) {
         Object.keys(snapshot.val()).forEach((key) => {
-          arr.push(snapshot.val()[key].pet);
+          favorites.push(snapshot.val()[key].pet);
         });
       } else {
         console.log("No data available");
       }
-      setFavoritesUid(arr);
-    } catch(error) {
+    } catch (error) {
       console.error(error);
-    };
-    
+    }
+
+    return favorites;
   };
 
-
-  const getDataFromPetsDatabase = async () => {
+  const getDataNotInFavorites = async (favoritesUid) => {
     const dbRef = dbref(getDatabase());
 
     await get(child(dbRef, `pets`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          setDataPets([])
+          setDataPets([]);
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
-            console.log(favoritesUid)
             if (favoritesUid.length > 0 && !favoritesUid.includes(key)) {
               setDataPets((prevState) => [
                 ...prevState,
@@ -99,22 +81,12 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const incrementIndexImage = () => {
-    if ( photoIndex < dataPets.length - 1){
-      setPhotoIndex((prevState) => prevState + 1)
+    if (photoIndex < dataPets.length - 1) {
+      setPhotoIndex((prevState) => prevState + 1);
     } else {
-      setPhotoIndex(0)
-      getFavoritesUid()
+      setPhotoIndex(0);
+      getData();
     }
-  };
-
-  const decrementIndexImage = () => {
-    photoIndex > 0
-      ? setPhotoIndex((prevState) => prevState - 1)
-      : setPhotoIndex(dataPets.length - 1);
-  };
-
-  const removeElementFromDataPets = (uid) => {
-    setDataPets((prevState) => prevState.filter((pet) => pet.uid !== uid));
   };
 
   const savePetAsFavorite = async () => {
@@ -131,20 +103,20 @@ const SearchContextProvider = ({ children }) => {
       pet: dataPets[photoIndex].uid,
     });
 
-    // removeElementFromDataPets(dataPets[photoIndex].uid);
     incrementIndexImage();
   };
 
   return (
     <SearchContext.Provider
       value={{
-        getDataFromPetsDatabase,
+        getDataNotInFavorites,
         incrementIndexImage,
-        decrementIndexImage,
+
         photoIndex,
         dataPets,
         savePetAsFavorite,
-        getFavoritesUid
+        getFavoritesUid,
+        getData,
       }}
     >
       {children}
