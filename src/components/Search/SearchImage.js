@@ -11,8 +11,8 @@ const SearchImage = () => {
     photoIndex,
   } = useContext(SearchContext);
 
-  const isElapsetToday = dataPets && dataPets.length > 0 && dataPets[photoIndex].daysElapsedSincePublication > 0 ? false: true;
-  const daysElapsedSincePublication = `${isElapsetToday ? ' (publicado hoy)': ' (publicado hace ' + dataPets[photoIndex].daysElapsedSincePublication + ' día(s))'}`;
+  const isElapsedToday = dataPets && dataPets.length > 0 && dataPets[photoIndex] && dataPets[photoIndex].daysElapsedSincePublication > 0 ? false: true;
+  const daysElapsedSincePublication = `${isElapsedToday ? ' (publicado hoy)': ' (publicado hace ' + dataPets[photoIndex].daysElapsedSincePublication + ' día(s))'}`;
 
   return(
     dataPets && dataPets.length > 0 ? 
