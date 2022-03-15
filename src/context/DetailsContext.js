@@ -1,6 +1,9 @@
 import { createContext, useState, useContext } from "react";
 import { SearchContext } from "./SearchContext";
 import { FavoriteContext } from "./FavoriteContext";
+// import { init } from '@emailjs/browser';
+// init("s57n_tFKifkRKHUzy");
+import emailjs from '@emailjs/browser';
 
 export const DetailsContext = createContext({});
 
@@ -9,6 +12,19 @@ const DetailsContextProvider = ({ children }) => {
   const [indexImagePet, setIndexImagePet] = useState(0);
   const { dataPets } = useContext(SearchContext);
   const { favoritePets } = useContext(FavoriteContext);
+
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    console.log(e.target)
+    emailjs.sendForm('service_jdc32vz', 'template_2z4hytq', e.target, 's57n_tFKifkRKHUzy')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
 
   const findByUid = (uid) => {
     Object.keys(dataPets.concat(favoritePets)).forEach((key) => {
@@ -39,6 +55,7 @@ const DetailsContextProvider = ({ children }) => {
         findByUid,
         detailPet,
         setIndexImagePet,
+        sendEmail
       }}
     >
       {children}

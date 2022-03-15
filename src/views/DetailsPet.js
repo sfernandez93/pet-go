@@ -1,4 +1,3 @@
-import { SearchContext } from "../context/SearchContext";
 import { DetailsContext } from "../context/DetailsContext";
 import { useContext, useEffect, useState } from "react";
 import DetailsPhoto from "../components/Details/DetailsPhoto";
@@ -8,10 +7,12 @@ import DetailsContactButton from "../components/Details/DetailsContactButton";
 import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
 import { useParams } from "react-router-dom";
+import DetailsSendEmailButton from "../components/Details/DetailsSendEmailButton";
+import { getLocalStorage } from "../localStorage";
 
 const DetailsPets = () => {
+  const storedData = getLocalStorage("userData");
   const { uidPet } = useParams();
-
   const { detailPet, indexImagePet, setIndexImagePet, findByUid } =
     useContext(DetailsContext);
 
@@ -21,7 +22,7 @@ const DetailsPets = () => {
   }, []);
 
   useEffect(() => {
-    console.log(uidPet)
+    console.log(uidPet);
     findByUid(uidPet);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailPet]);
@@ -66,13 +67,24 @@ const DetailsPets = () => {
           ></DetailsDescription>
 
           <div className="pb-6">
+            <DetailsSendEmailButton
+              fromEmail={storedData.email}
+              namePet={detailPet ? detailPet.name : ""}
+              agePet={detailPet ? detailPet.age : ""}
+              racePet={detailPet ? detailPet.race : ""}
+            ></DetailsSendEmailButton>
+            {/* <DetailsContactButton
+              bgColor={"white"}
+              buttomName={"Solicitar información"}
+              modoContacto={detailPet ? `mailto:${detailPet.email}` : ""}
+            ></DetailsContactButton> */}
             <DetailsContactButton
-              bgColor={"bg-blue-100"}
+              bgColor={"white"}
               buttomName={"Enviar un correo"}
               modoContacto={detailPet ? `mailto:${detailPet.email}` : ""}
             ></DetailsContactButton>
             <DetailsContactButton
-              bgColor={"white"}
+              bgColor={"bg-blue-100"}
               buttomName={"Llamar"}
               modoContacto={detailPet ? `tel:${detailPet.phone}` : ""}
             ></DetailsContactButton>
