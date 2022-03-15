@@ -135,6 +135,7 @@ const UploadContextProvider = ({ children }) => {
       region: regionRef.current.value,
       postalCode: postalCodeRef.current.value,
       isDisabled: isDisabledRef.current.checked,
+      dateUpload: Date.now()
     });
   };
 

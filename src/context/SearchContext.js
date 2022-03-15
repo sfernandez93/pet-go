@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState } from "react";
 import {
   getDatabase,
   ref as dbref,
@@ -17,7 +17,7 @@ const SearchContextProvider = ({ children }) => {
 
   const getData = async () => {
     const favorites = await getFavoritesUid();
-    getDataNotInFavorites(favorites);
+    await getDataNotInFavorites(favorites);
   };
 
   const getFavoritesUid = async () => {
@@ -44,6 +44,11 @@ const SearchContextProvider = ({ children }) => {
     return favorites;
   };
 
+  const calculateDaysElapsedSincePublication = (petObj) => {
+    const timeMiliseconds = Date.now() - petObj.dateUpload;
+    console.log(timeMiliseconds/86400000)
+    return Math.floor(timeMiliseconds/86400000);
+  };
   const getDataNotInFavorites = async (favoritesUid) => {
     const dbRef = dbref(getDatabase());
 
@@ -53,6 +58,8 @@ const SearchContextProvider = ({ children }) => {
           setDataPets([]);
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
+            const daysElapsedSincePublication =
+              calculateDaysElapsedSincePublication(petObj);
             if (favoritesUid.length > 0 && !favoritesUid.includes(key)) {
               setDataPets((prevState) => [
                 ...prevState,
@@ -67,6 +74,8 @@ const SearchContextProvider = ({ children }) => {
                   isDisabled: petObj.isDisabled,
                   details: petObj.details,
                   imagesUrl: petObj.imagesUrl,
+                  dateUpload: petObj.dateUpload,
+                  daysElapsedSincePublication: daysElapsedSincePublication,
                 },
               ]);
             }

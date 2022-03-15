@@ -6,11 +6,13 @@ import { NavLink } from "react-router-dom";
 const SearchImage = () => {
   const {
     incrementIndexImage,
-    decrementIndexImage,
     savePetAsFavorite,
     dataPets,
     photoIndex,
   } = useContext(SearchContext);
+
+  const isElapsetToday = dataPets && dataPets.length > 0 && dataPets[photoIndex].daysElapsedSincePublication > 0 ? false: true;
+  const daysElapsedSincePublication = `${isElapsetToday ? ' (publicado hoy)': ' (publicado hace ' + dataPets[photoIndex].daysElapsedSincePublication + ' día(s))'}`;
 
   return(
     dataPets && dataPets.length > 0 ? 
@@ -20,10 +22,12 @@ const SearchImage = () => {
           <div className="flex items-center pl-4">
             <FaMapMarkerAlt size={20} style={{ fill: "gray" }} />
             <p className="p-4 pl-2 text-sm font-normal text-gray-300 mr-14 hover:underline">
-              {dataPets && dataPets.length > 0 && dataPets[photoIndex] 
-                ? dataPets[photoIndex].city
-                : ""}{" "}
-               (publicado hace 2 horas)
+            {
+                  dataPets && dataPets.length > 0 && dataPets[photoIndex]
+                    ? dataPets[photoIndex].city + daysElapsedSincePublication
+                      
+                    : ""
+                } 
             </p>
           </div>
         </div>
