@@ -1,36 +1,39 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import {
   getDatabase,
   ref as dbref,
   remove,
   get,
   child,
+  update,
 } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import { getLocalStorage } from "../localStorage";
+import { LoginContext } from "./LoginContext";
 
 export const FavoriteContext = createContext({});
 
 const FavoriteContextProvider = ({ children }) => {
   const dbRef = dbref(getDatabase());
   const [favoritePets, setFavoritePets] = useState([]);
-  const [reloadFavorites, setReloadFavorites] = useState(false);
+  const [reloadPetsData, setReloadPetsData] = useState(false);
+  const { isLoggedIn } = useContext(LoginContext);
 
   useEffect(() => {
-    getDataFavoritesFromDatabase();
+    if (isLoggedIn) getDataFavoritesFromDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
-    if (reloadFavorites) getDataFavoritesFromDatabase();
+    if (reloadPetsData) getDataFavoritesFromDatabase();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadFavorites]);
+  }, [reloadPetsData]);
 
   const getDataFavoritesFromDatabase = async () => {
-    const auth = getAuth();
-    setReloadFavorites(false);
+    setReloadPetsData(false);
     setFavoritePets([]);
+    const storedData = getLocalStorage("userData");
 
-    get(child(dbRef, "users/" + auth.currentUser.uid + "/favoritePets"))
+    get(child(dbRef, "users/" + storedData.userId + "/favoritePets"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
@@ -63,23 +66,21 @@ const FavoriteContextProvider = ({ children }) => {
   };
 
   const deleteByUid = (uid) => {
-    const auth = getAuth();
+    const storedData = getLocalStorage("userData");
     const db = getDatabase();
     const dbRef = dbref(db);
 
-    get(child(dbRef, "users/" + auth.currentUser.uid + "/favoritePets/"))
+    get(child(dbRef, "users/" + storedData.userId + "/favoritePets/"))
       .then((snapshot) => {
         if (snapshot.exists()) {
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
             if (uid === petObj.pet) {
               remove(
-                dbref(
-                  db,
-                  "users/" + auth.currentUser.uid + "/favoritePets/" + key
-                )
+                dbref(db, "users/" + storedData.userId + "/favoritePets/" + key)
               );
-              setReloadFavorites(true);
+              
+              setReloadPetsData(true);
             }
           });
         } else {
@@ -96,7 +97,7 @@ const FavoriteContextProvider = ({ children }) => {
       value={{
         getDataFavoritesFromDatabase,
         favoritePets,
-        reloadFavorites,
+        reloadPetsData,
         deleteByUid,
       }}
     >

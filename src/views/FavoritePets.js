@@ -1,11 +1,17 @@
 import { FavoriteContext } from "../context/FavoriteContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FavoriteItem from "../components/Favorite/FavoriteItem";
 import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
+import { SearchContext } from "../context/SearchContext";
 
 const FavoritePets = () => {
-  const { favoritePets } = useContext(FavoriteContext);
+  const { getDataFavoritesFromDatabase, favoritePets } = useContext(FavoriteContext);
+
+    useEffect(() => {
+      getDataFavoritesFromDatabase();
+    console.log( "HOLA")
+  }, []);
 
   return (
     <div>
