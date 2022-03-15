@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 
 const DetailsPets = () => {
   const { uidPet } = useParams();
-  const { dataPets } = useContext(SearchContext);
 
   const { detailPet, indexImagePet, setIndexImagePet, findByUid } =
     useContext(DetailsContext);
@@ -22,9 +21,10 @@ const DetailsPets = () => {
   }, []);
 
   useEffect(() => {
+    console.log(uidPet)
     findByUid(uidPet);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataPets]);
+  }, [detailPet]);
 
   return (
     <div>

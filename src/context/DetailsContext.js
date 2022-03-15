@@ -1,5 +1,6 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 import { SearchContext } from "./SearchContext";
+import { FavoriteContext } from "./FavoriteContext";
 
 export const DetailsContext = createContext({});
 
@@ -7,11 +8,13 @@ const DetailsContextProvider = ({ children }) => {
   const [detailPet, setDetailPet] = useState(null);
   const [indexImagePet, setIndexImagePet] = useState(0);
   const { dataPets } = useContext(SearchContext);
+  const { favoritePets } = useContext(FavoriteContext);
 
   const findByUid = (uid) => {
-    Object.keys(dataPets).forEach((key) => {
-      const petUid = dataPets[key].uid;
-      if (uid === petUid) return setDetailPet(dataPets[key]);
+    Object.keys(dataPets.concat(favoritePets)).forEach((key) => {
+      const petUid = dataPets.concat(favoritePets)[key].uid;
+      if (uid === petUid)
+        return setDetailPet(dataPets.concat(favoritePets)[key]);
     });
   };
 
