@@ -5,7 +5,14 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { getDatabase, ref as dbref, push, set } from "firebase/database";
+import {
+  getDatabase,
+  ref as dbref,
+  push,
+  set,
+  get,
+  child,
+} from "firebase/database";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "./SearchContext";
@@ -34,8 +41,13 @@ const UploadContextProvider = ({ children }) => {
   const [storeImageUrl, setStoreImageUrl] = useState("");
   const [uid, setUid] = useState("");
   const [numberFilesError, setNumberFilesError] = useState("");
+  const [provinces, setProvinces] = useState([]);
 
-  
+  useEffect(() => {
+    getProvinces();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     if (storeImageUrl) writePetImageDatabase(storeImageUrl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,6 +70,29 @@ const UploadContextProvider = ({ children }) => {
     orgNameRef.current.value = "";
     isDisabledRef.current.checked = false;
     setImagesToUpload({});
+  };
+
+  const getProvinces = async () => {
+    const db = getDatabase();
+    const dbRef = dbref(db);
+    const provinces = [];
+
+    try {
+      const snapshot = await get(child(dbRef, "provincias/"));
+      if (snapshot.exists()) {
+        Object.keys(snapshot.val()).forEach((key) => {
+          provinces.push(snapshot.val()[key].name);
+        });
+        provinces.sort(function (a, b) {
+          return a.localeCompare(b);
+        });
+        setProvinces(provinces);
+      } else {
+        console.log("No data available");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChangeImage = (e) => {
@@ -133,7 +168,7 @@ const UploadContextProvider = ({ children }) => {
       region: regionRef.current.value,
       orgName: orgNameRef.current.value,
       isDisabled: isDisabledRef.current.checked,
-      dateUpload: Date.now()
+      dateUpload: Date.now(),
     });
   };
 
@@ -165,6 +200,7 @@ const UploadContextProvider = ({ children }) => {
         writeData,
         clearInputs,
         numberFilesError,
+        provinces,
       }}
     >
       {children}

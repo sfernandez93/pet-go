@@ -103,7 +103,7 @@ const UploadPet = () => {
             inputAutocomplete="phone"
             inputRef={phoneRef}
           ></UploadInput>
-                <UploadSelector></UploadSelector>
+          <UploadSelector></UploadSelector>
 
           <UploadInput
             inputTitle="Provincia"
