@@ -44,11 +44,22 @@ const SearchContextProvider = ({ children }) => {
     return favorites;
   };
 
-  const calculateDaysElapsedSincePublication = (petObj) => {
-    const timeMiliseconds = Date.now() - petObj.dateUpload;
-    console.log(timeMiliseconds/86400000)
-    return Math.floor(timeMiliseconds/86400000);
+  const getStringTimeElapsedSincePublication = (dateUpload) => {
+    if (dateUpload) {
+      const timeMiliseconds = Date.now() - dateUpload;
+      const timeDays = Math.floor(timeMiliseconds / 86400000);
+      if (Math.floor(timeMiliseconds / 86400000) > 0) {
+        return ` (publicado hace ${timeDays} días)`;
+      } else {
+        const timeHours = Math.floor(timeMiliseconds / 3600000);
+        return timeHours > 0
+          ? ` (publicado hace ${timeHours} horas)`
+          : ` (publicado hace menos de una hora)`;
+      }
+    }
+    return "";
   };
+
   const getDataNotInFavorites = async (favoritesUid) => {
     const dbRef = dbref(getDatabase());
 
@@ -58,8 +69,8 @@ const SearchContextProvider = ({ children }) => {
           setDataPets([]);
           Object.keys(snapshot.val()).forEach((key) => {
             const petObj = snapshot.val()[key];
-            const daysElapsedSincePublication =
-              calculateDaysElapsedSincePublication(petObj);
+            const timeElapsedSincePublication =
+              getStringTimeElapsedSincePublication(petObj.dateUpload);
             if (favoritesUid.length > 0 && !favoritesUid.includes(key)) {
               setDataPets((prevState) => [
                 ...prevState,
@@ -75,7 +86,7 @@ const SearchContextProvider = ({ children }) => {
                   details: petObj.details,
                   imagesUrl: petObj.imagesUrl,
                   dateUpload: petObj.dateUpload,
-                  daysElapsedSincePublication: daysElapsedSincePublication,
+                  timeElapsedSincePublication: timeElapsedSincePublication,
                 },
               ]);
             }
