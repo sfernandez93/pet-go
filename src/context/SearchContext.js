@@ -8,6 +8,7 @@ import {
   set,
 } from "firebase/database";
 import { getLocalStorage } from "../localStorage";
+import { v4 as uuid } from "uuid";
 
 export const SearchContext = createContext({});
 
@@ -16,6 +17,20 @@ const SearchContextProvider = ({ children }) => {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   const getData = async () => {
+    const LOCATION_URL = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=provincias-espanolas&q=&rows=52&sort=provincia&facet=ccaa&facet=provincia';
+
+
+    const response = await fetch(LOCATION_URL);
+    const data = await response.json();
+    console.log( data.records)
+    Object.keys(data.records).forEach((key) => {
+    console.log(data.records[key].fields.provincia)
+});
+
+
+    
+
+
     const favorites = await getFavoritesUid();
     await getDataNotInFavorites(favorites);
   };

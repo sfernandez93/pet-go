@@ -5,7 +5,7 @@ module.exports = {
       colors: {
         "blue-violet": "#b885e4",
         "dark-violet": "#8d41c9",
-        "clear-blue": "#40cfe0",
+        "clear-blue": "#c0d9ef",
         "clear-gray": "#e5e7eb",
         "marine-green": "#5a8fc46b",
         "transparent-black": "#000000a3",
@@ -14,6 +14,8 @@ module.exports = {
         chartreuse: "#7fff00",
         deepskyblue: "#00bfff",
         hotpink: "#ff69b4",
+        "clear-ghostwhite": "#dbdbef",
+        "submit-green": "#66c4b0"
       },
     },
   },

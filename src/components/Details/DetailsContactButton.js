@@ -1,4 +1,3 @@
-import {FaEnvelope} from "react-icons/fa";
 
 const DetailsContactButton = ({ bgColor, buttomName, modoContacto }) => {
   return (

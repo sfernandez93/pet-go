@@ -1,9 +1,11 @@
 import UploadInput from "../components/Upload/UploadInput";
 import UploadTextArea from "../components/Upload/UploadTextArea";
 import UploadCheckbox from "../components/Upload/UploadCheckbox";
+import UploadFeatures from "../components/Upload/UploadFeatures";
 import UploadSubmitButton from "../components/Upload/UploadSubmitButton";
 import UploadPhoto from "../components/Upload/UploadPhoto";
 import UploadProfilePhoto from "../components/Upload/UploadProfilePhoto";
+import UploadSelector from "../components/Upload/UploadSelector";
 import { useContext, useEffect } from "react";
 import { UploadContext } from "../context/UploadContext";
 import NavBar from "../components/Comun/NavBar";
@@ -17,10 +19,9 @@ const UploadPet = () => {
     emailRef,
     phoneRef,
     detailsRef,
-    streetAdressRef,
+    orgNameRef,
     cityRef,
     regionRef,
-    postalCodeRef,
     isDisabledRef,
     clearInputs,
   } = useContext(UploadContext);
@@ -56,6 +57,38 @@ const UploadPet = () => {
             inputAutocomplete="age"
             inputRef={ageRef}
           ></UploadInput>
+
+          <UploadTextArea
+            title="Acerca de"
+            inputName="about"
+            inputPlaceholder="Breve descripción de tu mascota"
+            inputRef={detailsRef}
+          ></UploadTextArea>
+
+          <UploadPhoto></UploadPhoto>
+        </div>
+
+        <UploadFeatures></UploadFeatures>
+        <UploadCheckbox
+          inputTitle="Modo ayúdame"
+          inputName="comments"
+          inputDescription="Indica si tu mascota tiene algún tipo de problema o discapacidad (detállalo
+                en la descripción)."
+          inputRef={isDisabledRef}
+        ></UploadCheckbox>
+      </div>
+
+      <div className="mt-4 px-4 py-6 bg-white sm:p-6">
+        <div className="grid grid-cols-6 gap-6">
+          <UploadInput
+            inputTitle="Nombre organización"
+            inputName="org-name"
+            inputType="text"
+            inputAutocomplete="orgName"
+            inputRef={orgNameRef}
+          ></UploadInput>
+          {/* <UploadProfilePhoto></UploadProfilePhoto> */}
+
           <UploadInput
             inputTitle="Email"
             inputName="email-address"
@@ -70,31 +103,8 @@ const UploadPet = () => {
             inputAutocomplete="phone"
             inputRef={phoneRef}
           ></UploadInput>
+                <UploadSelector></UploadSelector>
 
-          <UploadTextArea
-            title="Acerca de"
-            inputName="about"
-            inputPlaceholder="Breve descripción de tu mascota"
-            inputRef={detailsRef}
-          ></UploadTextArea>
-
-          {/* <UploadProfilePhoto></UploadProfilePhoto> */}
-          <UploadPhoto></UploadPhoto>
-
-          <UploadInput
-            inputTitle="Dirección"
-            inputName="street-address"
-            inputType="text"
-            inputAutocomplete="street-address"
-            inputRef={streetAdressRef}
-          ></UploadInput>
-          <UploadInput
-            inputTitle="Ciudad"
-            inputName="city"
-            inputType="text"
-            inputAutocomplete="address-level2"
-            inputRef={cityRef}
-          ></UploadInput>
           <UploadInput
             inputTitle="Provincia"
             inputName="region"
@@ -103,21 +113,15 @@ const UploadPet = () => {
             inputRef={regionRef}
           ></UploadInput>
           <UploadInput
-            inputTitle="Código Postal"
-            inputName="postal-code"
+            inputTitle="Ciudad"
+            inputName="city"
             inputType="text"
-            inputAutocomplete="postal-code"
-            inputRef={postalCodeRef}
+            inputAutocomplete="address-level2"
+            inputRef={cityRef}
           ></UploadInput>
-          <UploadCheckbox
-            inputTitle="Modo ayúdame"
-            inputName="comments"
-            inputDescription="Indica si tu mascota tiene algún tipo de discapacidad (detállalo
-                en la descripción)."
-            inputRef={isDisabledRef}
-          ></UploadCheckbox>
         </div>
       </div>
+
       <UploadSubmitButton></UploadSubmitButton>
       <NavBar></NavBar>
     </form>

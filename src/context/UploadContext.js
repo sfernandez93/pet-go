@@ -24,10 +24,10 @@ const UploadContextProvider = ({ children }) => {
   const emailRef = useRef();
   const phoneRef = useRef();
   const detailsRef = useRef();
-  const streetAdressRef = useRef();
+  const orgNameRef = useRef();
   const cityRef = useRef();
   const regionRef = useRef();
-  const postalCodeRef = useRef();
+  // const postalCodeRef = useRef();
   const isDisabledRef = useRef();
 
   const [imagesToUpload, setImagesToUpload] = useState({});
@@ -53,10 +53,9 @@ const UploadContextProvider = ({ children }) => {
     emailRef.current.value = "";
     phoneRef.current.value = "";
     detailsRef.current.value = "";
-    streetAdressRef.current.value = "";
     cityRef.current.value = "";
     regionRef.current.value = "";
-    postalCodeRef.current.value = "";
+    orgNameRef.current.value = "";
     isDisabledRef.current.checked = false;
     setImagesToUpload({});
   };
@@ -130,10 +129,9 @@ const UploadContextProvider = ({ children }) => {
       email: emailRef.current.value,
       phone: phoneRef.current.value,
       details: detailsRef.current.value,
-      street: streetAdressRef.current.value,
       city: cityRef.current.value,
       region: regionRef.current.value,
-      postalCode: postalCodeRef.current.value,
+      orgName: orgNameRef.current.value,
       isDisabled: isDisabledRef.current.checked,
       dateUpload: Date.now()
     });
@@ -160,10 +158,9 @@ const UploadContextProvider = ({ children }) => {
         emailRef,
         phoneRef,
         detailsRef,
-        streetAdressRef,
+        orgNameRef,
         cityRef,
         regionRef,
-        postalCodeRef,
         isDisabledRef,
         writeData,
         clearInputs,
