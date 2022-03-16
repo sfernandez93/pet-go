@@ -1,10 +1,14 @@
+import { useContext } from "react";
+import { UploadContext } from "../../context/UploadContext";
+
 const UploadInput = ({
   inputTitle,
   inputName,
   inputType,
   inputAutocomplete,
-  inputRef,
 }) => {
+  const { formValues, handleChange } = useContext(UploadContext);
+
   return (
     <div className="col-span-6 sm:col-span-3">
       <label
@@ -14,8 +18,8 @@ const UploadInput = ({
         {inputTitle}
       </label>
       <input
-        required
-        ref={inputRef}
+        defaultValue={formValues.value}
+        onChange={handleChange}
         type={inputType}
         name={inputName}
         id={inputName}

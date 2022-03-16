@@ -55,7 +55,7 @@ const SearchContextProvider = ({ children }) => {
         const timeHours = Math.floor(timeMiliseconds / 3600000);
         return timeHours > 0
           ? ` (publicado hace ${timeHours} horas)`
-          : ` (publicado hace menos de una hora)`;
+          : ` (publicado hace una hora)`;
       }
     }
     return "";
@@ -63,16 +63,16 @@ const SearchContextProvider = ({ children }) => {
 
   const getDataNotInFavorites = async (favoritesUid) => {
     const dbRef = dbref(getDatabase());
-
     await get(child(dbRef, `pets`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setDataPets([]);
           Object.keys(snapshot.val()).forEach((key) => {
+            console.log(snapshot.val()[key])
             const petObj = snapshot.val()[key];
             const timeElapsedSincePublication =
               getStringTimeElapsedSincePublication(petObj.dateUpload);
-            if (favoritesUid.length > 0 && !favoritesUid.includes(key)) {
+            if ((favoritesUid && favoritesUid.length < 1) || (favoritesUid.length > 0 && !favoritesUid.includes(key))) {
               setDataPets((prevState) => [
                 ...prevState,
                 {

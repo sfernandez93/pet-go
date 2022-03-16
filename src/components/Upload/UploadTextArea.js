@@ -1,4 +1,9 @@
-const UploadTextArea = ({ title, inputName, inputPlaceholder, inputRef }) => {
+import { useContext } from "react";
+import { UploadContext } from "../../context/UploadContext";
+
+const UploadTextArea = ({ title, inputName, inputPlaceholder }) => {
+  const { formValues, handleChange } = useContext(UploadContext);
+
   return (
     <div className="col-span-6 sm:col-span-3">
       <label
@@ -9,6 +14,8 @@ const UploadTextArea = ({ title, inputName, inputPlaceholder, inputRef }) => {
       </label>
       <div className="mt-1">
         <textarea
+          defaultValue={formValues.value}
+          onChange={handleChange}
           required
           maxLength="100"
           id={inputName}
@@ -16,7 +23,6 @@ const UploadTextArea = ({ title, inputName, inputPlaceholder, inputRef }) => {
           rows="3"
           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
           placeholder={inputPlaceholder}
-          ref={inputRef}
         ></textarea>
       </div>
     </div>

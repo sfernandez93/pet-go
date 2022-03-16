@@ -25,28 +25,21 @@ const UploadContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const storage = getStorage();
 
-  const firstNameRef = useRef();
-  const raceRef = useRef();
-  const ageRef = useRef();
-  const emailRef = useRef();
-  const phoneRef = useRef();
-  const detailsRef = useRef();
-  const orgNameRef = useRef();
-  const cityRef = useRef();
-  const regionRef = useRef();
-  // const postalCodeRef = useRef();
-  const isDisabledRef = useRef();
-
   const [imagesToUpload, setImagesToUpload] = useState({});
   const [storeImageUrl, setStoreImageUrl] = useState("");
   const [uid, setUid] = useState("");
   const [numberFilesError, setNumberFilesError] = useState("");
   const [provinces, setProvinces] = useState([]);
+  const [formValues, setFormValues] = useState({});
 
   useEffect(() => {
     getProvinces();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
 
   useEffect(() => {
     if (storeImageUrl) writePetImageDatabase(storeImageUrl);
@@ -59,16 +52,16 @@ const UploadContextProvider = ({ children }) => {
   }, [uid]);
 
   const clearInputs = () => {
-    firstNameRef.current.value = "";
-    raceRef.current.value = "";
-    ageRef.current.value = "";
-    emailRef.current.value = "";
-    phoneRef.current.value = "";
-    detailsRef.current.value = "";
-    cityRef.current.value = "";
-    regionRef.current.value = "";
-    orgNameRef.current.value = "";
-    isDisabledRef.current.checked = false;
+    // firstNameRef.current.value = "";
+    // raceRef.current.value = "";
+    // ageRef.current.value = "";
+    // emailRef.current.value = "";
+    // phoneRef.current.value = "";
+    // detailsRef.current.value = "";
+    // cityRef.current.value = "";
+    // regionRef.current.value = "";
+    // orgNameRef.current.value = "";
+    // isDisabledRef.current.checked = false;
     setImagesToUpload({});
   };
 
@@ -148,6 +141,18 @@ const UploadContextProvider = ({ children }) => {
     );
   };
 
+  const handleChange = (event) => {
+    let newObject = {};
+    newObject[event.target.name] =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    setFormValues((prevState) => ({
+      ...prevState,
+      ...newObject,
+    }));
+  };
+
   const writeData = (e) => {
     e.preventDefault();
     const db = getDatabase();
@@ -158,16 +163,27 @@ const UploadContextProvider = ({ children }) => {
 
   const writePetDatabase = (db, unique_id) => {
     set(dbref(db, "pets/" + unique_id), {
-      name: firstNameRef.current.value,
-      race: raceRef.current.value,
-      age: ageRef.current.value,
-      email: emailRef.current.value,
-      phone: phoneRef.current.value,
-      details: detailsRef.current.value,
-      city: cityRef.current.value,
-      region: regionRef.current.value,
-      orgName: orgNameRef.current.value,
-      isDisabled: isDisabledRef.current.checked,
+      name: formValues["first-name"],
+      race: formValues["race"],
+      age: formValues["age"],
+      email: formValues["email-address"],
+      phone: formValues["phone"],
+      details: formValues["about"],
+      city: formValues["city"],
+      region: formValues["region"],
+      orgName: formValues["org-name"],
+      isDisabled: formValues["is_disabled"] ? true : false,
+      isActive: formValues["is_active"] ? true : false,
+      isBig: formValues["is_big"] ? true : false,
+      isDocile: formValues["is_docile"] ? true : false,
+      isGuide: formValues["is_guide"] ? true : false,
+      isLoving: formValues["is_loving"] ? true : false,
+      isNotAlergic: formValues["is_notalergic"] ? true : false,
+      isPlayful: formValues["is_playful"] ? true : false,
+      isQuiet: formValues["is_quiet"] ? true : false,
+      isSmall: formValues["is_small"] ? true : false,
+      isSociable: formValues["is_sociable"] ? true : false,
+      isTrainable: formValues["is_trainable"] ? true : false,
       dateUpload: Date.now(),
     });
   };
@@ -187,20 +203,12 @@ const UploadContextProvider = ({ children }) => {
         imagesToUpload,
         setImagesToUpload,
         handleChangeImage,
-        firstNameRef,
-        raceRef,
-        ageRef,
-        emailRef,
-        phoneRef,
-        detailsRef,
-        orgNameRef,
-        cityRef,
-        regionRef,
-        isDisabledRef,
         writeData,
         clearInputs,
         numberFilesError,
         provinces,
+        formValues,
+        handleChange,
       }}
     >
       {children}

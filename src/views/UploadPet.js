@@ -12,19 +12,7 @@ import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const UploadPet = () => {
-  const {
-    firstNameRef,
-    raceRef,
-    ageRef,
-    emailRef,
-    phoneRef,
-    detailsRef,
-    orgNameRef,
-    cityRef,
-    regionRef,
-    isDisabledRef,
-    clearInputs,
-  } = useContext(UploadContext);
+  const { clearInputs, writeData } = useContext(UploadContext);
 
   useEffect(() => {
     clearInputs();
@@ -32,7 +20,7 @@ const UploadPet = () => {
   }, []);
 
   return (
-    <form className="absolute top-0 left-0 w-full">
+    <form onSubmit={writeData} className="absolute top-0 left-0 w-full">
       <LogoIconBar></LogoIconBar>
       <div className="mt-16 px-4 py-6 bg-white sm:p-6">
         <div className="grid grid-cols-6 gap-6">
@@ -41,28 +29,24 @@ const UploadPet = () => {
             inputName="first-name"
             inputType="text"
             inputAutocomplLogoIconBarete="given-name"
-            inputRef={firstNameRef}
           ></UploadInput>
           <UploadInput
             inputTitle="Raza"
             inputName="race"
             inputType="text"
             inputAutocomplete="family-name"
-            inputRef={raceRef}
           ></UploadInput>
           <UploadInput
             inputTitle="Edad"
             inputName="age"
             inputType="number"
             inputAutocomplete="age"
-            inputRef={ageRef}
           ></UploadInput>
 
           <UploadTextArea
             title="Acerca de"
             inputName="about"
             inputPlaceholder="Breve descripción de tu mascota"
-            inputRef={detailsRef}
           ></UploadTextArea>
 
           <UploadPhoto></UploadPhoto>
@@ -71,10 +55,9 @@ const UploadPet = () => {
         <UploadFeatures></UploadFeatures>
         <UploadCheckbox
           inputTitle="Modo ayúdame"
-          inputName="comments"
+          inputName="is_disabled"
           inputDescription="Indica si tu mascota tiene algún tipo de problema o discapacidad (detállalo
                 en la descripción)."
-          inputRef={isDisabledRef}
         ></UploadCheckbox>
       </div>
 
@@ -85,7 +68,6 @@ const UploadPet = () => {
             inputName="org-name"
             inputType="text"
             inputAutocomplete="orgName"
-            inputRef={orgNameRef}
           ></UploadInput>
           {/* <UploadProfilePhoto></UploadProfilePhoto> */}
 
@@ -94,30 +76,23 @@ const UploadPet = () => {
             inputName="email-address"
             inputType="email"
             inputAutocomplete="email"
-            inputRef={emailRef}
           ></UploadInput>
           <UploadInput
             inputTitle="Teléfono/Móvil"
             inputName="phone"
             inputType="text"
             inputAutocomplete="phone"
-            inputRef={phoneRef}
           ></UploadInput>
-          <UploadSelector></UploadSelector>
+          <UploadSelector
+            selectorTitle="Provincia"
+            selectorName="region"
+          ></UploadSelector>
 
-          <UploadInput
-            inputTitle="Provincia"
-            inputName="region"
-            inputType="text"
-            inputAutocomplete="address-level1"
-            inputRef={regionRef}
-          ></UploadInput>
           <UploadInput
             inputTitle="Ciudad"
             inputName="city"
             inputType="text"
             inputAutocomplete="address-level2"
-            inputRef={cityRef}
           ></UploadInput>
         </div>
       </div>
