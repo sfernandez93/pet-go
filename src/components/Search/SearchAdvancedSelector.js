@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { UploadContext } from "../../context/UploadContext";
+import { SearchContext } from "../../context/SearchContext";
 
 const SearchAdvancedSelector = ({ selectorTitle, selectorName }) => {
   const { provinces } = useContext(UploadContext);
-  const { formValues, handleChange } = useContext(UploadContext);
+  const { formValues } = useContext(UploadContext);
+  const { handleChange } = useContext(SearchContext);
 
   return (
       <select

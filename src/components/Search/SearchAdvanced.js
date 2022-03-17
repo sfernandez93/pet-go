@@ -7,7 +7,7 @@ const SearchAdvanced = () => {
   const { isAdvancedSearch } = useContext(SearchContext);
 
   return (
-    <div className="w-full">
+    <div className="w-full absolute top-0">
       <SearchAdvancedButton></SearchAdvancedButton>
       {isAdvancedSearch ? <SearchFilters></SearchFilters> : <div></div>}
     </div>

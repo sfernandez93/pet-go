@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import {
   getDatabase,
   ref as dbref,
@@ -13,12 +13,30 @@ export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
   const [dataPets, setDataPets] = useState([]);
+  const [dataFilterPets, setDataFilterPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isAdvancedSearch, setIsAdvancesSearch] = useState(false);
+  const [formValues, setFormValues] = useState({});
+
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
+
+  const handleChange = (event) => {
+    let newObject = {};
+    newObject[event.target.name] =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    setFormValues((prevState) => ({
+      ...prevState,
+      ...newObject,
+    }));
+  };
 
   const dropdownHandler = () => {
-    setIsAdvancesSearch(prevState => !prevState)
-  }
+    setIsAdvancesSearch((prevState) => !prevState);
+  };
 
   const getData = async () => {
     const favorites = await getFavoritesUid();
@@ -95,6 +113,31 @@ const SearchContextProvider = ({ children }) => {
       });
   };
 
+  const getDataFiltered = async (e) => {
+    e.preventDefault();
+    await getData();
+    setIsAdvancesSearch(false);
+    setDataPets(
+      dataPets.filter(
+        (x) =>
+          (formValues.region && formValues.region !== "0"
+            ? x.region === formValues.region
+            : true) &&
+          (formValues.is_active ? x.isActive : true) &&
+          (formValues.is_quite ? x.isQuiet : true) &&
+          (formValues.is_active ? x.isActive : true) &&
+          (formValues.is_loving ? x.isLoving : true) &&
+          (formValues.is_small ? x.isSmall : true) &&
+          (formValues.is_big ? x.isBig : true) &&
+          (formValues.is_playful ? x.isPlayful : true) &&
+          (formValues.is_sociable ? x.isSociable : true) &&
+          (formValues.is_trainable ? x.isTrainable : true) &&
+          (formValues.is_guide ? x.isGuide : true) &&
+          (formValues.is_notalergic ? x.isNotAlergic : true)
+      )
+    );
+  };
+
   const incrementIndexImage = () => {
     if (photoIndex < dataPets.length - 1) {
       setPhotoIndex((prevState) => prevState + 1);
@@ -132,7 +175,9 @@ const SearchContextProvider = ({ children }) => {
         getFavoritesUid,
         getData,
         isAdvancedSearch,
-        dropdownHandler
+        dropdownHandler,
+        getDataFiltered,
+        handleChange,
       }}
     >
       {children}

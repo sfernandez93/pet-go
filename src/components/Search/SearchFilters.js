@@ -1,18 +1,24 @@
 import UploadFeatures from "../Upload/UploadFeatures";
 import SearchAdvancedSelector from "../Search/SearchAdvancedSelector";
+import SearchFiltersButton from "../Search/SearchFiltersButton";
+import { useContext } from "react";
+import { SearchContext } from "../../context/SearchContext";
+import { UploadContext } from "../../context/UploadContext";
 
 const SearchFilters = () => {
+  
+  const { getDataFiltered } = useContext(SearchContext);
+  const { handleChange } = useContext(SearchContext);
+
   return (
-    <div className="absolute flex flex-col items-center w-full mt-24 p-4 shadow rounded bg-transparentbg ">
+    <form onSubmit={getDataFiltered} className="absolute flex flex-col items-center w-full mt-24 p-4 shadow rounded bg-transparentbg ">
       <SearchAdvancedSelector
         selectorTitle="Provincia"
         selectorName="region"
       ></SearchAdvancedSelector>
-      <UploadFeatures></UploadFeatures>
-      <button className="w-40 mt-3 border rounded-full bg-blue-100 py-2 px-4 font-semibold text-white">
-        Buscar
-      </button>
-    </div>
+      <UploadFeatures handleChange={handleChange} ></UploadFeatures>
+      <SearchFiltersButton></SearchFiltersButton>
+      </form>
   );
 };
 

@@ -12,7 +12,7 @@ import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
 
 const UploadPet = () => {
-  const { clearInputs, writeData } = useContext(UploadContext);
+  const { clearInputs, writeData, handleChange } = useContext(UploadContext);
 
   useEffect(() => {
     clearInputs();
@@ -52,7 +52,7 @@ const UploadPet = () => {
           <UploadPhoto></UploadPhoto>
         </div>
 
-        <UploadFeatures></UploadFeatures>
+        <UploadFeatures handleChange={handleChange}></UploadFeatures>
         <UploadCheckbox
           inputTitle="Modo ayúdame"
           inputName="is_disabled"

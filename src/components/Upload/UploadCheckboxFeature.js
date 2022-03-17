@@ -1,8 +1,8 @@
 import { UploadContext } from "../../context/UploadContext";
 import { useContext } from "react";
 
-const UploadCheckboxFeature = ({ inputTitle, inputName }) => {
-  const { formValues, handleChange } = useContext(UploadContext);
+const UploadCheckboxFeature = ({ inputTitle, inputName, onChangeFunction }) => {
+  const { formValues } = useContext(UploadContext);
 
   return (
     <label
@@ -11,7 +11,7 @@ const UploadCheckboxFeature = ({ inputTitle, inputName }) => {
     >
       <input
         defaultValue={formValues.value}
-        onChange={handleChange}
+        onChange={onChangeFunction}
         id={inputName}
         name={inputName}
         type="checkbox"
