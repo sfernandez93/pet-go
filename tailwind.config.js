@@ -17,7 +17,7 @@ module.exports = {
         "clear-ghostwhite": "#dbdbef",
         "submit-green": "#66c4b0",
         pastelblue:"#bbbbea",
-        transparentbg:"#ffffffc2",
+        transparentbg:"#fffffff2",
         transparentgray:"#80808066"
       },
     },
