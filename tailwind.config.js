@@ -16,7 +16,9 @@ module.exports = {
         hotpink: "#ff69b4",
         "clear-ghostwhite": "#dbdbef",
         "submit-green": "#66c4b0",
-        pastelblue:"#bbbbea"
+        pastelblue:"#bbbbea",
+        transparentbg:"#ffffffc2",
+        transparentgray:"#80808066"
       },
     },
   },

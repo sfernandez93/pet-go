@@ -14,6 +14,11 @@ export const SearchContext = createContext({});
 const SearchContextProvider = ({ children }) => {
   const [dataPets, setDataPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [isAdvancedSearch, setIsAdvancesSearch] = useState(false);
+
+  const dropdownHandler = () => {
+    setIsAdvancesSearch(prevState => !prevState)
+  }
 
   const getData = async () => {
     const favorites = await getFavoritesUid();
@@ -121,12 +126,13 @@ const SearchContextProvider = ({ children }) => {
       value={{
         getDataNotInFavorites,
         incrementIndexImage,
-
         photoIndex,
         dataPets,
         savePetAsFavorite,
         getFavoritesUid,
         getData,
+        isAdvancedSearch,
+        dropdownHandler
       }}
     >
       {children}

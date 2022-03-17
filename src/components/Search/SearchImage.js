@@ -18,7 +18,7 @@ const SearchImage = () => {
       <div className="flex flex-col justify-between h-4/5 w-11/12 bg-white rounded-lg shadow-lg">
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center pl-4">
-            <FaMapMarkerAlt size={20} style={{ fill: "gray" }} />
+            <FaMapMarkerAlt size={20} style={{ fill: "gainsboro" }} />
             <p className="p-4 pl-2 text-sm font-normal text-gray-300 hover:underline">
               {dataPets && dataPets.length > 0 && dataPets[photoIndex]
                 ? dataPets[photoIndex].city +
