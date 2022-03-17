@@ -15,7 +15,8 @@ module.exports = {
         deepskyblue: "#00bfff",
         hotpink: "#ff69b4",
         "clear-ghostwhite": "#dbdbef",
-        "submit-green": "#66c4b0"
+        "submit-green": "#66c4b0",
+        pastelblue:"#bbbbea"
       },
     },
   },

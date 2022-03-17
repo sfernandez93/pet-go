@@ -4,10 +4,10 @@ import {
   FaHeart,
   FaRegListAlt,
   FaMapMarkerAlt,
-  FaForward
+  FaForward,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import  SearchHelpMeIcon  from "./SearchHelpMeIcon";
+import SearchHelpMe from "./SearchHelpMe";
 
 const SearchImage = () => {
   const { incrementIndexImage, savePetAsFavorite, dataPets, photoIndex } =
@@ -16,18 +16,24 @@ const SearchImage = () => {
   return dataPets && dataPets.length > 0 ? (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="flex flex-col justify-between h-4/5 w-11/12 bg-white rounded-lg shadow-lg">
-        <div className="flex items-center mt-2 space-x-4">
+        <div className="flex items-center justify-between mt-2">
           <div className="flex items-center pl-4">
             <FaMapMarkerAlt size={20} style={{ fill: "gray" }} />
-            <p className="p-4 pl-2 text-sm font-normal text-gray-300 mr-14 hover:underline">
+            <p className="p-4 pl-2 text-sm font-normal text-gray-300 hover:underline">
               {dataPets && dataPets.length > 0 && dataPets[photoIndex]
                 ? dataPets[photoIndex].city +
                   dataPets[photoIndex].timeElapsedSincePublication
                 : ""}
             </p>
           </div>
-
-          <SearchHelpMeIcon />
+          {dataPets &&
+          dataPets.length > 0 &&
+          dataPets[photoIndex] &&
+          dataPets[photoIndex].isDisabled ? (
+            <SearchHelpMe />
+          ) : (
+            <></>
+          )}
         </div>
         <img
           className="w-full h-4/5 object-cover"
