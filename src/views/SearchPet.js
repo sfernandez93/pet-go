@@ -6,9 +6,10 @@ import { useContext, useEffect } from "react";
 import { SearchContext } from "../context/SearchContext";
 
 const Searchpet = () => {
-  const { getData } = useContext(SearchContext);
+  const { getData, setIsAdvancesSearch } = useContext(SearchContext);
 
   useEffect(() => {
+    setIsAdvancesSearch(false)
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

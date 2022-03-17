@@ -13,7 +13,6 @@ export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
   const [dataPets, setDataPets] = useState([]);
-  const [dataFilterPets, setDataFilterPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isAdvancedSearch, setIsAdvancesSearch] = useState(false);
   const [formValues, setFormValues] = useState({});
@@ -90,18 +89,17 @@ const SearchContextProvider = ({ children }) => {
         if (snapshot.exists()) {
           setDataPets([]);
           Object.keys(snapshot.val()).forEach((key) => {
+            let addPet = false;
             const petObj = snapshot.val()[key];
             const timeElapsedSincePublication =
               getStringTimeElapsedSincePublication(petObj.dateUpload);
-            if (
-              (favoritesUid && favoritesUid.length < 1) ||
-              (favoritesUid.length > 0 && !favoritesUid.includes(key))
-            ) {
-              petObj["uid"] = key;
-              petObj["timeElapsedSincePublication"] =
-                timeElapsedSincePublication;
+            if (favoritesUid.length < 1 || !favoritesUid.includes(key)) {
+              addPet =
+                Object.keys(formValues).length > 0
+                  ? isPetMeetConditionFilter(petObj)
+                  : true;
 
-              setDataPets((prevState) => [...prevState, petObj]);
+              if (addPet) addDataPet(petObj, key, timeElapsedSincePublication);
             }
           });
         } else {
@@ -113,29 +111,39 @@ const SearchContextProvider = ({ children }) => {
       });
   };
 
+  const addDataPet = (petObj, key, timeElapsedSincePublication) => {
+    petObj["uid"] = key;
+    petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
+    setDataPets((prevState) => [...prevState, petObj]);
+  };
+
+  const isPetMeetConditionFilter = (petObj) => {
+    if (
+      (formValues.region && formValues.region !== "0"
+        ? petObj.region === formValues.region
+        : true) &&
+      (formValues.is_active ? petObj.isActive : true) &&
+      (formValues.is_quite ? petObj.isQuiet : true) &&
+      (formValues.is_active ? petObj.isActive : true) &&
+      (formValues.is_loving ? petObj.isLoving : true) &&
+      (formValues.is_small ? petObj.isSmall : true) &&
+      (formValues.is_big ? petObj.isBig : true) &&
+      (formValues.is_playful ? petObj.isPlayful : true) &&
+      (formValues.is_sociable ? petObj.isSociable : true) &&
+      (formValues.is_trainable ? petObj.isTrainable : true) &&
+      (formValues.is_guide ? petObj.isGuide : true) &&
+      (formValues.is_notalergic ? petObj.isNotAlergic : true)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   const getDataFiltered = async (e) => {
     e.preventDefault();
-    await getData();
     setIsAdvancesSearch(false);
-    setDataPets(
-      dataPets.filter(
-        (x) =>
-          (formValues.region && formValues.region !== "0"
-            ? x.region === formValues.region
-            : true) &&
-          (formValues.is_active ? x.isActive : true) &&
-          (formValues.is_quite ? x.isQuiet : true) &&
-          (formValues.is_active ? x.isActive : true) &&
-          (formValues.is_loving ? x.isLoving : true) &&
-          (formValues.is_small ? x.isSmall : true) &&
-          (formValues.is_big ? x.isBig : true) &&
-          (formValues.is_playful ? x.isPlayful : true) &&
-          (formValues.is_sociable ? x.isSociable : true) &&
-          (formValues.is_trainable ? x.isTrainable : true) &&
-          (formValues.is_guide ? x.isGuide : true) &&
-          (formValues.is_notalergic ? x.isNotAlergic : true)
-      )
-    );
+    setFormValues({});
+    await getData();
   };
 
   const incrementIndexImage = () => {
@@ -178,6 +186,7 @@ const SearchContextProvider = ({ children }) => {
         dropdownHandler,
         getDataFiltered,
         handleChange,
+        setIsAdvancesSearch,
       }}
     >
       {children}
