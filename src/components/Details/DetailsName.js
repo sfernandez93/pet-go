@@ -1,8 +1,9 @@
 const DetailsName = ({petName}) => {
     return (
-        <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800 dark:text-white">
-        {petName}
-      </h1>
+      <p className="font-bold pt-3 pb-2">
+      {" "}
+      {petName}{" "}
+    </p>
     );
   };
   export default DetailsName;

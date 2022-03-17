@@ -20,7 +20,7 @@ const DetailsSendEmailButton = ({ fromEmail, namePet, agePet, racePet }) => {
       <input type="hidden" value={namePet} name="name_pet" />
       <input type="hidden" value={agePet} name="age_pet" />
       <input type="hidden" value={racePet} name="race_pet" />
-      <input className={`border rounded-full py-2 px-4 text-xs font-semibold text-gray-700`}  type="submit" value="Solicitar información" />
+      <input className={`w-full border rounded-full py-2 px-4 text-xs font-semibold text-gray-700`}  type="submit" value="Solicitar información" />
     </form>
     </div>
   );

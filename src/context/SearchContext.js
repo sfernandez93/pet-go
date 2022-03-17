@@ -8,7 +8,6 @@ import {
   set,
 } from "firebase/database";
 import { getLocalStorage } from "../localStorage";
-import { v4 as uuid } from "uuid";
 
 export const SearchContext = createContext({});
 
@@ -68,28 +67,18 @@ const SearchContextProvider = ({ children }) => {
         if (snapshot.exists()) {
           setDataPets([]);
           Object.keys(snapshot.val()).forEach((key) => {
-            console.log(snapshot.val()[key])
             const petObj = snapshot.val()[key];
             const timeElapsedSincePublication =
               getStringTimeElapsedSincePublication(petObj.dateUpload);
-            if ((favoritesUid && favoritesUid.length < 1) || (favoritesUid.length > 0 && !favoritesUid.includes(key))) {
-              setDataPets((prevState) => [
-                ...prevState,
-                {
-                  uid: key,
-                  name: petObj.name,
-                  age: petObj.age,
-                  race: petObj.race,
-                  city: petObj.city,
-                  phone: petObj.phone,
-                  email: petObj.email,
-                  isDisabled: petObj.isDisabled,
-                  details: petObj.details,
-                  imagesUrl: petObj.imagesUrl,
-                  dateUpload: petObj.dateUpload,
-                  timeElapsedSincePublication: timeElapsedSincePublication,
-                },
-              ]);
+            if (
+              (favoritesUid && favoritesUid.length < 1) ||
+              (favoritesUid.length > 0 && !favoritesUid.includes(key))
+            ) {
+              petObj["uid"] = key;
+              petObj["timeElapsedSincePublication"] =
+                timeElapsedSincePublication;
+
+              setDataPets((prevState) => [...prevState, petObj]);
             }
           });
         } else {

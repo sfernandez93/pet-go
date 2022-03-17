@@ -1,7 +1,7 @@
 const DetailsItem = ({itemName, itemProp}) => {
   return (
-    <div className="flex justify-between p-4 ">
-      <div className="text-gray-600">{itemName}</div>
+    <div className="flex justify-between p-4 text-xs">
+      <div className="text-gray-600 font-medium">{itemName}</div>
       <div className="text-gray-300">{itemProp}</div>
     </div>
   );

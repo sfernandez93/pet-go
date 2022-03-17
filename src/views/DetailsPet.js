@@ -1,17 +1,19 @@
 import { DetailsContext } from "../context/DetailsContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import DetailsPhoto from "../components/Details/DetailsPhoto";
+import DetailsName from "../components/Details/DetailsName";
+import DetailsOrgName from "../components/Details/DetailsOrgName";
+import DetailsFeatures from "../components/Details/DetailsFeatures";
+import DetailsItemsGroup from "../components/Details/DetailsItemsGroup";
+
+import DetailsProfilePhoto from "../components/Details/DetailsProfilePhoto";
 import DetailsDescription from "../components/Details/DetailsDescription";
-import DetailsItem from "../components/Details/DetailsItem";
-import DetailsContactButton from "../components/Details/DetailsContactButton";
+import DetailsContactButtons from "../components/Details/DetailsContactButtons";
 import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
 import { useParams } from "react-router-dom";
-import DetailsSendEmailButton from "../components/Details/DetailsSendEmailButton";
-import { getLocalStorage } from "../localStorage";
 
 const DetailsPets = () => {
-  const storedData = getLocalStorage("userData");
   const { uidPet } = useParams();
   const { detailPet, indexImagePet, setIndexImagePet, findByUid } =
     useContext(DetailsContext);
@@ -22,7 +24,6 @@ const DetailsPets = () => {
   }, []);
 
   useEffect(() => {
-    console.log(uidPet);
     findByUid(uidPet);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailPet]);
@@ -30,8 +31,8 @@ const DetailsPets = () => {
   return (
     <div>
       <LogoIconBar></LogoIconBar>
-      <div className="h-screen flex items-center justify-center">
-        <div className="w-11/12 bg-white çççborder border-gray-100 rounded-lg text-center hover:shadow-lg align-center">
+      <div className="h-full flex items-center justify-center mb-40 mt-20">
+        <div className="flex flex-col items-center w-11/12 bg-white çççborder border-gray-100 rounded-lg text-center hover:shadow-lg align-center">
           <DetailsPhoto
             photo={
               detailPet
@@ -41,68 +42,21 @@ const DetailsPets = () => {
                 : ""
             }
           ></DetailsPhoto>
-
-          <div href=""></div>
-
-          <div className="relative flex justify-center">
-            <img
-              src="https://picsum.photos/50/50"
-              className="rounded-full object-center border-4 border-white -mt-6 shadow-lg align-center"
-            />
-          </div>
-
-          <p className="font-bold pt-3 pb-2"> Angry Pitbull Club </p>
-
-          <p className="font-semibold p-2 text-sm text-gray-500">
-            {" "}
-            by{" "}
-            <a href="#" className="text-blue-500 hover:text-blue-700">
-              {" "}
-              OfficialAPC{" "}
-            </a>{" "}
-          </p>
-
+          <DetailsProfilePhoto
+            photo={detailPet ? detailPet.imagesUrl[0] : ""}
+          ></DetailsProfilePhoto>
+          <DetailsName petName={detailPet ? detailPet.name : ""}></DetailsName>
+          <DetailsOrgName
+            petOrgName={detailPet ? detailPet.orgName : ""}
+          ></DetailsOrgName>
           <DetailsDescription
             description={detailPet ? detailPet.details : ""}
           ></DetailsDescription>
+          <DetailsFeatures></DetailsFeatures>
 
-          <div className="pb-6">
-            <DetailsSendEmailButton
-              fromEmail={storedData.email}
-              namePet={detailPet ? detailPet.name : ""}
-              agePet={detailPet ? detailPet.age : ""}
-              racePet={detailPet ? detailPet.race : ""}
-            ></DetailsSendEmailButton>
-            {/* <DetailsContactButton
-              bgColor={"white"}
-              buttomName={"Solicitar información"}
-              modoContacto={detailPet ? `mailto:${detailPet.email}` : ""}
-            ></DetailsContactButton> */}
-            <DetailsContactButton
-              bgColor={"white"}
-              buttomName={"Enviar un correo"}
-              modoContacto={detailPet ? `mailto:${detailPet.email}` : ""}
-            ></DetailsContactButton>
-            <DetailsContactButton
-              bgColor={"bg-blue-100"}
-              buttomName={"Llamar"}
-              modoContacto={detailPet ? `tel:${detailPet.phone}` : ""}
-            ></DetailsContactButton>
-          </div>
-          <div className="flex flex-col divide-y mb-20">
-            <DetailsItem
-              itemName={"Raza"}
-              itemProp={detailPet ? detailPet.race : ""}
-            ></DetailsItem>
-            <DetailsItem
-              itemName={"Edad"}
-              itemProp={detailPet ? detailPet.age : ""}
-            ></DetailsItem>
-            <DetailsItem
-              itemName={"Ciudad"}
-              itemProp={detailPet ? detailPet.city : ""}
-            ></DetailsItem>
-          </div>
+          <DetailsItemsGroup></DetailsItemsGroup>
+          <DetailsContactButtons></DetailsContactButtons>
+
         </div>
       </div>
       <NavBar></NavBar>

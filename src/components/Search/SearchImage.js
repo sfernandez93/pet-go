@@ -4,9 +4,10 @@ import {
   FaHeart,
   FaRegListAlt,
   FaMapMarkerAlt,
-  FaForward,
+  FaForward
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import  SearchHelpMeIcon  from "./SearchHelpMeIcon";
 
 const SearchImage = () => {
   const { incrementIndexImage, savePetAsFavorite, dataPets, photoIndex } =
@@ -25,8 +26,9 @@ const SearchImage = () => {
                 : ""}
             </p>
           </div>
-        </div>
 
+          <SearchHelpMeIcon />
+        </div>
         <img
           className="w-full h-4/5 object-cover"
           src={
