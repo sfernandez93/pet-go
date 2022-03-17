@@ -37,6 +37,7 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const getData = async () => {
+    console.log("GET DATA")
     const favorites = await getFavoritesUid();
     await getDataNotInFavorites(favorites);
   };
@@ -126,6 +127,7 @@ const SearchContextProvider = ({ children }) => {
     petObj["uid"] = key;
     petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
     petObj["region"] = region;
+    console.log("HOLA")
     setDataPets((prevState) => [...prevState, petObj]);
   };
 
@@ -155,14 +157,18 @@ const SearchContextProvider = ({ children }) => {
     e.preventDefault();
     setIsAdvancesSearch(false);
     setFormValues({});
+    console.log("1")
     await getData();
   };
 
-  const incrementIndexImage = () => {
+  const incrementIndexImage = (e) => {
+    console.log(dataPets)
     if (photoIndex < dataPets.length - 1) {
       setPhotoIndex((prevState) => prevState + 1);
     } else {
+      console.log("ELSE")
       setPhotoIndex(0);
+      console.log("2")
       getData();
     }
   };

@@ -46,7 +46,7 @@ const FavoriteContextProvider = ({ children }) => {
         const timeHours = Math.floor(timeMiliseconds / 3600000);
         return timeHours > 0
           ? ` (publicado hace ${timeHours} horas)`
-          : ` (publicado hace una hora)`;
+          : ` (publicado ahora mismo)`;
       }
     }
     return "";

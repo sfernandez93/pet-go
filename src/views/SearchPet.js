@@ -10,6 +10,7 @@ const Searchpet = () => {
 
   useEffect(() => {
     setIsAdvancesSearch(false)
+    console.log("4")
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
