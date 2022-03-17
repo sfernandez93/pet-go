@@ -18,6 +18,7 @@ const DetailsPets = () => {
   const { detailPet, indexImagePet, setIndexImagePet, findByUid } =
     useContext(DetailsContext);
 
+    console.log(detailPet)
   useEffect(() => {
     setIndexImagePet(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +54,6 @@ const DetailsPets = () => {
             description={detailPet ? detailPet.details : ""}
           ></DetailsDescription>
           <DetailsFeatures></DetailsFeatures>
-
           <DetailsItemsGroup></DetailsItemsGroup>
           <DetailsContactButtons></DetailsContactButtons>
 

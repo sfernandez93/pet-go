@@ -12,14 +12,13 @@ import { getLocalStorage } from "../localStorage";
 export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
+  const storedData = getLocalStorage("userData");
+  const db = getDatabase();
+  const dbRef = dbref(db);
   const [dataPets, setDataPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isAdvancedSearch, setIsAdvancesSearch] = useState(false);
   const [formValues, setFormValues] = useState({});
-
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
 
   const handleChange = (event) => {
     let newObject = {};
@@ -43,9 +42,6 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const getFavoritesUid = async () => {
-    const storedData = getLocalStorage("userData");
-    const db = getDatabase();
-    const dbRef = dbref(db);
     const favorites = [];
 
     try {
@@ -111,9 +107,25 @@ const SearchContextProvider = ({ children }) => {
       });
   };
 
-  const addDataPet = (petObj, key, timeElapsedSincePublication) => {
+  const findProvinceByUid = async (uid) => {
+    try {
+      const snapshot = await get(child(dbRef, "provincias/" + uid));
+      if (snapshot.exists()) {
+        return snapshot.val().name;
+      } else {
+        console.log("No data available");
+        return "";
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const addDataPet = async (petObj, key, timeElapsedSincePublication) => {
+    const region = await findProvinceByUid(petObj.region);
     petObj["uid"] = key;
     petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
+    petObj["region"] = region;
     setDataPets((prevState) => [...prevState, petObj]);
   };
 
@@ -187,6 +199,7 @@ const SearchContextProvider = ({ children }) => {
         getDataFiltered,
         handleChange,
         setIsAdvancesSearch,
+        getStringTimeElapsedSincePublication,
       }}
     >
       {children}

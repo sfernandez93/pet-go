@@ -29,17 +29,13 @@ const UploadContextProvider = ({ children }) => {
   const [storeImageUrl, setStoreImageUrl] = useState("");
   const [uid, setUid] = useState("");
   const [numberFilesError, setNumberFilesError] = useState("");
-  const [provinces, setProvinces] = useState([]);
+  const [provinces, setProvinces] = useState({});
   const [formValues, setFormValues] = useState({});
 
   useEffect(() => {
     getProvinces();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
 
   useEffect(() => {
     if (storeImageUrl) writePetImageDatabase(storeImageUrl);
@@ -68,21 +64,12 @@ const UploadContextProvider = ({ children }) => {
   const getProvinces = async () => {
     const db = getDatabase();
     const dbRef = dbref(db);
-    const provinces = [];
 
     try {
       const snapshot = await get(child(dbRef, "provincias/"));
-      if (snapshot.exists()) {
-        Object.keys(snapshot.val()).forEach((key) => {
-          provinces.push(snapshot.val()[key].name);
-        });
-        provinces.sort(function (a, b) {
-          return a.localeCompare(b);
-        });
-        setProvinces(provinces);
-      } else {
-        console.log("No data available");
-      }
+      snapshot.exists()
+        ? setProvinces(snapshot.val())
+        : console.log("No data available");
     } catch (error) {
       console.error(error);
     }

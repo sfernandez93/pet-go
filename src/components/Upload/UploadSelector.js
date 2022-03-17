@@ -24,13 +24,13 @@ const UploadSelector = ({ selectorTitle, selectorName }) => {
           className="block text-xs font-medium text-gray-600 inset-y-0 right-0 flex items-center pr-4"
           defaultValue
         ></option>
-        {[...provinces].map((key, i) => (
+        {[...Object.keys(provinces)].map((key) => (
           <option
-            key={i}
+            key={key}
             className="block text-xs font-medium text-gray-600 inset-y-0 right-0 flex items-center pr-4"
             value={key}
           >
-            {key}
+            {provinces[key].name}
           </option>
         ))}
       </select>

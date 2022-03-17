@@ -89,7 +89,7 @@ const UploadPet = () => {
           ></UploadSelector>
 
           <UploadInput
-            inputTitle="Ciudad"
+            inputTitle="Población"
             inputName="city"
             inputType="text"
             inputAutocomplete="address-level2"
