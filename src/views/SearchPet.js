@@ -18,7 +18,6 @@ const Searchpet = () => {
     <div className="h-full w-full flex items-center justify-center flex-col">
       <LogoIconBar></LogoIconBar>
       <SearchAdvanced></SearchAdvanced>
-
       <SearchImage></SearchImage>
       <NavBar></NavBar>
     </div>

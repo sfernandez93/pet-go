@@ -64,7 +64,7 @@ const UploadPet = () => {
       <div className="mt-4 px-4 py-6 bg-white sm:p-6">
         <div className="grid grid-cols-6 gap-6">
           <UploadInput
-            inputTitle="Nombre organización"
+            inputTitle="Sociedad protectora"
             inputName="org-name"
             inputType="text"
             inputAutocomplete="orgName"
