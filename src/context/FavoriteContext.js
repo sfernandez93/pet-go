@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState } from "react";
 import {
   getDatabase,
   ref as dbref,
@@ -7,7 +7,6 @@ import {
   child,
 } from "firebase/database";
 import { getLocalStorage } from "../localStorage";
-import { SearchContext } from "./SearchContext";
 
 export const FavoriteContext = createContext({});
 
@@ -77,7 +76,7 @@ const FavoriteContextProvider = ({ children }) => {
         petObj["uid"] = uid;
         petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
         petObj["region"] = region;
-        console.log(petObj)
+        console.log(petObj);
         setFavoritePets((prevState) => [...prevState, petObj]);
       } else {
         console.log("No data available");

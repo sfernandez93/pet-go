@@ -10,6 +10,8 @@ import SearchContextProvider from "./context/SearchContext";
 import FavoriteContextProvider from "./context/FavoriteContext";
 import DetailsContextProvider from "./context/DetailsContext";
 import { BrowserRouter } from "react-router-dom";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -29,3 +31,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+reportWebVitals();
+
+serviceWorkerRegistration.register();

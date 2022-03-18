@@ -10,8 +10,6 @@ const FavoriteItem = ({ urlImage, petUid }) => {
     deleteByUid(petUid);
   };
 
-  console.log(petUid)
-
   return (
     <div className="w-full bg-white rounded-lg sahdow-lg overflow-hidden flex flex-col md:flex-row">
       <div className="relative w-full h-40">
@@ -28,8 +26,8 @@ const FavoriteItem = ({ urlImage, petUid }) => {
         <img
           className="object-center object-cover w-full h-full"
           src={urlImage}
-          alt="photo"
-        ></img>
+          alt="Favorite."
+        />
       </div>
     </div>
   );

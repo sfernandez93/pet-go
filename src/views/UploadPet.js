@@ -4,7 +4,6 @@ import UploadCheckbox from "../components/Upload/UploadCheckbox";
 import UploadFeatures from "../components/Upload/UploadFeatures";
 import UploadSubmitButton from "../components/Upload/UploadSubmitButton";
 import UploadPhoto from "../components/Upload/UploadPhoto";
-import UploadProfilePhoto from "../components/Upload/UploadProfilePhoto";
 import UploadSelector from "../components/Upload/UploadSelector";
 import { useContext, useEffect } from "react";
 import { UploadContext } from "../context/UploadContext";

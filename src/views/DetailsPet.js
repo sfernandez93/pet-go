@@ -42,9 +42,10 @@ const DetailsPets = () => {
                 : ""
             }
           ></DetailsPhoto>
-          <DetailsProfilePhoto
+          {/* <DetailsProfilePhoto
             photo={detailPet ? detailPet.imagesUrl[0] : ""}
-          ></DetailsProfilePhoto>
+          ></DetailsProfilePhoto> */}
+          <DetailsProfilePhoto></DetailsProfilePhoto>
           <DetailsName petName={detailPet ? detailPet.name : ""}></DetailsName>
           <DetailsOrgName
             petOrgName={detailPet ? detailPet.orgName : ""}
@@ -55,7 +56,6 @@ const DetailsPets = () => {
           <DetailsFeatures></DetailsFeatures>
           <DetailsItemsGroup></DetailsItemsGroup>
           <DetailsContactButtons></DetailsContactButtons>
-
         </div>
       </div>
       <NavBar></NavBar>

@@ -1,5 +1,4 @@
-import 
-{ useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 
 import { LoginContext } from "../context/LoginContext";
 import SignInUpButton from "../components/Login/SignInUpButton";
@@ -19,10 +18,10 @@ const SignIn = () => {
     <div className="gradient-background h-full flex flex-col items-center">
       <div className="w-80 py-8 flex items-center flex-col mb-3">
         <div className="mt-8 w-64 flex flex-col">
-        <img
-        src={require('../images/output-logo-remove.png')}
-        alt="logo"
-      ></img>
+          <img
+            src={require("../images/output-logo-remove.png")}
+            alt="logo"
+          ></img>
           <LoginInput
             inputRef={emailRef}
             type={"email"}

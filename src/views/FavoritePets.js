@@ -3,7 +3,6 @@ import { useContext, useEffect } from "react";
 import FavoriteItem from "../components/Favorite/FavoriteItem";
 import NavBar from "../components/Comun/NavBar";
 import LogoIconBar from "../components/Comun/LogoIconBar";
-import { SearchContext } from "../context/SearchContext";
 
 const FavoritePets = () => {
   const { getDataFavoritesFromDatabase, favoritePets } =

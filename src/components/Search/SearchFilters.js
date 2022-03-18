@@ -3,7 +3,6 @@ import SearchAdvancedSelector from "../Search/SearchAdvancedSelector";
 import SearchFiltersButton from "../Search/SearchFiltersButton";
 import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
-import { UploadContext } from "../../context/UploadContext";
 
 const SearchFilters = () => {
   
