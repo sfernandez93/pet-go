@@ -19,6 +19,7 @@ const SearchContextProvider = ({ children }) => {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isAdvancedSearch, setIsAdvancesSearch] = useState(false);
   const [formValues, setFormValues] = useState({});
+  const [isFinish, setIsFinish] = useState(false);
 
   const handleChange = (event) => {
     let newObject = {};
@@ -36,7 +37,25 @@ const SearchContextProvider = ({ children }) => {
     setIsAdvancesSearch((prevState) => !prevState);
   };
 
+  const setPhotoHidden = (obj) => {
+    dataPets.forEach((key) => {
+      if (key.uid === obj.uid) key["isPhotoHidden"] = true;
+    });
+    setDataPets(dataPets);
+  }
+
+  const handleIncrement = (obj) => {
+    setPhotoHidden(obj);
+    incrementIndexImage();
+  };
+
+  const handleSaveAsFavorite = (obj) => {
+    setPhotoHidden(obj);
+    savePetAsFavorite();
+  };
+
   const getData = async () => {
+    setIsFinish(false)
     const favorites = await getFavoritesUid();
     await getDataNotInFavorites(favorites);
   };
@@ -159,24 +178,8 @@ const SearchContextProvider = ({ children }) => {
     await getData();
   };
 
-  const deleteElementAndincrementIndexImage = () => {
-    setDataPets(
-      dataPets.filter((element) => element.uid !== dataPets[photoIndex].uid)
-    );
-    // dataPets[photoIndex].isPhotoHidden = true;
-    incrementIndexImage();
-  };
-
   const incrementIndexImage = () => {
     setPhotoIndex((prevState) => prevState + 1);
-
-    // if (photoIndex < dataPets.length - 1) {
-    //   // dataPets[photoIndex].isPhotoHidden = true;
-    //   setPhotoIndex((prevState) => prevState + 1);
-    // } else {
-    //   setPhotoIndex(0);
-    //   getData();
-    // }
   };
 
   const savePetAsFavorite = async () => {
@@ -212,10 +215,12 @@ const SearchContextProvider = ({ children }) => {
         dropdownHandler,
         getDataFiltered,
         handleChange,
+        handleIncrement, 
+        handleSaveAsFavorite,
         setIsAdvancesSearch,
         getStringTimeElapsedSincePublication,
-        deleteElementAndincrementIndexImage,
-        
+        isFinish,
+        setIsFinish
       }}
     >
       {children}

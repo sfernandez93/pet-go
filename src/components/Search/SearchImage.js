@@ -1,5 +1,5 @@
 import { SearchContext } from "../../context/SearchContext";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import {
   FaHeart,
   FaRegListAlt,
@@ -13,22 +13,34 @@ import TinderCard from "react-tinder-card";
 const SearchImage = () => {
   const {
     incrementIndexImage,
-    deleteElementAndincrementIndexImage,
-    savePetAsFavorite,
+    handleIncrement,
     dataPets,
+    handleSaveAsFavorite,
     photoIndex,
     setPhotoIndex,
+    getData,
+    isFinish,
+    setIsFinish,
   } = useContext(SearchContext);
 
-  const swiped = (direction, nameToDelete) => {
-    incrementIndexImage();
-  };
-
-  if (photoIndex > dataPets.length - 1) {
-    setPhotoIndex(0);
-  }
-
   const arrayReverse = [...dataPets];
+
+  useEffect(() => {
+    setPhotoIndex(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (isFinish) getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFinish]);
+
+  useEffect(() => {
+    if (photoIndex && photoIndex > dataPets.length - 1) {
+      setPhotoIndex(0);
+      setIsFinish(true);
+    }
+  });
 
   return dataPets && dataPets.length > 0 && dataPets[photoIndex] ? (
     <div className="w-full h-full bg-gray-100 flex items-center justify-center">
@@ -55,9 +67,11 @@ const SearchImage = () => {
         <div className="cardContainer relative h-full">
           {arrayReverse.reverse().map((key) => (
             <TinderCard
-              className={`swipe h-full absolute top-0`}
+              className={`swipe h-full absolute top-0 ${
+                key.isPhotoHidden ? "hidden" : ""
+              }`}
               key={Object.keys(key.imagesUrl)[0]}
-              onSwipe={(dir) => swiped(dir, key)}
+              onSwipe={incrementIndexImage}
             >
               <img
                 className="w-full h-full object-cover"
@@ -77,10 +91,10 @@ const SearchImage = () => {
           >
             <FaRegListAlt size={20} style={{ fill: "grey" }} />
           </NavLink>
-          <button onClick={deleteElementAndincrementIndexImage}>
+          <button onClick={(dir) => handleIncrement(dataPets[photoIndex])}>
             <FaForward size={20} style={{ fill: "grey" }} />
           </button>
-          <button onClick={savePetAsFavorite}>
+          <button onClick={(dir) => handleSaveAsFavorite(dataPets[photoIndex])}>
             <FaHeart
               size={20}
               style={{ fill: "red" }}
