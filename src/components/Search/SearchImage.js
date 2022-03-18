@@ -1,5 +1,5 @@
 import { SearchContext } from "../../context/SearchContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import {
   FaHeart,
   FaRegListAlt,
@@ -9,46 +9,28 @@ import {
 import { NavLink } from "react-router-dom";
 import SearchHelpMe from "./SearchHelpMe";
 import TinderCard from "react-tinder-card";
-const db = [
-  {
-    name: 'Richard Hendricks',
-    url: './img/richard.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    url: './img/erlich.jpg'
-  },
-  {
-    name: 'Monica Hall',
-    url: './img/monica.jpg'
-  },
-  {
-    name: 'Jared Dunn',
-    url: './img/jared.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    url: './img/dinesh.jpg'
-  }
-]
 
 const SearchImage = () => {
-  const { incrementIndexImage, savePetAsFavorite, dataPets, photoIndex } =
-    useContext(SearchContext);
+  const {
+    incrementIndexImage,
+    deleteElementAndincrementIndexImage,
+    savePetAsFavorite,
+    dataPets,
+    photoIndex,
+    setPhotoIndex,
+  } = useContext(SearchContext);
 
-    const characters = db
-    // const [lastDirection, setLastDirection] = useState()
-  
-    const swiped = () => {
-      incrementIndexImage()
-      // setLastDirection(direction)
-    }
-  
-    const outOfFrame = (name) => {
-      console.log(name + ' left the screen!')
-    }
-  
-  return dataPets && dataPets.length > 0 ? (
+  const swiped = (direction, nameToDelete) => {
+    incrementIndexImage();
+  };
+
+  if (photoIndex > dataPets.length - 1) {
+    setPhotoIndex(0);
+  }
+
+  const arrayReverse = [...dataPets];
+
+  return dataPets && dataPets.length > 0 && dataPets[photoIndex] ? (
     <div className="w-full h-full bg-gray-100 flex items-center justify-center">
       <div className="flex flex-col justify-between h-4/5 w-11/12 bg-white rounded-lg shadow-lg">
         <div className="flex items-center justify-between mt-2">
@@ -71,12 +53,11 @@ const SearchImage = () => {
           )}
         </div>
         <div className="cardContainer relative h-full">
-          {dataPets.map((key) => (
+          {arrayReverse.reverse().map((key) => (
             <TinderCard
-              className="swipe h-full absolute top-0"
+              className={`swipe h-full absolute top-0`}
               key={Object.keys(key.imagesUrl)[0]}
-              onSwipe={incrementIndexImage}
-              onCardLeftScreen={() => outOfFrame(Object.keys(key.imagesUrl)[0])}
+              onSwipe={(dir) => swiped(dir, key)}
             >
               <img
                 className="w-full h-full object-cover"
@@ -96,7 +77,7 @@ const SearchImage = () => {
           >
             <FaRegListAlt size={20} style={{ fill: "grey" }} />
           </NavLink>
-          <button onClick={incrementIndexImage}>
+          <button onClick={deleteElementAndincrementIndexImage}>
             <FaForward size={20} style={{ fill: "grey" }} />
           </button>
           <button onClick={savePetAsFavorite}>

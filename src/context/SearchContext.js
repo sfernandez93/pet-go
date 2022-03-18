@@ -37,7 +37,6 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const getData = async () => {
-    console.log("GET DATA")
     const favorites = await getFavoritesUid();
     await getDataNotInFavorites(favorites);
   };
@@ -127,7 +126,7 @@ const SearchContextProvider = ({ children }) => {
     petObj["uid"] = key;
     petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
     petObj["region"] = region;
-    console.log("HOLA")
+    petObj["isPhotoHidden"] = false;
     setDataPets((prevState) => [...prevState, petObj]);
   };
 
@@ -157,20 +156,27 @@ const SearchContextProvider = ({ children }) => {
     e.preventDefault();
     setIsAdvancesSearch(false);
     setFormValues({});
-    console.log("1")
     await getData();
   };
 
-  const incrementIndexImage = (e) => {
-    console.log(dataPets)
-    if (photoIndex < dataPets.length - 1) {
-      setPhotoIndex((prevState) => prevState + 1);
-    } else {
-      console.log("ELSE")
-      setPhotoIndex(0);
-      console.log("2")
-      getData();
-    }
+  const deleteElementAndincrementIndexImage = () => {
+    setDataPets(
+      dataPets.filter((element) => element.uid !== dataPets[photoIndex].uid)
+    );
+    // dataPets[photoIndex].isPhotoHidden = true;
+    incrementIndexImage();
+  };
+
+  const incrementIndexImage = () => {
+    setPhotoIndex((prevState) => prevState + 1);
+
+    // if (photoIndex < dataPets.length - 1) {
+    //   // dataPets[photoIndex].isPhotoHidden = true;
+    //   setPhotoIndex((prevState) => prevState + 1);
+    // } else {
+    //   setPhotoIndex(0);
+    //   getData();
+    // }
   };
 
   const savePetAsFavorite = async () => {
@@ -196,6 +202,8 @@ const SearchContextProvider = ({ children }) => {
         getDataNotInFavorites,
         incrementIndexImage,
         photoIndex,
+        setPhotoIndex,
+        setDataPets,
         dataPets,
         savePetAsFavorite,
         getFavoritesUid,
@@ -206,6 +214,8 @@ const SearchContextProvider = ({ children }) => {
         handleChange,
         setIsAdvancesSearch,
         getStringTimeElapsedSincePublication,
+        deleteElementAndincrementIndexImage,
+        
       }}
     >
       {children}
