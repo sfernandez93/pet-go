@@ -8,32 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "android-lauchericon-72-72.png",
+      "src": "logo192.png",
       "type": "image/png",
-      "sizes": "72x72",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     },
     {
-      "src": "android-lauchericon-96-96.png",
-      "type": "image/png",
-      "sizes": "96x96",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "android-lauchericon-192-192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "android-lauchericon-512-512.png",
+      "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
-    },
-    {
-      "src": "1024.png",
-      "type": "image/png",
-      "sizes": "1024x1024"
     }
   ],
   "start_url": ".",
