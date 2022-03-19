@@ -15,12 +15,6 @@
       "purpose": "any maskable"
     },
     {
-      "src": "android-lauchericon-144-144.png",
-      "type": "image/png",
-      "sizes": "144x144",
-      "purpose": "any maskable"
-    },
-    {
       "src": "android-lauchericon-192-192.png",
       "type": "image/png",
       "sizes": "192x192",
