@@ -10,7 +10,7 @@ const SearchFilters = () => {
   const { handleChange } = useContext(SearchContext);
 
   return (
-    <form onSubmit={getDataFiltered} className="absolute flex flex-col items-center w-full mt-24 p-4 shadow rounded bg-transparentbg ">
+    <form onSubmit={getDataFiltered} className="absolute flex flex-col items-center w-full mt-24 p-4 shadow rounded bg-transparentbg z-20">
       <SearchAdvancedSelector
         selectorTitle="Provincia"
         selectorName="region"

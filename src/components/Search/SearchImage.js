@@ -44,7 +44,7 @@ const SearchImage = () => {
 
   return dataPets && dataPets.length > 0 && dataPets[photoIndex] ? (
     <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-      <div className="flex flex-col justify-between h-4/5 w-11/12 bg-white rounded-lg shadow-lg">
+      <div className="flex flex-col justify-between h-4/5 w-11/12 lg:w-2/6 lg:h-3/4 bg-white rounded-lg shadow-lg">
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center pl-4">
             <FaMapMarkerAlt size={20} style={{ fill: "gainsboro" }} />

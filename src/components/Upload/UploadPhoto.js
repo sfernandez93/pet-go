@@ -7,7 +7,7 @@ const UploadPhoto = () => {
     useContext(UploadContext);
 
   return (
-    <div className="col-span-6 sm:col-span-3">
+    <div className="col-span-6">
       <label className="block text-sm font-medium text-gray-500"> Fotos </label>
       <div
         className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md ${
