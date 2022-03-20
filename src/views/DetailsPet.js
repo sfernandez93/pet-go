@@ -5,8 +5,7 @@ import DetailsName from "../components/Details/DetailsName";
 import DetailsOrgName from "../components/Details/DetailsOrgName";
 import DetailsFeatures from "../components/Details/DetailsFeatures";
 import DetailsItemsGroup from "../components/Details/DetailsItemsGroup";
-
-import DetailsProfilePhoto from "../components/Details/DetailsProfilePhoto";
+// import DetailsProfilePhoto from "../components/Details/DetailsProfilePhoto";
 import DetailsDescription from "../components/Details/DetailsDescription";
 import DetailsContactButtons from "../components/Details/DetailsContactButtons";
 import NavBar from "../components/Comun/NavBar";

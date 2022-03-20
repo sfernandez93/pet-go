@@ -1,4 +1,4 @@
-import { FaBriefcaseMedical, FaClinicMedical } from "react-icons/fa";
+import { FaClinicMedical } from "react-icons/fa";
 
 const SearchHelpMe = () => {
   return (
