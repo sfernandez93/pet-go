@@ -1,35 +1,11 @@
 import { SearchContext } from "../../context/SearchContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import SearchImageButtons from "./SearchImageButtons";
 import SearchPhotoContainer from "./SearchPhotoContainer";
 import SearchHeaderImage from "./SearchHeaderImage";
 
 const SearchImage = () => {
-  const {
-    dataPets,
-    photoIndex,
-    setPhotoIndex,
-    getData,
-    isFinish,
-    setIsFinish,
-  } = useContext(SearchContext);
-
-  useEffect(() => {
-    setPhotoIndex(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (isFinish) getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFinish]);
-
-  useEffect(() => {
-    if (photoIndex && photoIndex > dataPets.length - 1) {
-      setPhotoIndex(0);
-      setIsFinish(true);
-    }
-  });
+  const { dataPets, photoIndex } = useContext(SearchContext);
 
   return dataPets && dataPets.length > 0 && dataPets[photoIndex] ? (
     <div className="w-screen h-screen flex items-center justify-center">

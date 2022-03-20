@@ -54,10 +54,10 @@ const SearchContextProvider = ({ children }) => {
     savePetAsFavorite();
   };
 
-  const getData = async () => {
+  const getData = async (formValues) => {
     setIsFinish(false)
     const favorites = await getFavoritesUid();
-    await getDataNotInFavorites(favorites);
+    await getDataNotInFavorites(favorites, formValues);
   };
 
   const getFavoritesUid = async () => {
@@ -97,7 +97,7 @@ const SearchContextProvider = ({ children }) => {
     return "";
   };
 
-  const getDataNotInFavorites = async (favoritesUid) => {
+  const getDataNotInFavorites = async (favoritesUid, formValues) => {
     const dbRef = dbref(getDatabase());
     await get(child(dbRef, `pets`))
       .then((snapshot) => {
@@ -110,7 +110,7 @@ const SearchContextProvider = ({ children }) => {
               getStringTimeElapsedSincePublication(petObj.dateUpload);
             if (favoritesUid.length < 1 || !favoritesUid.includes(key)) {
               addPet =
-                Object.keys(formValues).length > 0
+              formValues && Object.keys(formValues).length > 0
                   ? isPetMeetConditionFilter(petObj)
                   : true;
 
@@ -174,8 +174,8 @@ const SearchContextProvider = ({ children }) => {
   const getDataFiltered = async (e) => {
     e.preventDefault();
     setIsAdvancesSearch(false);
-    setFormValues({});
-    await getData();
+    // setFormValues({});
+    await getData(formValues);
   };
 
   const incrementIndexImage = () => {
@@ -212,6 +212,8 @@ const SearchContextProvider = ({ children }) => {
         getFavoritesUid,
         getData,
         isAdvancedSearch,
+        formValues, 
+        setFormValues,
         dropdownHandler,
         getDataFiltered,
         handleChange,
