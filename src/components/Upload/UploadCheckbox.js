@@ -5,8 +5,9 @@ const UploadCheckbox = ({
   inputTitle,
   inputName,
   inputDescription,
+  handleChange,
 }) => {
-  const { formValues, handleChange } = useContext(UploadContext);
+  const { formValues } = useContext(UploadContext);
 
   return (
     <div className="flex items-start col-span-6 sm:col-span-3 lg:col-span-2 ">

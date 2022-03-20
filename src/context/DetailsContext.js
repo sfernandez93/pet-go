@@ -39,7 +39,7 @@ const DetailsContextProvider = ({ children }) => {
   };
 
   const getFeatures = () => {
-    setFeatures([])
+    setFeatures([]);
     if (detailPet.isActive)
       setFeatures((prevState) => [...prevState, "Activo"]);
     if (detailPet.isBig)
@@ -67,7 +67,7 @@ const DetailsContextProvider = ({ children }) => {
 
   const findByUid = (uid) => {
     const allDataPets = dataPets.concat(favoritePets);
-    console.log(allDataPets)
+    console.log(allDataPets);
     Object.keys(allDataPets).forEach((key) => {
       const petUid = allDataPets[key].uid;
       if (uid === petUid) return setDetailPet(allDataPets[key]);
@@ -96,7 +96,7 @@ const DetailsContextProvider = ({ children }) => {
         detailPet,
         setIndexImagePet,
         sendEmail,
-        features
+        features,
       }}
     >
       {children}

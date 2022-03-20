@@ -1,7 +1,4 @@
 const DetailsItem = ({ itemName, itemProp }) => {
-  console.log(itemName);
-  console.log(itemProp);
-
   return (
     <div className="flex justify-between p-4 text-xs">
       <div className="text-gray-600 font-medium text-start">{itemName}</div>

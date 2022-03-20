@@ -53,6 +53,7 @@ const UploadPet = () => {
 
         <UploadFeatures handleChange={handleChange}></UploadFeatures>
         <UploadCheckbox
+        handleChange={handleChange}
           inputTitle="Modo ayúdame"
           inputName="is_disabled"
           inputDescription="Indica si tu mascota tiene algún tipo de problema o discapacidad (detállalo

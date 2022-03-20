@@ -17,7 +17,7 @@ const SearchContextProvider = ({ children }) => {
   const dbRef = dbref(db);
   const [dataPets, setDataPets] = useState([]);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [isAdvancedSearch, setIsAdvancesSearch] = useState(false);
+  const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
   const [formValues, setFormValues] = useState({});
   const [isFinish, setIsFinish] = useState(false);
 
@@ -34,7 +34,7 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const dropdownHandler = () => {
-    setIsAdvancesSearch((prevState) => !prevState);
+    setIsAdvancedSearch((prevState) => !prevState);
   };
 
   const setPhotoHidden = (obj) => {
@@ -42,7 +42,7 @@ const SearchContextProvider = ({ children }) => {
       if (key.uid === obj.uid) key["isPhotoHidden"] = true;
     });
     setDataPets(dataPets);
-  }
+  };
 
   const handleIncrement = (obj) => {
     setPhotoHidden(obj);
@@ -55,7 +55,7 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const getData = async (formValues) => {
-    setIsFinish(false)
+    setIsFinish(false);
     const favorites = await getFavoritesUid();
     await getDataNotInFavorites(favorites, formValues);
   };
@@ -110,7 +110,7 @@ const SearchContextProvider = ({ children }) => {
               getStringTimeElapsedSincePublication(petObj.dateUpload);
             if (favoritesUid.length < 1 || !favoritesUid.includes(key)) {
               addPet =
-              formValues && Object.keys(formValues).length > 0
+                formValues && Object.keys(formValues).length > 0
                   ? isPetMeetConditionFilter(petObj)
                   : true;
 
@@ -141,7 +141,10 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const addDataPet = async (petObj, key, timeElapsedSincePublication) => {
-    const region = await findProvinceByUid(petObj.region);
+    const region =
+      petObj.region && petObj.region !== "0"
+        ? await findProvinceByUid(petObj.region)
+        : "";
     petObj["uid"] = key;
     petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
     petObj["region"] = region;
@@ -150,13 +153,14 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const isPetMeetConditionFilter = (petObj) => {
+    console.log(formValues);
     if (
       (formValues.region && formValues.region !== "0"
         ? petObj.region === formValues.region
         : true) &&
       (formValues.is_active ? petObj.isActive : true) &&
-      (formValues.is_quite ? petObj.isQuiet : true) &&
-      (formValues.is_active ? petObj.isActive : true) &&
+      (formValues.is_docile ? petObj.isDocile : true) &&
+      (formValues.is_quiet ? petObj.isQuiet : true) &&
       (formValues.is_loving ? petObj.isLoving : true) &&
       (formValues.is_small ? petObj.isSmall : true) &&
       (formValues.is_big ? petObj.isBig : true) &&
@@ -164,8 +168,10 @@ const SearchContextProvider = ({ children }) => {
       (formValues.is_sociable ? petObj.isSociable : true) &&
       (formValues.is_trainable ? petObj.isTrainable : true) &&
       (formValues.is_guide ? petObj.isGuide : true) &&
+      (formValues.is_disabled ? petObj.isDisabled : true) &&
       (formValues.is_notalergic ? petObj.isNotAlergic : true)
     ) {
+      console.log(petObj);
       return true;
     }
     return false;
@@ -173,7 +179,7 @@ const SearchContextProvider = ({ children }) => {
 
   const getDataFiltered = async (e) => {
     e.preventDefault();
-    setIsAdvancesSearch(false);
+    setIsAdvancedSearch(false);
     // setFormValues({});
     await getData(formValues);
   };
@@ -212,17 +218,17 @@ const SearchContextProvider = ({ children }) => {
         getFavoritesUid,
         getData,
         isAdvancedSearch,
-        formValues, 
+        formValues,
         setFormValues,
         dropdownHandler,
         getDataFiltered,
         handleChange,
-        handleIncrement, 
+        handleIncrement,
         handleSaveAsFavorite,
-        setIsAdvancesSearch,
+        setIsAdvancedSearch,
         getStringTimeElapsedSincePublication,
         isFinish,
-        setIsFinish
+        setIsFinish,
       }}
     >
       {children}

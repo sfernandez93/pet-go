@@ -76,7 +76,6 @@ const FavoriteContextProvider = ({ children }) => {
         petObj["uid"] = uid;
         petObj["timeElapsedSincePublication"] = timeElapsedSincePublication;
         petObj["region"] = region;
-        console.log(petObj);
         setFavoritePets((prevState) => [...prevState, petObj]);
       } else {
         console.log("No data available");

@@ -12,7 +12,7 @@ const SearchAdvancedSelector = ({ selectorTitle, selectorName }) => {
       defaultValue={formValues.value}
       onChange={handleChange}
       name={selectorName}
-      className="text-xs w-4/6 border h-10 rounded-full pl-4 text-gray-300 mt-1 block w-full"
+      className="bg-white text-xs w-4/6 border h-10 rounded-full pl-4 text-gray-300 mt-1 block w-full"
       aria-label="Default select example"
     >
       <option

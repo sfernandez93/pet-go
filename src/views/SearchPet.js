@@ -15,16 +15,22 @@ const Searchpet = () => {
     setIsFinish,
     formValues,
     setFormValues,
-    setIsAdvancesSearch,
+    setIsAdvancedSearch,
+    isAdvancedSearch,
   } = useContext(SearchContext);
 
   useEffect(() => {
-    setIsAdvancesSearch(false);
+    setIsAdvancedSearch(false);
     setPhotoIndex(0);
     setFormValues({});
     getData({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (isAdvancedSearch) setFormValues({});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAdvancedSearch]);
 
   useEffect(() => {
     if (isFinish) getData(formValues);
