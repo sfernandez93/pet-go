@@ -18,7 +18,8 @@ module.exports = {
         "submit-green": "#66c4b0",
         pastelblue:"#bbbbea",
         transparentbg:"#fffffff2",
-        transparentgray:"#80808066"
+        transparentgray:"#80808066",
+        // ""6ae0b2
       },
     },
   },
