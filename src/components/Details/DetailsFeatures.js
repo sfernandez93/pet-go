@@ -5,7 +5,7 @@ const DetailsFeatures = () => {
   const { features } = useContext(DetailsContext);
 
   return (
-    <div className="grid grid-cols-3 gap-3 p-6 pt-0">
+    <div className="grid grid-cols-3 gap-3 p-6">
       {[...features].map((key, i) => (
         <div
           key={i}

@@ -86,12 +86,12 @@ const SearchContextProvider = ({ children }) => {
       const timeMiliseconds = Date.now() - dateUpload;
       const timeDays = Math.floor(timeMiliseconds / 86400000);
       if (Math.floor(timeMiliseconds / 86400000) > 0) {
-        return ` (publicado hace ${timeDays} días)`;
+        return ` (subido hace ${timeDays} días)`;
       } else {
         const timeHours = Math.floor(timeMiliseconds / 3600000);
         return timeHours > 0
-          ? ` (publicado hace ${timeHours} horas)`
-          : ` (publicado hace una hora)`;
+          ? ` (subido hace ${timeHours} horas)`
+          : ` (subido hace una hora)`;
       }
     }
     return "";

@@ -17,7 +17,7 @@ const UploadSelector = ({ selectorTitle, selectorName }) => {
         defaultValue={formValues.value}
         onChange={handleChange}
         name={selectorName}
-        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        className="mt-1 block w-full shadow-sm sm:text-sm rounded-md"
         aria-label="Default select example"
       >
         <option

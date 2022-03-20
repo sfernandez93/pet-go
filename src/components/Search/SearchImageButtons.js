@@ -10,7 +10,10 @@ const SearchImageButtons = () => {
 
   return (
     <div className="flex justify-between px-10 py-6">
-      <SearchDetailsLink></SearchDetailsLink>
+      <SearchDetailsLink
+        dataPets={dataPets}
+        photoIndex={photoIndex}
+      ></SearchDetailsLink>
 
       <SearchImageButton
         clickFunction={() => handleIncrement(dataPets[photoIndex])}

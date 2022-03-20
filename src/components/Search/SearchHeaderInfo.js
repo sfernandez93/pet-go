@@ -8,7 +8,7 @@ const SearchHeaderInfo = () => {
   return (
     <div className="flex items-center pl-4">
       <FaMapMarkerAlt size={20} style={{ fill: "gainsboro" }} />
-      <p className="p-4 pl-2 text-sm font-normal text-gray-300 hover:underline">
+      <p className="p-4 pl-2 text-xs font-normal text-gray-300">
         {dataPets && dataPets.length > 0 && dataPets[photoIndex]
           ? dataPets[photoIndex].city +
             dataPets[photoIndex].timeElapsedSincePublication

@@ -32,7 +32,7 @@ const SearchImage = () => {
   });
 
   return dataPets && dataPets.length > 0 && dataPets[photoIndex] ? (
-    <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+    <div className="w-screen h-screen flex items-center justify-center">
       <div className="flex flex-col justify-between h-3/4 w-10/12 sm:w-2/6 sm:h-3/4 bg-white rounded-lg shadow-lg">
         <SearchHeaderImage></SearchHeaderImage>
         <SearchPhotoContainer></SearchPhotoContainer>

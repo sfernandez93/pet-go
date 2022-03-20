@@ -10,7 +10,7 @@ const SearchPhotoContainer = () => {
     <div className="cardContainer relative h-full">
       {arrayReverse.reverse().map((key) => (
         <TinderCard
-          className={`swipe h-full absolute top-0 ${
+          className={`swipe h-full w-full absolute top-0 ${
             key.isPhotoHidden ? "hidden" : ""
           }`}
           key={Object.keys(key.imagesUrl)[0]}
