@@ -1,7 +1,9 @@
+import { FaBriefcaseMedical } from "react-icons/fa";
+
 const SearchHelpMe = () => {
   return (
-    <div className="flex font-medium justify-center items-center h-8 w-16 mr-4 bg-pastelblue text-white px-4 text-xs leading-3 text-indigo-700 rounded-full bg-indigo-100">
-      Ayúdale
+    <div className="flex font-medium justify-center items-center h-8 w-16 text-xs leading-3 text-indigo-700 rounded-full">
+      <FaBriefcaseMedical size={20} style={{ fill: "lightblue" }} />
     </div>
   );
 };

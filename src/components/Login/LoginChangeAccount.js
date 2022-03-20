@@ -10,25 +10,25 @@ const LoginChangeAccount = () => {
         <>
           <p>
             {" "}
-            Don't have an account?{" "}
+            ¿No tienes una cuenta?{" "}
             <span
               className="text-blue-900 text-sm font-semibold"
               onClick={() => setHasAccount(!hasAccount)}
             >
               {" "}
-              Sign up
+              Regístrate
             </span>
           </p>
         </>
       ) : (
         <>
           <p>
-            Have an account?{" "}
+           ¿Tienes una cuenta?{" "}
             <span
               className="text-blue-900 text-sm font-semibold"
               onClick={() => setHasAccount(!hasAccount)}
             >
-              Sign in
+              Accede
             </span>
           </p>
         </>

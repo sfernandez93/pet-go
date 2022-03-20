@@ -22,7 +22,7 @@ const SignInUpButton = () => {
       }
       data-cy="login-button"
     >
-      {hasAccount ? "Sign in" : "Sign up"}
+      {hasAccount ? "Accede" : "Regístrate"}
     </button>
   );
 };
