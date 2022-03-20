@@ -11,7 +11,7 @@ const UploadPhoto = () => {
       <label className="block text-sm font-medium text-gray-500"> Fotos </label>
       <div
         className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md ${
-          imagesToUpload.length > 0 ? "bg-blue-50" : "bg-gray-50"
+          imagesToUpload.length > 0 ? "bg-gray-100" : "bg-gray-50"
         } `}
       >
         <div className="space-y-1 text-center">

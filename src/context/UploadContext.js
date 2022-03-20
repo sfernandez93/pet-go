@@ -48,16 +48,7 @@ const UploadContextProvider = ({ children }) => {
   }, [uid]);
 
   const clearInputs = () => {
-    // firstNameRef.current.value = "";
-    // raceRef.current.value = "";
-    // ageRef.current.value = "";
-    // emailRef.current.value = "";
-    // phoneRef.current.value = "";
-    // detailsRef.current.value = "";
-    // cityRef.current.value = "";
-    // regionRef.current.value = "";
-    // orgNameRef.current.value = "";
-    // isDisabledRef.current.checked = false;
+    setFormValues({})
     setImagesToUpload({});
   };
 

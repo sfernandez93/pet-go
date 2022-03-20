@@ -17,7 +17,7 @@ const UploadTextArea = ({ title, inputName, inputPlaceholder }) => {
           defaultValue={formValues.value}
           onChange={handleChange}
           required
-          maxLength="100"
+          maxLength="200"
           id={inputName}
           name={inputName}
           rows="3"
