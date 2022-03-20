@@ -7,6 +7,10 @@ const DetailsItemsGroup = () => {
   return (
     <div className="w-11/12 flex flex-col divide-y mt-10 mb-10">
       <DetailsItem
+        itemName={"Nombre"}
+        itemProp={detailPet ? detailPet.name : ""}
+      ></DetailsItem>
+      <DetailsItem
         itemName={"Raza"}
         itemProp={detailPet ? detailPet.race : ""}
       ></DetailsItem>

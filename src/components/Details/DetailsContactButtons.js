@@ -19,11 +19,13 @@ const DetailsContactButtons = () => {
       ></DetailsSendEmailButton>
       <DetailsContactButton
         bgColor={"white"}
+        textColor={"gray-700"}
         buttomName={"Enviar un correo"}
         modoContacto={detailPet ? `mailto:${detailPet.email}` : ""}
       ></DetailsContactButton>
       <DetailsContactButton
-        bgColor={"bg-blue-100"}
+        bgColor={"primary"}
+        textColor={"white"}
         buttomName={"Llamar"}
         modoContacto={detailPet ? `tel:${detailPet.phone}` : ""}
       ></DetailsContactButton>

@@ -19,6 +19,8 @@ module.exports = {
         pastelblue:"#bbbbea",
         transparentbg:"#fffffff2",
         transparentgray:"#80808066",
+        "primary":"#16a48c87",
+        "lightseagreen":"#139d8d70"
         // ""6ae0b2
       },
     },

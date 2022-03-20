@@ -1,7 +1,7 @@
 import { DetailsContext } from "../context/DetailsContext";
 import { useContext, useEffect } from "react";
 import DetailsPhoto from "../components/Details/DetailsPhoto";
-import DetailsName from "../components/Details/DetailsName";
+// import DetailsName from "../components/Details/DetailsName";
 import DetailsOrgName from "../components/Details/DetailsOrgName";
 import DetailsFeatures from "../components/Details/DetailsFeatures";
 import DetailsItemsGroup from "../components/Details/DetailsItemsGroup";
@@ -46,7 +46,6 @@ const DetailsPets = () => {
             photo={detailPet ? detailPet.imagesUrl[0] : ""}
           ></DetailsProfilePhoto> */}
           {/* <DetailsProfilePhoto></DetailsProfilePhoto> */}
-          <DetailsName petName={detailPet ? detailPet.name : ""}></DetailsName>
           <DetailsOrgName
             petOrgName={detailPet ? detailPet.orgName : ""}
           ></DetailsOrgName>
