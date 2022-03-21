@@ -32,7 +32,6 @@ const DetailsContextProvider = ({ children }) => {
       info: true,
     }));
 
-    setIsButtonEmailClicked(true);
     setTimeout(() => {
       emailjs
         .sendForm(
@@ -42,7 +41,10 @@ const DetailsContextProvider = ({ children }) => {
           "s57n_tFKifkRKHUzy"
         )
         .then(
-          setIsButtonEmailClicked(false),
+          setIsButtonEmailClicked((prevState) => ({
+            ...prevState,
+            info: false,
+          })),
           (result) => {
             console.log(result.text);
           },
