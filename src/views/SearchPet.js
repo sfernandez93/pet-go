@@ -21,9 +21,8 @@ const Searchpet = () => {
 
   useEffect(() => {
     setIsAdvancedSearch(false);
-    setPhotoIndex(0);
     setFormValues({});
-    getData({});
+    if (photoIndex === 0) getData({});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -42,9 +41,10 @@ const Searchpet = () => {
       setPhotoIndex(0);
       setIsFinish(true);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [photoIndex]);
 
-
+  console.log(photoIndex);
   return (
     <div className="h-full w-full flex items-center justify-center flex-col">
       <LogoIconBar></LogoIconBar>

@@ -184,7 +184,6 @@ const SearchContextProvider = ({ children }) => {
   const getDataFiltered = async (e) => {
     e.preventDefault();
     setIsAdvancedSearch(false);
-    // setFormValues({});
     await getData(formValues);
   };
 
