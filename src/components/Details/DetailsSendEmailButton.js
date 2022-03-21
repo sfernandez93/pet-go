@@ -2,7 +2,7 @@ import { DetailsContext } from "../../context/DetailsContext";
 import { useContext } from "react";
 
 const DetailsSendEmailButton = ({ fromEmail, namePet, agePet, racePet }) => {
-  const { sendEmail } = useContext(DetailsContext);
+  const { sendEmail, isButtonEmailClicked } = useContext(DetailsContext);
 
   return (
     <div className="mt-5">
@@ -17,7 +17,7 @@ const DetailsSendEmailButton = ({ fromEmail, namePet, agePet, racePet }) => {
         <input type="hidden" value={agePet} name="age_pet" />
         <input type="hidden" value={racePet} name="race_pet" />
         <input
-          className={`w-full border rounded-full py-2 px-4 text-xs font-semibold text-gray-700 cursor-pointer hover:opacity-40`}
+          className={`w-full border rounded-full py-2 px-4 text-xs font-semibold text-gray-700 cursor-pointer ${isButtonEmailClicked.info ? 'bg-gray-100': ''}`}
           type="submit"
           value="Solicitar información"
         />

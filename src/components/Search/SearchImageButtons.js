@@ -38,9 +38,6 @@ const SearchImageButtons = () => {
           />
         }
       ></SearchImageButton>
-      {/* <div ref={hoverRef}>
-      {`The current div is ${isHover ? `hovered` : `unhovered`}`}
-    </div> */}
     </div>
   );
 };

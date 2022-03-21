@@ -11,6 +11,12 @@ const DetailsContextProvider = ({ children }) => {
   const [detailPet, setDetailPet] = useState(null);
   const [indexImagePet, setIndexImagePet] = useState(0);
   const [features, setFeatures] = useState([]);
+  const [isButtonEmailClicked, setIsButtonEmailClicked] = useState({
+    info: false,
+    email: false,
+    call: false,
+  });
+
   const { dataPets } = useContext(SearchContext);
   const { favoritePets } = useContext(FavoriteContext);
 
@@ -21,21 +27,30 @@ const DetailsContextProvider = ({ children }) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_jdc32vz",
-        "template_2z4hytq",
-        e.target,
-        "s57n_tFKifkRKHUzy"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    setIsButtonEmailClicked((prevState) => ({
+      ...prevState,
+      info: true,
+    }));
+
+    setIsButtonEmailClicked(true);
+    setTimeout(() => {
+      emailjs
+        .sendForm(
+          "service_jdc32vz",
+          "template_2z4hytq",
+          e.target,
+          "s57n_tFKifkRKHUzy"
+        )
+        .then(
+          setIsButtonEmailClicked(false),
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }, 500);
   };
 
   const getFeatures = () => {
@@ -97,6 +112,8 @@ const DetailsContextProvider = ({ children }) => {
         setIndexImagePet,
         sendEmail,
         features,
+        isButtonEmailClicked,
+        setIsButtonEmailClicked
       }}
     >
       {children}
