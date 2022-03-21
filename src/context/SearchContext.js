@@ -20,6 +20,7 @@ const SearchContextProvider = ({ children }) => {
   const [isAdvancedSearch, setIsAdvancedSearch] = useState(false);
   const [formValues, setFormValues] = useState({});
   const [isFinish, setIsFinish] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleChange = (event) => {
     let newObject = {};
@@ -49,9 +50,12 @@ const SearchContextProvider = ({ children }) => {
     incrementIndexImage();
   };
 
-  const handleSaveAsFavorite = (obj) => {
+  const handleSaveAsFavorite =  async (obj) => {
+    setIsFavorite(true);
     setPhotoHidden(obj);
-    savePetAsFavorite();
+    setTimeout(() => {
+      savePetAsFavorite();
+    }, 300);
   };
 
   const getData = async (formValues) => {
@@ -203,6 +207,7 @@ const SearchContextProvider = ({ children }) => {
     });
 
     incrementIndexImage();
+    setIsFavorite(false);
   };
 
   return (
@@ -229,6 +234,8 @@ const SearchContextProvider = ({ children }) => {
         getStringTimeElapsedSincePublication,
         isFinish,
         setIsFinish,
+        isFavorite, 
+        setIsFavorite
       }}
     >
       {children}

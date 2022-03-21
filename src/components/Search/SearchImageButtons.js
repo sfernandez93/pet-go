@@ -5,8 +5,13 @@ import SearchImageButton from "./SearchImageButton";
 import SearchDetailsLink from "./SearchDetailsLink";
 
 const SearchImageButtons = () => {
-  const { handleIncrement, dataPets, handleSaveAsFavorite, photoIndex } =
-    useContext(SearchContext);
+  const {
+    handleIncrement,
+    dataPets,
+    handleSaveAsFavorite,
+    photoIndex,
+    isFavorite,
+  } = useContext(SearchContext);
 
   return (
     <div className="flex justify-between px-10 py-6">
@@ -24,11 +29,18 @@ const SearchImageButtons = () => {
         icon={
           <FaHeart
             size={20}
-            style={{ fill: "red" }}
-            className=" hover:shadow-2xl transition duration-200 transform hover:scale-150 cursor-pointers"
+            style={{ fill: isFavorite ? "red" : "gainsboro" }}
+            className={`cursor-pointers ${
+              isFavorite
+                ? "shadow-2xl transition duration-100 transform scale-150"
+                : ""
+            }`}
           />
         }
       ></SearchImageButton>
+      {/* <div ref={hoverRef}>
+      {`The current div is ${isHover ? `hovered` : `unhovered`}`}
+    </div> */}
     </div>
   );
 };
