@@ -6,6 +6,8 @@ const UploadCheckbox = ({
   inputName,
   inputDescription,
   handleChange,
+  textColor,
+  textColorDescription
 }) => {
   const { formValues } = useContext(UploadContext);
 
@@ -22,10 +24,10 @@ const UploadCheckbox = ({
         ></input>
       </div>
       <div className="ml-3 text-sm">
-        <label htmlFor="is_disabled" className="font-medium text-gray-700">
+        <label htmlFor="is_disabled" className={`font-medium text-${textColor}`}>
           {inputTitle}
         </label>
-        <p className="text-gray-500">{inputDescription}</p>
+        <p className={`text-${textColorDescription}`}>{inputDescription}</p>
       </div>
     </div>
   );

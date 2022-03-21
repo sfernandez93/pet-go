@@ -44,7 +44,6 @@ const Searchpet = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photoIndex]);
 
-  console.log(photoIndex);
   return (
     <div className="h-full w-full flex items-center justify-center flex-col">
       <LogoIconBar></LogoIconBar>

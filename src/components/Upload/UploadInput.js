@@ -13,11 +13,12 @@ const UploadInput = ({
     <div className="col-span-6 sm:col-span-3">
       <label
         htmlFor={inputName}
-        className="block text-sm font-medium text-gray-500"
+        className="block text-xs font-medium text-gray-500"
       >
         {inputTitle}
       </label>
       <input
+        required
         defaultValue={formValues.value}
         onChange={handleChange}
         type={inputType}

@@ -51,20 +51,25 @@ const UploadPet = () => {
           <UploadPhoto></UploadPhoto>
         </div>
 
-        <UploadFeatures handleChange={handleChange}></UploadFeatures>
+        <UploadFeatures
+          handleChange={handleChange}
+          textColor="gray-600"
+        ></UploadFeatures>
         <UploadCheckbox
-        handleChange={handleChange}
-          inputTitle="Modo ayúdame"
+          handleChange={handleChange}
+          inputTitle="Modo ayuda"
           inputName="is_disabled"
           inputDescription="Indica si tu mascota tiene algún tipo de problema o discapacidad (detállalo
                 en la descripción)."
+          textColor="gray-700"
+          textColorDescription="gray-500"
         ></UploadCheckbox>
       </div>
 
-      <div className="mt-4 px-4 py-6 bg-white sm:p-6">
+      <div className="px-4 pb-6 pt-12 bg-white sm:p-6">
         <div className="grid grid-cols-6 gap-6">
           <UploadInput
-            inputTitle="Sociedad protectora"
+            inputTitle="Organización"
             inputName="org-name"
             inputType="text"
             inputAutocomplete="orgName"

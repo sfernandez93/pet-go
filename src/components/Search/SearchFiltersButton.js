@@ -2,9 +2,8 @@
 
 const SearchFiltersButton = () => {
   return (
-    <div className="bg-primary flex justify-center w-40 mt-6 rounded-full py-2 px-4 font-semibold text-white opacity-40">
-      <input className="pr-2 font-bold" type="submit" value="Pet Go!"></input>
-      {/* <FaPaw size={20} style={{ fill: "white" }} /> */}
+    <div className="bg-primary flex justify-center mt-6 rounded-full py-2 px-4 font-semibold text-white opacity-70">
+      <input className="font-bold" type="submit" value="Go!"></input>
     </div>
   );
 };

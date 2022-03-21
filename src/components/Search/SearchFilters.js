@@ -12,19 +12,24 @@ const SearchFilters = () => {
   return (
     <form
       onSubmit={getDataFiltered}
-      className="absolute flex flex-col items-center w-full mt-24 p-4 shadow rounded bg-transparentbg z-20"
+      className="absolute flex flex-col items-center w-full mt-20 p-4 shadow rounded bg-transparentbg z-20"
     >
       <SearchAdvancedSelector
         selectorTitle="Provincia"
         selectorName="region"
       ></SearchAdvancedSelector>
-      <UploadFeatures handleChange={handleChange}></UploadFeatures>
+      <UploadFeatures
+        handleChange={handleChange}
+        textColor="gray-300"
+      ></UploadFeatures>
 
       <UploadCheckbox
         handleChange={handleChange}
-        inputTitle="Modo ayúdame"
+        inputTitle="Modo ayuda"
         inputName="is_disabled"
         inputDescription="Adopta mascotas con algún tipo de necesidad especial. ¡Te lo agradecerán!"
+        textColor="gray-400"
+        textColorDescription="gray-300"
       ></UploadCheckbox>
 
       <SearchFiltersButton></SearchFiltersButton>

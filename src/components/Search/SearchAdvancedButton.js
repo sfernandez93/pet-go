@@ -7,7 +7,7 @@ const SearchAdvanced = () => {
 
   return (
       <button
-        className="flex items-center justify-center absolute w-full mt-16 h-4 hover:h-8 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:bg-gray-100 w-64 shadow rounded bg-white cursor-pointer"
+        className="flex items-center justify-center absolute w-full mt-16 h-4 w-64 shadow rounded bg-white cursor-pointer"
         onClick={dropdownHandler}
       >
         <FaAngleDown size={20} style={{ fill: "gainsboro" }} />

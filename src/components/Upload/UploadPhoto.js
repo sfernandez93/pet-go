@@ -8,10 +8,10 @@ const UploadPhoto = () => {
 
   return (
     <div className="col-span-6">
-      <label className="block text-sm font-medium text-gray-500"> Fotos </label>
+      <label className="block text-xs font-medium text-gray-500"> Fotos </label>
       <div
         className={`mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md ${
-          imagesToUpload.length > 0 ? "bg-gray-100" : "bg-gray-50"
+          imagesToUpload.length > 0 ? "bg-lightseagreen opacity-30" : "bg-gray-50"
         } `}
       >
         <div className="space-y-1 text-center">
@@ -32,7 +32,7 @@ const UploadPhoto = () => {
           <div className="flex text-sm text-gray-600">
             <label
               htmlFor="file-upload"
-              className="relative cursor-pointer bg-white rounded-md font-medium text-lightseagreen hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+              className="relative cursor-pointer bg-white rounded-md font-medium text-lightseagreen hover:text-gray-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gray-500"
             >
               <span>
                 {imagesToUpload.length > 0

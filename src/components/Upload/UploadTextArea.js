@@ -8,7 +8,7 @@ const UploadTextArea = ({ title, inputName, inputPlaceholder }) => {
     <div className="col-span-6 sm:col-span-3">
       <label
         htmlFor="about"
-        className="block text-sm font-medium text-gray-500"
+        className="block text-xs font-medium text-gray-500"
       >
         {title}
       </label>

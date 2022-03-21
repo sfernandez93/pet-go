@@ -9,7 +9,7 @@ const UploadSelector = ({ selectorTitle, selectorName }) => {
     <div className="col-span-6 sm:col-span-3">
       <label
         htmlFor="provincia"
-        className="block text-sm font-medium text-gray-500"
+        className="block text-xs font-medium text-gray-500"
       >
         {selectorTitle}
       </label>
@@ -17,7 +17,7 @@ const UploadSelector = ({ selectorTitle, selectorName }) => {
         defaultValue={formValues.value}
         onChange={handleChange}
         name={selectorName}
-        className="mt-1 block bg-white w-full shadow-sm sm:text-sm rounded-md"
+        className="mt-1 block bg-white w-full shadow-sm text-xs text-gray-300 rounded-md"
         aria-label="Default select example"
       >
         <option

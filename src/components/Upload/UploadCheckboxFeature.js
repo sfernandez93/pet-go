@@ -1,13 +1,13 @@
 import { UploadContext } from "../../context/UploadContext";
 import { useContext } from "react";
 
-const UploadCheckboxFeature = ({ inputTitle, inputName, onChangeFunction }) => {
+const UploadCheckboxFeature = ({ inputTitle, inputName, onChangeFunction, textColor }) => {
   const { formValues } = useContext(UploadContext);
 
   return (
     <label
       htmlFor={inputName}
-      className="flex justify-center items-center relative flex-inline items-center isolate p-2 rounded-2xl font-medium text-gray-600 text-sm"
+      className={`flex justify-center items-center relative flex-inline items-center isolate p-2 rounded-2xl font-normal text-${textColor} text-xs`}
     >
       <input
         defaultValue={formValues.value}
