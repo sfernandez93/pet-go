@@ -55,12 +55,12 @@ const DetailsContextProvider = ({ children }) => {
 
   const getFeatures = () => {
     setFeatures([]);
+    if (detailPet.isDisabled)
+      setFeatures((prevState) => [...prevState, "Modo ayuda"]);
     if (detailPet.isActive)
       setFeatures((prevState) => [...prevState, "Activo"]);
     if (detailPet.isBig)
       setFeatures((prevState) => [...prevState, "Perro grande"]);
-    if (detailPet.isDisabled)
-      setFeatures((prevState) => [...prevState, "Help me"]);
     if (detailPet.isDocile) setFeatures((prevState) => [...prevState, "Dócil"]);
     if (detailPet.isGuide)
       setFeatures((prevState) => [...prevState, "Perro guía"]);
@@ -113,7 +113,7 @@ const DetailsContextProvider = ({ children }) => {
         sendEmail,
         features,
         isButtonEmailClicked,
-        setIsButtonEmailClicked
+        setIsButtonEmailClicked,
       }}
     >
       {children}

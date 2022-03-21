@@ -9,7 +9,9 @@ const DetailsFeatures = () => {
       {[...features].map((key, i) => (
         <div
           key={i}
-          className="flex font-medium justify-center items-center h-8 px-4 text-xs leading-3 text-white rounded-full bg-primary opacity-70"
+          className={`flex font-medium justify-center items-center h-8 px-4 text-xs leading-3 text-white rounded-full ${
+            key === "Modo ayuda" ? "bg-clearblue": "bg-primary"
+          } opacity-70`}
         >
           {key}
         </div>
