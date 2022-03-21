@@ -42,7 +42,7 @@ const SearchContextProvider = ({ children }) => {
     dataPets.forEach((key) => {
       if (key.uid === obj.uid) key["isPhotoHidden"] = true;
     });
-    setDataPets(dataPets);
+    // setDataPets(dataPets);
   };
 
   const handleIncrement = (obj) => {
@@ -157,7 +157,6 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const isPetMeetConditionFilter = (petObj) => {
-    console.log(formValues);
     if (
       (formValues.region && formValues.region !== "0"
         ? petObj.region === formValues.region
@@ -175,7 +174,6 @@ const SearchContextProvider = ({ children }) => {
       (formValues.is_disabled ? petObj.isDisabled : true) &&
       (formValues.is_notalergic ? petObj.isNotAlergic : true)
     ) {
-      console.log(petObj);
       return true;
     }
     return false;
@@ -183,6 +181,7 @@ const SearchContextProvider = ({ children }) => {
 
   const getDataFiltered = async (e) => {
     e.preventDefault();
+    setPhotoIndex(0);
     setIsAdvancedSearch(false);
     await getData(formValues);
   };

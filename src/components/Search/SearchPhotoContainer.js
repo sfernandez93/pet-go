@@ -3,7 +3,7 @@ import { useContext } from "react";
 import TinderCard from "react-tinder-card";
 
 const SearchPhotoContainer = () => {
-  const { dataPets, incrementIndexImage } = useContext(SearchContext);
+  const { dataPets, handleIncrement } = useContext(SearchContext);
   const arrayReverse = [...dataPets];
 
   return (
@@ -14,7 +14,7 @@ const SearchPhotoContainer = () => {
             key.isPhotoHidden ? "hidden" : ""
           }`}
           key={Object.keys(key.imagesUrl)[0]}
-          onSwipe={incrementIndexImage}
+          onSwipe={() => handleIncrement(key)}
         >
           <img
             className="w-full h-full object-cover"

@@ -21,8 +21,9 @@ const Searchpet = () => {
 
   useEffect(() => {
     setIsAdvancedSearch(false);
-    setFormValues({});
-    if (photoIndex === 0) getData({});
+    if (photoIndex === 0 && Object.keys(formValues).length < 1) {
+      getData({});
+    } 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,7 +33,7 @@ const Searchpet = () => {
   }, [isAdvancedSearch]);
 
   useEffect(() => {
-    if (isFinish) getData(formValues);
+    if (isFinish) getData(formValues);   
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFinish]);
 
@@ -43,6 +44,7 @@ const Searchpet = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [photoIndex]);
+
 
   return (
     <div className="h-full w-full flex items-center justify-center flex-col">
