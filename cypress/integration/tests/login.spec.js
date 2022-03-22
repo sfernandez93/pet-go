@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/await-async-utils */
 /* eslint-disable jest/valid-expect */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
@@ -79,17 +80,47 @@ context("Actions", () => {
     cy.url().should("eq", "https://pet-go-9200b.web.app/login");
   });
 
-  it(".click() - click into register button", () => {
-    cy.get("[data-cy=email]")
-    .type("sa@gmail.com")
-    cy.get("[data-cy=password]")
-    .type("ssssss")
-    cy.get("[data-cy=change-to-login]").click()
-    cy.get("[data-cy=login-button]").click()
-    cy.location().should((location) => {
-      console.log(location.href)
-      // expect(location.href).to.eq("https://pet-go-9200b.web.app/search");
-    });
-
+  it(".click() - login", () => {
+    cy.get("[data-cy=email]").type("sa@gmail.com");
+    cy.get("[data-cy=password]").type("ssssss");
+    cy.get("[data-cy=change-to-login]").click();
+    cy.get("[data-cy=login-button]").click();
+    cy.wait(2000);
+    cy.url().should("eq", "https://pet-go-9200b.web.app/search");
   });
+
+  it(".click() - login with error password", () => {
+    cy.get("[data-cy=email]").type("sa@gmail.com");
+    cy.get("[data-cy=password]").type("errorpassword");
+    cy.get("[data-cy=change-to-login]").click();
+    cy.get("[data-cy=login-button]").click();
+    // cy.wait(2000);
+    cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+  });
+
+  it(".click() - register with an existent acount", () => {
+    cy.get("[data-cy=email]").type("sa@gmail.com");
+    cy.get("[data-cy=password]").type("ssssss");
+    cy.get("[data-cy=login-button]").click();
+    // cy.wait(2000);
+    // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+  });
+
+  it(".click() - register with an invalid acount", () => {
+    cy.get("[data-cy=email]").type("sa");
+    cy.get("[data-cy=password]").type("password");
+    cy.get("[data-cy=login-button]").click();
+    // cy.wait(2000);
+    // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+  });
+
+  
+  it(".click() - register with an invalid password", () => {
+    cy.get("[data-cy=email]").type("correoprueba@gmail.com");
+    cy.get("[data-cy=password]").type("ssss");
+    cy.get("[data-cy=login-button]").click();
+    // cy.wait(2000);
+    // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+  });
+
 });

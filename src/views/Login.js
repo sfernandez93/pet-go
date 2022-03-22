@@ -28,18 +28,18 @@ const SignIn = () => {
             inputValue={email}
             inputFunction={setEmail}
             placeholder="Email"
-            dataCY="email"
+            dataCy="email"
           ></LoginInput>
-          <LoginError error={emailError}></LoginError>
+          <LoginError error={emailError} dataCy="emailError"></LoginError>
           <LoginInput
             inputRef={passwordRef}
             type="password"
             inputValue={password}
             inputFunction={setPassword}
             placeholder="Password"
-            dataCY="password"
+            dataCy="password"
           ></LoginInput>
-          <LoginError error={passwordError}></LoginError>
+          <LoginError error={passwordError} dataCy="passwordError"></LoginError>
           <SignInUpButton></SignInUpButton>
         </div>
         <LoginSpacedBar></LoginSpacedBar>
