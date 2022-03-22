@@ -16,24 +16,24 @@ const NavBar = () => {
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex w-full justify-around">
               <NavLink to={"/search"}>
-                <div className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                <div className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-cy="searchNavBar">
                   <FaSistrix size={20} style={{ fill: "grey" }} />
                 </div>
               </NavLink>
               <NavLink to={"/upload"}>
-                <div className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                <div className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-cy="uploadNavBar">
                   <FaPlus size={20} style={{ fill: "grey" }} />
                 </div>
               </NavLink>
 
               <NavLink to={"/favorites"}>
-                <div className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                <div className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-cy="favoritesNavBar">
                   <FaHeart size={20} style={{ fill: "pink" }} />
                 </div>
               </NavLink>
               <button
                 onClick={handleSignOut}
-                className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-300 hover:bg-gray-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium" data-cy="signOutNavBar"
               >
                 <FaSignOutAlt size={20} style={{ fill: "grey" }} />
               </button>

@@ -20,7 +20,7 @@ const SignInUpButton = () => {
           ? handleLoginWithEmailAndPassword
           : handleSignUpWithEmailAndPassword
       }
-      data-cy="login-button"
+      data-cy="loginButton"
     >
       {hasAccount ? "Accede" : "Regístrate"}
     </button>

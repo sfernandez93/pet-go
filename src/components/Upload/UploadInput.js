@@ -5,7 +5,7 @@ const UploadInput = ({
   inputTitle,
   inputName,
   inputType,
-  inputAutocomplete,
+  inputAutocomplete
 }) => {
   const { formValues, handleChange } = useContext(UploadContext);
 
@@ -26,6 +26,7 @@ const UploadInput = ({
         id={inputName}
         autoComplete={inputAutocomplete}
         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        data-cy={inputName}
       ></input>
     </div>
   );

@@ -28,7 +28,7 @@ const SignIn = () => {
             inputValue={email}
             inputFunction={setEmail}
             placeholder="Email"
-            dataCy="email"
+            dataCy="emailLogin"
           ></LoginInput>
           <LoginError error={emailError} dataCy="emailError"></LoginError>
           <LoginInput
@@ -37,7 +37,7 @@ const SignIn = () => {
             inputValue={password}
             inputFunction={setPassword}
             placeholder="Password"
-            dataCy="password"
+            dataCy="passwordLogin"
           ></LoginInput>
           <LoginError error={passwordError} dataCy="passwordError"></LoginError>
           <SignInUpButton></SignInUpButton>
