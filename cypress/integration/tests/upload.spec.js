@@ -139,7 +139,7 @@ context("Actions", () => {
         fileContent: fileContent.toString(),
         fileName:
           "f5eaa850ab45c3d6eab259c154a934fe.jpg",
-        mimeType: "image/png",
+        mimeType: "image/jpg",
       });
     });
     cy.get("[data-cy=uploadButton]").click();
