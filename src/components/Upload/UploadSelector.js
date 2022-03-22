@@ -19,6 +19,7 @@ const UploadSelector = ({ selectorTitle, selectorName }) => {
         name={selectorName}
         className="mt-1 block bg-white w-full shadow-sm text-xs text-gray-300 rounded-md"
         aria-label="Default select example"
+        data-cy={selectorName}
       >
         <option
           className="block text-xs font-medium text-gray-600 inset-y-0 right-0 flex items-center pr-4"

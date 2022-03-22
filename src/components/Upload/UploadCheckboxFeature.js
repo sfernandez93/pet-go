@@ -17,6 +17,7 @@ const UploadCheckboxFeature = ({ inputTitle, inputName, onChangeFunction, textCo
         type="checkbox"
         hidden
         className="relative peer z-20 text-purple-600 rounded-md focus:ring-0"
+        data-cy={inputName}
       />
       <span className="relative z-20 text-center">{inputTitle}</span>
       <div className="absolute inset-0 bg-white peer-checked:bg-purple-50 peer-checked:border-purple-300 z-10 border rounded-2xl"></div>
