@@ -83,7 +83,7 @@ context("Actions", () => {
   it(".click() - login", () => {
     cy.get("[data-cy=email]").type("sa@gmail.com");
     cy.get("[data-cy=password]").type("ssssss");
-    cy.get("[data-cy=change-to-login]").click();
+    cy.get("[data-cy=changeToLogin]").click();
     cy.get("[data-cy=login-button]").click();
     cy.wait(2000);
     cy.url().should("eq", "https://pet-go-9200b.web.app/search");
@@ -92,7 +92,7 @@ context("Actions", () => {
   it(".click() - login with error password", () => {
     cy.get("[data-cy=email]").type("sa@gmail.com");
     cy.get("[data-cy=password]").type("errorpassword");
-    cy.get("[data-cy=change-to-login]").click();
+    cy.get("[data-cy=changeToLogin]").click();
     cy.get("[data-cy=login-button]").click();
     // cy.wait(2000);
     cy.url().should("eq", "https://pet-go-9200b.web.app/login");

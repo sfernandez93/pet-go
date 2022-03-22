@@ -14,7 +14,7 @@ const LoginChangeAccount = () => {
             <span
               className="text-blue-900 text-sm font-semibold"
               onClick={() => setHasAccount(!hasAccount)}
-              data-cy="change-to-register"
+              data-cy="changeToRegister"
             >
               {" "}
               Regístrate
@@ -28,7 +28,7 @@ const LoginChangeAccount = () => {
             <span
               className="text-blue-900 text-sm font-semibold"
               onClick={() => setHasAccount(!hasAccount)}
-              data-cy="change-to-login"
+              data-cy="changeToLogin"
             >
               Accede
             </span>
