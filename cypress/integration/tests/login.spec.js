@@ -9,7 +9,7 @@ context("Actions", () => {
 
   it(".type() - type into a DOM element", () => {
     // https://on.cypress.io/type
-    cy.get("[data-cy='email']")
+    cy.get("[data-cy=email]")
       .type("fake@email.com")
       .should("have.value", "fake@email.com")
 

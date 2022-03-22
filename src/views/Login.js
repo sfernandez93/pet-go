@@ -24,20 +24,20 @@ const SignIn = () => {
           ></img>
           <LoginInput
             inputRef={emailRef}
-            type={"email"}
+            type="email"
             inputValue={email}
             inputFunction={setEmail}
-            placeholder={"Email"}
-            dataCY={"email"}
+            placeholder="Email"
+            dataCY="email"
           ></LoginInput>
           <LoginError error={emailError}></LoginError>
           <LoginInput
             inputRef={passwordRef}
-            type={"password"}
+            type="password"
             inputValue={password}
             inputFunction={setPassword}
-            placeholder={"Password"}
-            dataCY={"password"}
+            placeholder="Password"
+            dataCY="password"
           ></LoginInput>
           <LoginError error={passwordError}></LoginError>
           <SignInUpButton></SignInUpButton>
