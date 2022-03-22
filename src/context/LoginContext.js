@@ -99,7 +99,7 @@ const LoginContextProvider = ({ children }) => {
           setEmailError("El email no es válido");
           break;
         case "auth/weak-password":
-          setPasswordError("La constraseña no es válida");
+          setPasswordError("La contraseña no es válida");
           break;
         default:
           break;

@@ -94,14 +94,21 @@ context("Actions", () => {
     cy.get("[data-cy=password]").type("errorpassword");
     cy.get("[data-cy=changeToLogin]").click();
     cy.get("[data-cy=login-button]").click();
+    cy.get("[data-cy=emailError]").should('have.value', 'Ya dispone de una cuenta con este correo')
+
     // cy.wait(2000);
-    cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+    // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
   });
 
   it(".click() - register with an existent acount", () => {
     cy.get("[data-cy=email]").type("sa@gmail.com");
     cy.get("[data-cy=password]").type("ssssss");
     cy.get("[data-cy=login-button]").click();
+    // cy.get("[data-cy=emailError]").should('have.value', 'Ya dispone de una cuenta con este correo')
+
+    // console.log(cy.get("[data-cy=emailError]"))
+    // cy.get("[data-cy=emailError]").click();
+
     // cy.wait(2000);
     // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
   });
