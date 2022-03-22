@@ -4,6 +4,7 @@ const UploadSubmitButton = () => {
       <button
         type="submit"
         className="w-full bg-primary inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white"
+        data-cy="uploadButton"
       >
         Guardar
       </button>

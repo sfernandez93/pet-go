@@ -47,6 +47,7 @@ const UploadPhoto = () => {
                 multiple
                 className="sr-only"
                 onChange={handleChangeImage}
+                data-cy="fileUpload"
               ></input>
             </label>
           </div>

@@ -15,16 +15,16 @@ context("Actions", () => {
     cy.get("[data-cy=uploadNavBar]").click();
   });
 
-  it("type into upload inputs", () => {
+  it("check inputs, selector and checkboxes", () => {
     cy.get("[data-cy=first-name]")
-      .type("Ron")
-      .should("have.value", "Ron")
+      .type("Prueba")
+      .should("have.value", "Prueba")
       .type("{leftarrow}{rightarrow}{uparrow}{downarrow}")
       .type("{del}{selectall}{backspace}")
       .type("{alt}{option}")
       .type("{shift}")
-      .type("Ron", { delay: 100 })
-      .should("have.value", "Ron");
+      .type("Prueba", { delay: 100 })
+      .should("have.value", "Prueba");
 
     cy.get("[data-cy=race]")
       .type("Bichón Maltés")
@@ -37,6 +37,8 @@ context("Actions", () => {
       .should("have.value", "Bichón Maltés");
 
     cy.get("[data-cy=age]")
+      .type("edad")
+      .should("have.value", "")
       .type("0")
       .should("have.value", "0")
       .type("{leftarrow}{rightarrow}{uparrow}{downarrow}")
@@ -44,23 +46,25 @@ context("Actions", () => {
       .type("{alt}{option}")
       .type("{shift}");
 
-    cy.get("[data-cy=age]")
-      .type("edad")
-      .should("have.value", "")
-      .type("{leftarrow}{rightarrow}{uparrow}{downarrow}")
-      .type("{del}{selectall}{backspace}")
-      .type("{alt}{option}")
-      .type("{shift}");
-
-    cy.get("[data-cy=email-adress]")
-      .type("ron@email.com")
-      .should("have.value", "ron@email.com")
+    cy.get("[data-cy=email-address]")
+      .type("prueba@email.com")
+      .should("have.value", "prueba@email.com")
       .type("{leftarrow}{rightarrow}{uparrow}{downarrow}")
       .type("{del}{selectall}{backspace}")
       .type("{alt}{option}")
       .type("{shift}")
-      .type("ron@email.com", { delay: 100 })
-      .should("have.value", "ron@email.com");
+      .type("prueba@email.com", { delay: 100 })
+      .should("have.value", "prueba@email.com");
+
+    cy.get("[data-cy=phone]")
+      .type("666666666")
+      .should("have.value", "666666666")
+      .type("{leftarrow}{rightarrow}{uparrow}{downarrow}")
+      .type("{del}{selectall}{backspace}")
+      .type("{alt}{option}")
+      .type("{shift}")
+      .type("666666666", { delay: 100 })
+      .should("have.value", "666666666");
 
     cy.get("[data-cy=org-name]")
       .type("Organización protectora de animales")
@@ -91,47 +95,61 @@ context("Actions", () => {
       .type("{shift}")
       .type("Descripción de prueba", { delay: 100 })
       .should("have.value", "Descripción de prueba");
-  });
 
-  it("select an option in a <select> upload element", () => {
-    // https://on.cypress.io/select
-
-    // at first, no option should be selected
     cy.get("[data-cy=region]").should("have.value", "");
-
-    // Select option(s) with matching text content
     cy.get("[data-cy=region]").select("079e93cf-1fd1-4506-a125-c9c140ad5faa");
-    // confirm the apples were selected
-    // note that each value starts with "fr-" in our HTML
     cy.get("[data-cy=region]").should(
       "have.value",
-      "fr-079e93cf-1fd1-4506-a125-c9c140ad5faa"
+      "079e93cf-1fd1-4506-a125-c9c140ad5faa"
     );
 
-    // Select option(s) with matching value
-    cy.get("[data-cy=region]")
-      .select("fr-079e93cf-1fd1-4506-a125-c9c140ad5faa")
-      // can attach an assertion right away to the element
-      .should("have.value", "fr-079e93cf-1fd1-4506-a125-c9c140ad5faa");
-  });
-
-  it("check upload checkbox", () => {
-    // https://on.cypress.io/check
-
-    // By default, .check() will check all
-    // matching checkbox or radio elements in succession, one after another
     cy.get("[data-cy=is_disabled]")
       .not("[disabled]")
       .check()
       .should("be.checked")
       .uncheck()
-      .should("not.be.checked");
-
-    cy.get("[data-cy=is_active]")
-      .not("[disabled]")
+      .should("not.be.checked")
       .check()
-      .should("be.checked")
-      .uncheck()
-      .should("not.be.checked");
+      .should("be.checked");
+  });
+
+  it("check submit button", () => {
+    cy.get("[data-cy=first-name]").type("Prueba");
+
+    cy.get("[data-cy=race]").type("Bichón Maltés");
+
+    cy.get("[data-cy=age]").type("0");
+
+    cy.get("[data-cy=email-address]").type("prueba@email.com");
+
+    cy.get("[data-cy=phone]").type("666666666");
+
+    cy.get("[data-cy=org-name]").type("Organización protectora de animales");
+
+    cy.get("[data-cy=city]").type("Madrid");
+
+    cy.get("[data-cy=about]").type("Descripción de prueba");
+
+    cy.get("[data-cy=region]").select("079e93cf-1fd1-4506-a125-c9c140ad5faa");
+
+    cy.fixture(
+      "https://i.pinimg.com/564x/68/3c/ea/683cea0440eb469f7f6a85292c763e48.jpg"
+    ).then((fileContent) => {
+      cy.get("[data-cy=fileUpload]").attachFile({
+        fileContent: fileContent.toString(),
+        fileName:
+          "https://i.pinimg.com/564x/68/3c/ea/683cea0440eb469f7f6a85292c763e48.jpg",
+        mimeType: "image/png",
+      });
+    });
+    cy.get("[data-cy=uploadButton]").click();
+    cy.wait(2000);
+    cy.url().should("eq", "https://pet-go-9200b.web.app/search");
+  });
+
+  it("check submit button incomplete data", () => {
+    cy.get("[data-cy=uploadButton]").click();
+    cy.wait(2000);
+    cy.url().should("eq", "https://pet-go-9200b.web.app/upload");
   });
 });
