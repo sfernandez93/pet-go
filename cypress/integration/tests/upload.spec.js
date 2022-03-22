@@ -133,12 +133,12 @@ context("Actions", () => {
     cy.get("[data-cy=region]").select("079e93cf-1fd1-4506-a125-c9c140ad5faa");
 
     cy.fixture(
-      "https://i.pinimg.com/564x/68/3c/ea/683cea0440eb469f7f6a85292c763e48.jpg"
+      "f5eaa850ab45c3d6eab259c154a934fe.jpg"
     ).then((fileContent) => {
       cy.get("[data-cy=fileUpload]").attachFile({
         fileContent: fileContent.toString(),
         fileName:
-          "https://i.pinimg.com/564x/68/3c/ea/683cea0440eb469f7f6a85292c763e48.jpg",
+          "f5eaa850ab45c3d6eab259c154a934fe.jpg",
         mimeType: "image/png",
       });
     });
