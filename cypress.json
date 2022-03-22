@@ -1,4 +1,5 @@
 {
   "componentFolder": "src",
-  "testFiles": "**/*.spec.{js,ts,jsx,tsx}"
+  "testFiles": "**/*.spec.{js,ts,jsx,tsx}",
+  "chromeWebSecurity": false
 }

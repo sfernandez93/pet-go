@@ -84,7 +84,6 @@ const DetailsContextProvider = ({ children }) => {
 
   const findByUid = (uid) => {
     const allDataPets = dataPets.concat(favoritePets);
-    console.log(allDataPets);
     Object.keys(allDataPets).forEach((key) => {
       const petUid = allDataPets[key].uid;
       if (uid === petUid) return setDetailPet(allDataPets[key]);
