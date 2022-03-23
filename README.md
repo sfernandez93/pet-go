@@ -22,11 +22,11 @@ Petgo is a social app for the adoption of animals that are in foster care by ani
 ## Screenshoots
 
 <p align="center">
-  <img src="/screenshots/login-screenshot.jpg" width="15%" />
-  <img src="/screenshots/search-screenshot.jpg" width="15%" />
-  <img src="/screenshots/detail-screenshot.jpg" width="15%" />
-  <img src="/screenshots/upload-screenshot.jpg" width="15%" />
-  <img src="/screenshots/favorites-screenshot.jpg" width="15%" />
+  <img src="/screenshots/login-screenshot.JPG" width="15%" />
+  <img src="/screenshots/search-screenshot.JPG" width="15%" />
+  <img src="/screenshots/detail-screenshot.JPG" width="15%" />
+  <img src="/screenshots/upload-screenshot.JPG" width="15%" />
+  <img src="/screenshots/favorites-screenshot.JPG" width="15%" />
 </p>
 
 ---
