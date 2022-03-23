@@ -45,16 +45,6 @@ $ npm run start
 
 All dependencies will be installed automatically
 
-### To run in dev mode or debugg mode:
-
-```
-$npm run dev
-```
-
-```
-$npm dev:debug
-```
-
 ## API
 
 The server part has multiple **API endpoints** using several routes:

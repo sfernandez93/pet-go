@@ -9,7 +9,7 @@ context("Actions", () => {
     cy.visit("https://pet-go-9200b.web.app/login");
   });
 
-  it(".type() - type into login inputs", () => {
+  it("type into login inputs", () => {
     cy.get("[data-cy=emailLogin]")
       .type("fake@email.com")
       .should("have.value", "fake@email.com")
@@ -47,8 +47,7 @@ context("Actions", () => {
       .should("have.value", "slowpassword");
   });
 
-  it(".clear() - clears login inputs", () => {
-    // https://on.cypress.io/clear
+  it("clears login inputs", () => {
     cy.get("[data-cy=emailLogin]")
       .type("fake@email.com")
       .should("have.value", "fake@email.com")
@@ -62,71 +61,61 @@ context("Actions", () => {
       .should("have.value", "");
   });
 
-  it("cy.hash() - get the current URL hash", () => {
-    // https://on.cypress.io/hash
+  it("get the current URL hash", () => {
     cy.hash().should("be.empty");
   });
 
-  it("cy.location() - get window.location", () => {
-    // https://on.cypress.io/location
+  it("get window.location", () => {
     cy.location().should((location) => {
       expect(location.hash).to.be.empty;
       expect(location.href).to.eq("https://pet-go-9200b.web.app/login");
     });
   });
 
-  it("cy.url() - get the current URL", () => {
-    // https://on.cypress.io/url
+  it("get the current URL", () => {
     cy.url().should("eq", "https://pet-go-9200b.web.app/login");
   });
 
-  it(".click() - login", () => {
-    cy.get("[data-cy=emailLogin]").type("sa@gmail.com");
-    cy.get("[data-cy=passwordLogin]").type("ssssss");
+  it("login with email and password", () => {
+    cy.get("[data-cy=emailLogin]").type("prueba@gmail.com");
+    cy.get("[data-cy=passwordLogin]").type("prueba");
     cy.get("[data-cy=changeToLogin]").click();
     cy.get("[data-cy=loginButton]").click();
     cy.wait(2000);
     cy.url().should("eq", "https://pet-go-9200b.web.app/search");
   });
 
-  it(".click() - login with error password", () => {
-    cy.get("[data-cy=emailLogin]").type("sa@gmail.com");
+  it("login with error password", () => {
+    cy.get("[data-cy=emailLogin]").type("prueba@gmail.com");
     cy.get("[data-cy=passwordLogin]").type("errorpassword");
     cy.get("[data-cy=changeToLogin]").click();
-    cy.get("[data-cy=loginButton]").click();
-    // cy.get("[data-cy=passwordError]").should('have.text', 'Contraseña incorrecta')
-    cy.wait(200);
-    // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+
+    cy.get("[data-cy=loginButton]")
+      .click()
+      .then(() => {
+        cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+      });
   });
 
-  // it(".click() - register with an existent acount", () => {
-  //   cy.get("[data-cy=emailLogin]").type("sa@gmail.com");
-  //   cy.get("[data-cy=passwordLogin]").type("ssssss");
-  //   cy.get("[data-cy=loginButton]").click();
-  //   // cy.get("[data-cy=emailLoginError]").should('have.value', 'Ya dispone de una cuenta con este correo')
+  it("register with invalid password", () => {
+    cy.get("[data-cy=emailLogin]").type("prueba2@gmail.com");
+    cy.get("[data-cy=passwordLogin]").type("error");
 
-  //   // console.log(cy.get("[data-cy=emailLoginError]"))
-  //   // cy.get("[data-cy=emailLoginError]").click();
+    cy.get("[data-cy=loginButton]")
+      .click()
+      .then(() => {
+        cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+      });
+  });
 
-  //   // cy.wait(2000);
-  //   // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
-  // });
+  it("register with existent email", () => {
+    cy.get("[data-cy=emailLogin]").type("prueba@gmail.com");
+    cy.get("[data-cy=passwordLogin]").type("prueba");
 
-  // it(".click() - register with an invalid acount", () => {
-  //   cy.get("[data-cy=emailLogin]").type("sa");
-  //   cy.get("[data-cy=passwordLogin]").type("password");
-  //   cy.get("[data-cy=loginButton]").click();
-  //   // cy.wait(2000);
-  //   // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
-  // });
-
-  
-  // it(".click() - register with an invalid password", () => {
-  //   cy.get("[data-cy=emailLogin]").type("correoprueba@gmail.com");
-  //   cy.get("[data-cy=passwordLogin]").type("ssss");
-  //   cy.get("[data-cy=loginButton]").click();
-  //   // cy.wait(2000);
-  //   // cy.url().should("eq", "https://pet-go-9200b.web.app/login");
-  // });
-
+    cy.get("[data-cy=loginButton]")
+      .click()
+      .then(() => {
+        cy.url().should("eq", "https://pet-go-9200b.web.app/login");
+      });
+  });
 });
