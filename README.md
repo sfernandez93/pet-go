@@ -1,46 +1,85 @@
-# Getting Started with Create React App
+<p align="center">
+    <img src="https://www.isdi.education/uploads/media/open-graph/08/1278-Captura%20de%20pantalla%202021-09-24%20a%20las%2014.22.27.png?v=1-0" alt="ISDI-logo" width="100"/>
+    <img src="https://authy.com/wp-content/uploads/npm-logo.png" alt="npm-logo" width="50"/>
+    <img src="https://i.blogs.es/545cf8/es6-logo/450_1000.png" alt="es6-logo" width="50"/>
+    <img src="https://teorema-rd.com/storage/2020/05/Html5-JS-css-logo.jpg" alt="html5-css3-js-logo" width="150"/>
+    <img src="https://cdn.rawgit.com/feross/standard/master/badge.svg" alt="es6-logo" width="100"/>
+    <img src="https://blog.wildix.com/wp-content/uploads/2020/06/react-logo.jpg" alt="react-logo" width="100"/>
+    <img src="https://blog.back4app.com/wp-content/uploads/2021/02/firebase.png" alt="firebase-logo" width="100"/>
+    <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--E7SQLjAt--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5d14su1hfqzbeqa2qhbr.png" alt="email-js-logo" width="100"/>
+    <img src="https://www.cypress.io/static/cypress-io-logo-social-share-8fb8a1db3cdc0b289fad927694ecb415.png" alt="firebase-logo" width="100"/>
+    <img src="https://www.adue.digital/wp-content/uploads/2021/06/tailwind-css-logo-vector.png" alt="tailwind-logo" width="100"/>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+Petgo is a social app for the adoption of animals that are in foster care by animal shelters. Animal shelters can upload them to the platform. Pets are displayed in a search engine, in which the user can mark them as favourite and consult information or contact details about them.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Screenshoots
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center">
+  <img src="./screenshots/login-screenshot.jpg" width="15%" />
+  <img src="./screenshots/search-screenshot.jpg" width="15%" />
+  <img src="./screenshots/detail-screenshot.jpg" width="15%" />
+  <img src="./screenshots/upload-screenshot.jpg" width="15%" />
+  <img src="./screenshots/favorites-screenshot.jpg" width="15%" />
+</p>
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+You need to run commands: `npm install`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### To run the server:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ npm run start
+```
 
-### `npm run eject`
+All dependencies will be installed automatically
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### To run in dev mode or debugg mode:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+$npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+$npm dev:debug
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## API
 
-## Learn More
+The server part has multiple **API endpoints** using several routes:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `/login` -> Serves the authentication options, register and login.
+- `/search` -> Serves the internal data about pets.
+- `/upload` -> Serves to upload data about pets to firebase database.
+- `/favorites` -> Serves the internal data of favorite pets of the registered or logged in user.
+- `/detail` -> Serves the internal data of a particular pet.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## Built with:
+
+- **Front-end**
+
+  - react: 17.0.2
+    - react-router: 6.2.2
+    - react-jwt: 1.1.4
+    - react-firebase: 5.0.3
+  - cypress: 9.5.2
+  - tailwindcss: 3.0.23
+
+---
+
+## Author
+
+[Sabela Fernández Villar](https://github.com/sfernandez93)
