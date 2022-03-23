@@ -80,6 +80,13 @@ The server part has multiple **API endpoints** using several routes:
 
 ---
 
+## Hosting
+
+[pet-go-9200b.web.app](pet-go-9200b.web.app)
+
+[pet-go-9200b.firebaseapp.com](pet-go-9200b.firebaseapp.com)
+
+---
 ## Author
 
 [Sabela Fernández Villar](https://github.com/sfernandez93)
